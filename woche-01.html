@@ -38,9 +38,9 @@
     <svg class="skizze" viewBox="0 0 295 195" width="295" role="img" aria-label="Rechtwinkliges Dreieck mit Hypotenuse c und Winkel alpha">
       <polygon class="sk-shape" points="30,155 230,155 230,45"/>
       <polyline class="sk-right" points="215,155 215,140 230,140"/>
-      <path class="sk-arc" d="M 70,155 A 40 40 0 0 0 65,135.8"/>
+      <path class="sk-arc" d="M 72,155 A 42 42 0 0 0 66.8,134.8"/>
       <text class="sk-ang" x="78" y="144">α = 28°</text>
-      <text class="sk-lab" x="85" y="100" transform="rotate(-28 90 92)">c = 12 cm</text>
+      <text class="sk-lab" x="85" y="75" transform="rotate(-28 90 92)">c = 12 cm</text>
       <text class="sk-lab" x="238" y="104">a</text>
       <text class="sk-pt" x="20" y="168">A</text>
       <text class="sk-pt" x="234" y="168">C</text>
@@ -52,8 +52,8 @@
         <p>$$\sin(\alpha) = \dfrac{\text{Gegenkathete}}{\text{Hypotenuse}} = \dfrac{a}{c}$$</p>
       </div>
     </details>
-    <div class="check" data-loesung="5.63; 5,63">
-      <input type="text" class="antwort" placeholder="z. B. 3,25" aria-label="Deine Lösung für a">
+    <div class="check" data-loesung="5.63">
+      <input type="text" class="antwort" placeholder="z. B. 3.25 (Punkt!)" aria-label="Deine Lösung für a">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
@@ -80,25 +80,25 @@
     </svg>
     <details><summary>Tipp</summary>
       <div class="tipp">
-        <p>\(b\) ist die Ankathete von \(\alpha\) und \(c\) ist die Hypotenuse. Verwende und löse auf:</p>
+        <p>\(b\) ist die Ankathete von \(\alpha\) und \(c\) ist die Hypotenuse. Verwende:</p>
         <p>$$\cos(\alpha) = \dfrac{\text{Ankathete}}{\text{Hypotenuse}} = \dfrac{b}{c}$$</p>
       </div>
     </details>
-    <div class="check" data-loesung="51.3; 51,3">
-      <input type="text" class="antwort" placeholder="z. B. 37,5" aria-label="Deine Lösung für b">
+    <div class="check" data-loesung="51.3">
+      <input type="text" class="antwort" placeholder="z. B. 37.5 (Punkt!)" aria-label="Deine Lösung für b">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
       <div class="weg loesung" style="display:none">
         <p>Aus</p>
-        <p>$$\cos(\alpha) = \dfrac{b}{c} = \dfrac{5}{8}\;\;\;\text{folgt}\;\;\; \alpha = \cos^{-1}\!\left(\dfrac{5}{8}\right),\;\;\; \text{damit ist}$$</p>
-        <p>$$\alpha = \cos^{-1}\!\left(\tfrac{5}{8}\right) \approx \cos^{-1}(0{,}625) = 51{,}3^\circ$$</p>
+        <p>$$\cos(\alpha) = \dfrac{b}{c}\;\;\;\text{folgt}\;\;\; \alpha = \cos^{-1}\!\left(\dfrac{b}{c}\right),\;\;\; \text{damit ist}$$</p>
+        <p>$$\alpha = \cos^{-1}\!\left(\tfrac{5}{8}\right) = \cos^{-1}(0{,}625) \approx 51{,}3^\circ$$</p>
       </div>
     </div>
   </div>
   <!-- c) Verallgemeinerung (ohne Kontrolle) -->
   <div class="teil">
-    <p>c)&nbsp; Sinus, Kosinus und Tangens (als Seitenverhältnisse) sind nur im <em>rechtwinkligen</em> Dreieck definiert. Erkläre: Welche zwei Sätze braucht man, um in <em>beliebigen</em> Dreiecken fehlende Seiten und Winkel zu berechnen? Notiere jeweils die Formel.</p>
+    <p>c)&nbsp; Sinus, Kosinus und Tangens (als Seitenverhältnisse) funktionieren nur im <em>rechtwinkligen</em> Dreieck. Erkläre: Welche zwei Sätze braucht man, um in <em>beliebigen</em> Dreiecken fehlende Seiten und Winkel zu berechnen? Notiere jeweils die Formel.</p>
     <details><summary>Tipp</summary>
       <div class="tipp"><p>Der eine Satz verbindet je eine Seite mit dem gegenüberliegenden Winkel; der andere verallgemeinert den Satz des Pythagoras um einen Korrekturterm mit einem Kosinus.</p></div>
     </details>
@@ -121,9 +121,9 @@
     <svg class="skizze" viewBox="0 0 220 215" width="220" role="img" aria-label="Kreissektor mit Radius r und Mittelpunktswinkel 60 Grad">
       <circle class="sk-thin" cx="105" cy="105" r="95"/>
       <path class="sk-sector" d="M 105,105 L 200,105 A 95 95 0 0 0 152.5,22.7 Z"/>
-      <text class="sk-lab" x="140" y="122">r = 6 cm</text>
       <path class="sk-arc" d="M 131,105 A 26 26 0 0 0 118,82.5"/>
-<text class="sk-ang" x="137" y="87">60°</text>
+      <text class="sk-ang" x="137" y="87">60°</text>
+      <text class="sk-lab" x="140" y="122">r = 6 cm</text>
       <text class="sk-pt" x="90" y="120">M</text>
     </svg>
     <details><summary>Tipp</summary>
@@ -132,8 +132,8 @@
         <p>$$A = \dfrac{\varphi}{360^\circ}\cdot \pi r^2$$</p>
       </div>
     </details>
-    <div class="check" data-loesung="18.85; 18,85">
-      <input type="text" class="antwort" placeholder="z. B. 12,57" aria-label="Deine Lösung für a">
+    <div class="check" data-loesung="18.85">
+      <input type="text" class="antwort" placeholder="z. B. 12.5 (Punkt!)" aria-label="Deine Lösung für a">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
@@ -145,9 +145,9 @@
       </div>
     </div>
   </div>
-  <!-- b) Umrechnungstabelle -->
+  <!-- b) Umrechnungstabelle (ohne Kontrolle) -->
   <div class="teil">
-    <p>b)&nbsp; Grad- und Bogenmaß lassen sich mit    \(\;x_{\text{rad}} = \alpha\cdot\dfrac{\pi}{180^\circ}\;\)    umrechnen. Ergänze in jeder Zeile den fehlenden Wert. Gib das Bogenmaß als Vielfaches von \(\pi\) an.</p>
+    <p>b)&nbsp; Grad- und Bogenmaß lassen sich mit \(\;x_{\text{rad}} = x_{\text{Grad}}\cdot\dfrac{\pi}{180^\circ}\;\) umrechnen (und umgekehrt \(\;x_{\text{Grad}} = x_{\text{rad}}\cdot\dfrac{180^\circ}{\pi}\)). Ergänze in jeder Zeile den fehlenden Wert. Gib das Bogenmaß als Vielfaches von \(\pi\) an.</p>
     <table class="umr">
       <tr><th>Grad</th><th>Bogenmaß</th></tr>
       <tr><td>30°</td><td>&nbsp;</td></tr>
@@ -160,7 +160,7 @@
       <tr><td>&nbsp;</td><td>\(2\pi\)</td></tr>
     </table>
     <details><summary>Tipp</summary>
-      <div class="tipp"><p>\(180^\circ\) entsprechen genau \(\pi\). Merke dir solche Ankerwerte: \(90^\circ=\tfrac{\pi}{2}\), \(60^\circ=\tfrac{\pi}{3}\), \(45^\circ=\tfrac{\pi}{4}\), \(30^\circ=\tfrac{\pi}{6}\). Der Rest sind Vielfache davon. Dann brauchst du die Formel nicht.</p></div>
+      <div class="tipp"><p>\(180^\circ\) entsprechen genau \(\pi\). Merke dir die „Ankerwerte": \(90^\circ=\tfrac{\pi}{2}\), \(60^\circ=\tfrac{\pi}{3}\), \(45^\circ=\tfrac{\pi}{4}\), \(30^\circ=\tfrac{\pi}{6}\). Der Rest sind Vielfache davon.</p></div>
     </details>
     <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
       <div class="loesung">
@@ -179,17 +179,17 @@
         <p>$$120^\circ = 120\cdot\dfrac{\pi}{180} = \dfrac{2}{3}\pi \qquad\text{und}\qquad \dfrac{3\pi}{4} = \dfrac{3}{4}\cdot 180^\circ = 135^\circ$$</p>
       </div>
     </details>
-  </div>  
+  </div>
 </section>
 <section class="aufgabe">
-  <h2>Aufgabe 3: Bonus</h2>
+  <h2>Aufgabe 3: Bonus – Sinussatz im allgemeinen Dreieck</h2>
   <div class="teil">
     <p>Bestimme die Länge der Seite \(b\) im abgebildeten Dreieck. Runde auf zwei Dezimalstellen.</p>
     <svg class="skizze" viewBox="0 0 300 195" width="300" role="img" aria-label="Allgemeines Dreieck mit Winkeln alpha und beta und Seite a">
       <polygon class="sk-shape" points="30,170 240,170 181,43"/>
-      <path class="sk-arc" d="M 62,170 A 32 32 0 0 0 54.5,149.4"/>
-      <path class="sk-arc" d="M 208,170 A 32 32 0 0 1 226.5,141"/>
-      <text class="sk-ang" x="66" y="162">α = 40°</text>
+      <path class="sk-arc" d="M 74,170 A 44 44 0 0 0 63.7,141.7"/>
+      <path class="sk-arc" d="M 196,170 A 44 44 0 0 1 221.5,130.1"/>
+      <text class="sk-ang" x="80" y="158">α = 40°</text>
       <text class="sk-ang" x="200" y="160" text-anchor="end">β = 65°</text>
       <text class="sk-lab" x="223" y="101" text-anchor="middle" transform="rotate(65 223 101)">a = 7 cm</text>
       <text class="sk-lab" x="96" y="95" text-anchor="end">b</text>
@@ -203,8 +203,8 @@
         <p>$$\dfrac{a}{\sin(\alpha)}=\dfrac{b}{\sin(\beta)}$$</p>
       </div>
     </details>
-    <div class="check" data-loesung="9.87; 9,87">
-      <input type="text" class="antwort" placeholder="z. B. 8,4" aria-label="Deine Lösung für die Bonusaufgabe">
+    <div class="check" data-loesung="9.87">
+      <input type="text" class="antwort" placeholder="z. B. 8.4 (Punkt!)" aria-label="Deine Lösung für die Bonusaufgabe">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
