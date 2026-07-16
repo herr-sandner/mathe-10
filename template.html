@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+  ===== WOCHEN-VORLAGE – so füllst du sie aus =====
+  1. Datei kopieren und z. B. "woche-02.html" nennen.
+  2. « ... »-Stellen ersetzen: Wochennummer (im <h1> UND unten bei schreibeDatum),
+     Thema, je Teilaufgabe Text + Tipp + Lösungsweg.
+  3. Formeln zwischen \( ... \)  bzw. abgesetzt zwischen $$ ... $$.
+
+  ZWEI SORTEN TEILAUFGABE (unten je ein Beispiel):
+  • MIT Selbstkontrolle  -> Block <div class="check" data-loesung="...">.
+       In data-loesung die richtige(n) Zahl(en) eintragen, mehrere mit ";".
+       Reihenfolge/Schreibweise egal (Vergleich als Zahlenmenge).
+       weg-link und weg NICHT anfassen (style="display:none" bleibt stehen –
+       das JavaScript blendet sie zur richtigen Zeit ein).
+  • OHNE Kontrolle (Nachweise, Begründungen) -> nur <details> "Lösung anzeigen".
+
+  4. Neue Datei in index.html (Übersicht) verlinken. Datum kommt automatisch.
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="schutz.js?v=4"></script>
+<title>Woche « NR » – Kontrollaufgaben Mathe GK 11</title>
+<link rel="stylesheet" href="style.css?v=4">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+
+<header>
+  <h1>Woche « NR »</h1>
+  <div class="meta">Ausgabe: <span data-datum></span> · « Thema der Woche »</div>
+</header>
+
+<section class="aufgabe">
+  <h2>Aufgabe 1 – « Titel »</h2>
+
+  <!-- Teilaufgabe MIT Selbstkontrolle -->
+  <div class="teil">
+    <p>a)&nbsp; « Teilaufgabe … »</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>« Tipp zu a … »</p></div>
+    </details>
+    <div class="check" data-loesung="« richtige Zahl(en), z. B. 2; -3 »">
+      <input type="text" class="antwort" placeholder="mehrere mit ; getrennt" aria-label="Deine Lösung für a">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none">
+        <p>« Lösungsweg zu a … »</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teilaufgabe OHNE Kontrolle (Nachweis/Begründung) -->
+  <div class="teil">
+    <p>b)&nbsp; « Teilaufgabe (Nachweis/Begründung) … »</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>« Tipp zu b … »</p></div>
+    </details>
+    <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
+      <div class="loesung"><p>« Lösung zu b … »</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="aufgabe">
+  <h2>Aufgabe 2 – « Titel »</h2>
+
+  <div class="teil">
+    <p>a)&nbsp; « Teilaufgabe … »</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>« Tipp zu a … »</p></div>
+    </details>
+    <div class="check" data-loesung="« richtige Zahl(en) »">
+      <input type="text" class="antwort" placeholder="mehrere mit ; getrennt" aria-label="Deine Lösung für a">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none">
+        <p>« Lösungsweg zu a … »</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<p><a href="index.html">← zur Übersicht</a></p>
+
+<script src="schuljahr.js"></script>
+<script>schreibeDatum(/* « NR » */ 2);</script>
+<script src="kontrolle.js?v=4"></script>
+</body>
+</html>
