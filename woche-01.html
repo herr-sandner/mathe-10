@@ -30,10 +30,8 @@
   <h1>Woche 1</h1>
   <div class="meta">Ausgabe: <span data-datum></span></div>
 </header>
-
 <section class="aufgabe">
   <h2>Aufgabe 1: Rechtwinklige Dreiecke (Wiederholung Klasse 9)</h2>
-
   <!-- a) Sinus: fehlende Länge -->
   <div class="teil">
     <p>a)&nbsp; Bestimme die Länge der Seite \(a\). Runde auf zwei Dezimalstellen.</p>
@@ -49,8 +47,10 @@
       <text class="sk-pt" x="234" y="42">B</text>
     </svg>
     <details><summary>Tipp</summary>
-      <div class="tipp"><p>\(a\) liegt dem Winkel \(\alpha\) gegenüber und \(c\) ist die Hypotenuse. Verwende:<p> 
-        <p>$$\sin(\alpha) = \dfrac{\text{Gegenkathete}}{\text{Hypotenuse}} = \dfrac{a}{c}$$</p></div>
+      <div class="tipp">
+        <p>\(a\) liegt dem Winkel \(\alpha\) gegenüber und \(c\) ist die Hypotenuse. Verwende:</p>
+        <p>$$\sin(\alpha) = \dfrac{\text{Gegenkathete}}{\text{Hypotenuse}} = \dfrac{a}{c}$$</p>
+      </div>
     </details>
     <div class="check" data-loesung="5.63; 5,63">
       <input type="text" class="antwort" placeholder="z. B. 3,25" aria-label="Deine Lösung für a">
@@ -59,41 +59,43 @@
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
       <div class="weg loesung" style="display:none">
         <p>Aus</p>
-        <p>$$\sin(\alpha) = \dfrac{a}{c}\;\;\;\text{folgt}\;\;\; a = c\cdot\sin(\alpha),\;\;\; \text{damit ist}$$<p>
+        <p>$$\sin(\alpha) = \dfrac{a}{c}\;\;\;\text{folgt}\;\;\; a = c\cdot\sin(\alpha),\;\;\; \text{damit ist}$$</p>
         <p>$$a = 12\ \text{cm}\cdot\sin(28^\circ) \approx 12\cdot 0{,}4695 = 5{,}63\ \text{cm}$$</p>
       </div>
     </div>
   </div>
-
   <!-- b) Cosinus: fehlender Winkel -->
   <div class="teil">
-    <p>b)&nbsp; In einem anderen rechtwinkligen Dreieck (rechter Winkel bei \(C\)) sind die Ankathete \(b = 5\ \text{cm}\) und die Hypotenuse \(c = 8\ \text{cm}\) gegeben. Berechne den Winkel \(\alpha\). Runde auf eine Dezimalstelle (in Grad).</p>
+    <p>b)&nbsp; Bestimme die Größe des Winkels \(\alpha\). Runde auf eine Dezimalstelle.</p>
     <svg class="skizze" viewBox="0 0 240 235" width="240" role="img" aria-label="Rechtwinkliges Dreieck mit Ankathete b und Hypotenuse c">
       <polygon class="sk-shape" points="40,205 180,205 180,19"/>
       <polyline class="sk-right" points="165,205 165,190 180,190"/>
       <path class="sk-arc" d="M 70,205 A 30 30 0 0 0 58,181"/>
-      <text class="sk-ang" x="74" y="197">α = ?</text>
+      <text class="sk-ang" x="76" y="197">α</text>
       <text class="sk-lab" x="110" y="222" text-anchor="middle">b = 5 cm</text>
-      <text class="sk-lab" x="122" y="108">c = 8 cm</text>
+      <text class="sk-lab" x="97" y="103" text-anchor="middle" transform="rotate(-53 97 103)">c = 8 cm</text>
       <text class="sk-pt" x="30" y="218">A</text>
       <text class="sk-pt" x="186" y="220">C</text>
       <text class="sk-pt" x="186" y="16">B</text>
     </svg>
     <details><summary>Tipp</summary>
-      <div class="tipp"><p>\(b\) ist die Ankathete von \(\alpha\), \(c\) die Hypotenuse. Verwende \(\cos\alpha = \dfrac{\text{Ankathete}}{\text{Hypotenuse}} = \dfrac{b}{c}\) und dann \(\alpha = \cos^{-1}(\dots)\).</p></div>
+      <div class="tipp">
+        <p>\(b\) ist die Ankathete von \(\alpha\) und \(c\) ist die Hypotenuse. Verwende:</p>
+        <p>$$\cos(\alpha) = \dfrac{\text{Ankathete}}{\text{Hypotenuse}} = \dfrac{b}{c}$$</p>
+      </div>
     </details>
     <div class="check" data-loesung="51.3; 51,3">
-      <input type="text" class="antwort" placeholder="z. B. 51.3" aria-label="Deine Lösung für b">
+      <input type="text" class="antwort" placeholder="z. B. 37,5" aria-label="Deine Lösung für b">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
       <div class="weg loesung" style="display:none">
-        <p>Aus \(\cos\alpha = \dfrac{b}{c}\) folgt \(\alpha = \cos^{-1}\!\left(\dfrac{b}{c}\right)\).</p>
+        <p>Aus</p>
+        <p>$$\cos(\alpha) = \dfrac{b}{c}\;\;\;\text{folgt}\;\;\; \alpha = \cos^{-1}\!\left(\dfrac{b}{c}\right),\;\;\; \text{damit ist}$$</p>
         <p>$$\alpha = \cos^{-1}\!\left(\tfrac{5}{8}\right) = \cos^{-1}(0{,}625) \approx 51{,}3^\circ$$</p>
       </div>
     </div>
   </div>
-
   <!-- c) Verallgemeinerung (ohne Kontrolle) -->
   <div class="teil">
     <p>c)&nbsp; Sinus, Kosinus und Tangens (als Seitenverhältnisse) funktionieren nur im <em>rechtwinkligen</em> Dreieck. Erkläre: Welche zwei Sätze braucht man, um in <em>beliebigen</em> Dreiecken fehlende Seiten und Winkel zu berechnen? Notiere jeweils die Formel.</p>
@@ -102,19 +104,20 @@
     </details>
     <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
       <div class="loesung">
-        <p><strong>Sinussatz:</strong> In jedem Dreieck gilt $$\frac{a}{\sin\alpha}=\frac{b}{\sin\beta}=\frac{c}{\sin\gamma}.$$</p>
-        <p><strong>Kosinussatz:</strong> $$c^2 = a^2 + b^2 - 2ab\cdot\cos\gamma$$ (entsprechend für die anderen Seiten). Für \(\gamma = 90^\circ\) wird \(\cos\gamma = 0\) und man erhält den Satz des Pythagoras \(c^2=a^2+b^2\).</p>
+        <p><strong>Sinussatz:</strong> In jedem Dreieck gilt</p>
+        <p>$$\frac{a}{\sin(\alpha)}=\frac{b}{\sin(\beta)}=\frac{c}{\sin(\gamma)}$$</p>
+        <p><strong>Kosinussatz:</strong></p>
+        <p>$$c^2 = a^2 + b^2 - 2ab\cdot\cos(\gamma)$$</p>
+        <p>(entsprechend für die anderen Seiten). Für \(\gamma = 90^\circ\) wird \(\cos(\gamma) = 0\) und man erhält den Satz des Pythagoras \(c^2=a^2+b^2\).</p>
       </div>
     </details>
   </div>
 </section>
-
 <section class="aufgabe">
-  <h2>Aufgabe 2 – Bogenmaß und Kreissektoren</h2>
-
+  <h2>Aufgabe 2: Bogenmaß und Kreissektoren</h2>
   <!-- a) Sektorfläche -->
   <div class="teil">
-    <p>a)&nbsp; Ein Kreissektor hat den Radius \(r = 6\ \text{cm}\) und den Mittelpunktswinkel \(\varphi = 60^\circ\). Berechne den Flächeninhalt des Sektors. Runde auf zwei Dezimalstellen (in cm²).</p>
+    <p>a)&nbsp; Berechne den Flächeninhalt des abgebildeten Kreissektors. Runde auf zwei Dezimalstellen.</p>
     <svg class="skizze" viewBox="0 0 220 215" width="220" role="img" aria-label="Kreissektor mit Radius r und Mittelpunktswinkel 60 Grad">
       <circle class="sk-thin" cx="105" cy="105" r="95"/>
       <path class="sk-sector" d="M 105,105 L 200,105 A 95 95 0 0 0 152.5,22.7 Z"/>
@@ -123,20 +126,24 @@
       <text class="sk-pt" x="90" y="120">M</text>
     </svg>
     <details><summary>Tipp</summary>
-      <div class="tipp"><p>Der Sektor ist der Bruchteil \(\dfrac{\varphi}{360^\circ}\) des ganzen Kreises. Also \(A = \dfrac{\varphi}{360^\circ}\cdot \pi r^2\).</p></div>
+      <div class="tipp">
+        <p>Der Sektor ist der Bruchteil \(\tfrac{\varphi}{360^\circ}\) des ganzen Kreises. Verwende:</p>
+        <p>$$A = \dfrac{\varphi}{360^\circ}\cdot \pi r^2$$</p>
+      </div>
     </details>
     <div class="check" data-loesung="18.85; 18,85">
-      <input type="text" class="antwort" placeholder="z. B. 18.85" aria-label="Deine Lösung für a">
+      <input type="text" class="antwort" placeholder="z. B. 12,5" aria-label="Deine Lösung für a">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
       <div class="weg loesung" style="display:none">
-        <p>$$A = \frac{\varphi}{360^\circ}\cdot \pi r^2 = \frac{60^\circ}{360^\circ}\cdot \pi \cdot (6\ \text{cm})^2 = \frac{1}{6}\cdot 36\pi\ \text{cm}^2 = 6\pi\ \text{cm}^2 \approx 18{,}85\ \text{cm}^2$$</p>
+        <p>Aus</p>
+        <p>$$A = \dfrac{\varphi}{360^\circ}\cdot \pi r^2 \;\;\;\text{folgt mit}\;\;\; \varphi = 60^\circ,\ r = 6\ \text{cm}$$</p>
+        <p>$$A = \dfrac{60^\circ}{360^\circ}\cdot \pi \cdot (6\ \text{cm})^2 = \dfrac{1}{6}\cdot 36\pi\ \text{cm}^2 = 6\pi\ \text{cm}^2 \approx 18{,}85\ \text{cm}^2$$</p>
         <p>Kleiner Zusatz: Die Bogenlänge desselben Sektors wäre \(b = \dfrac{\varphi}{360^\circ}\cdot 2\pi r = 2\pi\ \text{cm} \approx 6{,}28\ \text{cm}\).</p>
       </div>
     </div>
   </div>
-
   <!-- b) Umrechnungstabelle (ohne Kontrolle) -->
   <div class="teil">
     <p>b)&nbsp; Grad- und Bogenmaß lassen sich mit \(\;x_{\text{rad}} = x_{\text{Grad}}\cdot\dfrac{\pi}{180^\circ}\;\) umrechnen (und umgekehrt \(\;x_{\text{Grad}} = x_{\text{rad}}\cdot\dfrac{180^\circ}{\pi}\)). Fülle die Tabelle aus – erst als Vielfaches von \(\pi\), dann als Dezimalzahl.</p>
@@ -162,39 +169,41 @@
     </details>
   </div>
 </section>
-
 <section class="aufgabe">
-  <h2>Aufgabe 3 – Bonus: Sinussatz im allgemeinen Dreieck</h2>
+  <h2>Aufgabe 3: Bonus – Sinussatz im allgemeinen Dreieck</h2>
   <div class="teil">
-    <p>In einem Dreieck (nicht rechtwinklig) sind \(a = 7\ \text{cm}\), \(\alpha = 40^\circ\) und \(\beta = 65^\circ\) gegeben. Berechne die Seite \(b\). Runde auf zwei Dezimalstellen (in cm).</p>
+    <p>Bestimme die Länge der Seite \(b\) im abgebildeten Dreieck. Runde auf zwei Dezimalstellen.</p>
     <svg class="skizze" viewBox="0 0 300 195" width="300" role="img" aria-label="Allgemeines Dreieck mit Winkeln alpha und beta und Seite a">
       <polygon class="sk-shape" points="30,170 240,170 181,43"/>
       <path class="sk-arc" d="M 62,170 A 32 32 0 0 0 54.5,149.4"/>
       <path class="sk-arc" d="M 208,170 A 32 32 0 0 1 226.5,141"/>
       <text class="sk-ang" x="66" y="162">α = 40°</text>
       <text class="sk-ang" x="200" y="160" text-anchor="end">β = 65°</text>
-      <text class="sk-lab" x="222" y="104">a = 7 cm</text>
-      <text class="sk-lab" x="92" y="104" text-anchor="end">b = ?</text>
+      <text class="sk-lab" x="223" y="101" text-anchor="middle" transform="rotate(65 223 101)">a = 7 cm</text>
+      <text class="sk-lab" x="96" y="95" text-anchor="end">b</text>
       <text class="sk-pt" x="20" y="183">A</text>
       <text class="sk-pt" x="246" y="183">B</text>
       <text class="sk-pt" x="181" y="34" text-anchor="middle">C</text>
     </svg>
     <details><summary>Tipp</summary>
-      <div class="tipp"><p>\(a\) liegt \(\alpha\) gegenüber, \(b\) liegt \(\beta\) gegenüber. Setze im Sinussatz \(\dfrac{a}{\sin\alpha}=\dfrac{b}{\sin\beta}\) ein und löse nach \(b\) auf.</p></div>
+      <div class="tipp">
+        <p>\(a\) liegt \(\alpha\) gegenüber und \(b\) liegt \(\beta\) gegenüber. Verwende den Sinussatz:</p>
+        <p>$$\dfrac{a}{\sin(\alpha)}=\dfrac{b}{\sin(\beta)}$$</p>
+      </div>
     </details>
     <div class="check" data-loesung="9.87; 9,87">
-      <input type="text" class="antwort" placeholder="z. B. 9.87" aria-label="Deine Lösung für die Bonusaufgabe">
+      <input type="text" class="antwort" placeholder="z. B. 8,4" aria-label="Deine Lösung für die Bonusaufgabe">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
       <div class="weg loesung" style="display:none">
-        <p>Sinussatz: \(\dfrac{a}{\sin\alpha}=\dfrac{b}{\sin\beta}\;\Rightarrow\; b = a\cdot\dfrac{\sin\beta}{\sin\alpha}\).</p>
-        <p>$$b = 7\ \text{cm}\cdot\frac{\sin(65^\circ)}{\sin(40^\circ)} = 7\cdot\frac{0{,}9063}{0{,}6428} \approx 9{,}87\ \text{cm}$$</p>
+        <p>Aus</p>
+        <p>$$\dfrac{a}{\sin(\alpha)}=\dfrac{b}{\sin(\beta)}\;\;\;\text{folgt}\;\;\; b = a\cdot\dfrac{\sin(\beta)}{\sin(\alpha)},\;\;\; \text{damit ist}$$</p>
+        <p>$$b = 7\ \text{cm}\cdot\dfrac{\sin(65^\circ)}{\sin(40^\circ)} \approx 7\cdot\dfrac{0{,}9063}{0{,}6428} = 9{,}87\ \text{cm}$$</p>
       </div>
     </div>
   </div>
 </section>
-
 <p><a href="index.html">← zur Übersicht</a></p>
 <script src="schuljahr.js"></script>
 <script>schreibeDatum(1);</script>
