@@ -264,7 +264,7 @@
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>Nullstellen bei \(-2\pi,\ -\pi,\ 0,\ \pi,\ 2\pi\) – das sind \(5\) Stück.</p></div>
+      <div class="weg loesung" style="display:none"><p>Nullstellen bei \(-2\pi,\ -\pi,\ 0,\ \pi,\ 2\pi\), das sind \(5\) Stück.</p></div>
     </div>
     <p>Anzahl der Hochpunkte im Intervall \([-2\pi;\,2\pi]\):</p>
     <div class="check" data-loesung="2">
@@ -272,7 +272,7 @@
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>Hochpunkte (Wert \(1\)) bei \(x=-\tfrac{3\pi}{2}\) und \(x=\tfrac{\pi}{2}\) – also \(2\) Stück.</p></div>
+      <div class="weg loesung" style="display:none"><p>Hochpunkte (Wert \(1\)) bei \(x=-\tfrac{3\pi}{2}\) und \(x=\tfrac{\pi}{2}\), also \(2\) Stück.</p></div>
     </div>
   </div>
 
@@ -281,9 +281,9 @@
     <p>d)&nbsp; Beschreibe Periode, Nullstellen und Symmetrie des Graphen.</p>
     <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
       <div class="loesung">
-        <p><strong>Periode:</strong> \(2\pi\) – nach \(2\pi\) wiederholt sich der Verlauf.</p>
+        <p><strong>Periode:</strong> \(2\pi\), denn nach \(2\pi\) wiederholt sich der Verlauf (der Graph ist wieder an derselben Stelle).</p>
         <p><strong>Nullstellen:</strong> bei allen Vielfachen von \(\pi\), also \(x = k\cdot\pi\) mit \(k \in \mathbb{Z}\).</p>
-        <p><strong>Symmetrie:</strong> punktsymmetrisch zum Ursprung, denn \(\sin(-x) = -\sin(x)\) (ungerade Funktion).</p>
+        <p><strong>Symmetrie:</strong> punktsymmetrisch zum Ursprung.</p>
       </div>
     </details>
   </div>
@@ -292,7 +292,7 @@
 <section class="aufgabe">
   <h2>Aufgabe 3: Gleichungen am Einheitskreis</h2>
   <div class="teil">
-    <p>Gib alle Lösungen im Intervall \([0^\circ;\,360^\circ)\) an (mehrere mit „;" trennen).</p>
+    <p>Gib alle Lösungen im Intervall \([0^\circ;\,360^\circ)\) an (mehrere mit ; trennen).</p>
 
     <p>a)&nbsp; \(\sin x = \tfrac{1}{2}\)</p>
     <div class="check" data-loesung="30; 150">
@@ -331,9 +331,15 @@
     </div>
 
     <p>e)&nbsp; \(\cos x = -2\)</p>
-    <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
-      <div class="loesung"><p>Keine Lösung: Für jeden Winkel gilt \(-1 \le \cos x \le 1\). Der Wert \(-2\) liegt außerhalb dieses Bereichs.</p></div>
-    </details>
+    <div class="check" data-loesung="keine">
+      <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen e">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Keine Lösung: Für jeden Winkel gilt \(-1 \le \cos x \le 1\). Der Wert \(-2\) liegt außerhalb dieses Bereichs.</p></div>
+    </div>
+    
+    
 
     <p>f)&nbsp; \(\sin(2x) = 0\)</p>
     <div class="check" data-loesung="0; 90; 180; 270">
