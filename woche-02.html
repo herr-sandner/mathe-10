@@ -14,10 +14,14 @@
   .sk-arc{stroke:var(--akzent-dunkel);stroke-width:1.6;fill:none}
   .sk-rad{stroke:var(--akzent);stroke-width:2;fill:none}
   .sk-proj{stroke:var(--akzent-dunkel);stroke-width:1.8;fill:none;stroke-dasharray:4 3}
+  .sk-sin{stroke:#e5322d;stroke-width:2.2;fill:none;stroke-dasharray:4 3}
+  .sk-cos{stroke:#1a56ff;stroke-width:2.2;fill:none;stroke-dasharray:4 3}
   .sk-curve{stroke:var(--akzent);stroke-width:2.2;fill:none;stroke-linejoin:round;stroke-linecap:round}
   .sk-guide{stroke:var(--linie);stroke-width:1.2;fill:none;stroke-dasharray:3 3}
   .sk-dot{fill:var(--akzent)}
   text.sk-lab{fill:var(--akzent-dunkel);font:600 13px system-ui,sans-serif}
+  text.sk-sin-l{fill:#e5322d;font:600 13px system-ui,sans-serif}
+  text.sk-cos-l{fill:#1a56ff;font:600 13px system-ui,sans-serif}
   text.sk-ang{fill:var(--akzent-dunkel);font:600 12px system-ui,sans-serif}
   text.sk-pt{fill:var(--akzent-dunkel);font:12px system-ui,sans-serif}
   /* Tabellen */
@@ -33,25 +37,23 @@
   <h1>Woche 2</h1>
   <div class="meta">Ausgabe: <span data-datum></span></div>
 </header>
-
 <section class="aufgabe">
   <h2>Aufgabe 1: Sinus und Kosinus am Einheitskreis</h2>
   <svg class="skizze" viewBox="0 0 250 250" width="250" role="img" aria-label="Einheitskreis mit Punkt P sowie sin und cos als Strecken">
     <line class="sk-thin" x1="20" y1="130" x2="235" y2="130"/>
     <line class="sk-thin" x1="120" y1="20" x2="120" y2="240"/>
     <circle class="sk-shape" cx="120" cy="130" r="90"/>
-    <line class="sk-proj" x1="120" y1="130" x2="171.6" y2="130"/>
-    <line class="sk-proj" x1="171.6" y1="130" x2="171.6" y2="56.3"/>
+    <line class="sk-cos" x1="120" y1="130" x2="171.6" y2="130"/>
+    <line class="sk-sin" x1="171.6" y1="130" x2="171.6" y2="56.3"/>
     <line class="sk-rad" x1="120" y1="130" x2="171.6" y2="56.3"/>
     <path class="sk-arc" d="M 146,130 A 26 26 0 0 0 134.9,108.7"/>
     <circle class="sk-dot" cx="171.6" cy="56.3" r="3"/>
     <text class="sk-ang" x="151" y="123">α</text>
-    <text class="sk-lab" x="130" y="147">cos α</text>
-    <text class="sk-lab" x="178" y="98">sin α</text>
+    <text class="sk-cos-l" x="128" y="147">cos(α)</text>
+    <text class="sk-sin-l" x="178" y="98">sin(α)</text>
     <text class="sk-pt" x="176" y="52">P</text>
     <text class="sk-pt" x="107" y="145">O</text>
   </svg>
-
   <!-- a) Achsenwinkel-Tabelle -->
   <div class="teil">
     <p>a)&nbsp; Fülle die Tabelle ohne Taschenrechner aus.</p>
@@ -79,7 +81,6 @@
       </div>
     </details>
   </div>
-
   <!-- b) Vorzeichen -->
   <div class="teil">
     <p>b)&nbsp; Gib das Vorzeichen an: <strong>+1</strong> für positiv, <strong>−1</strong> für negativ.</p>
@@ -101,86 +102,83 @@
         </svg>
       </div>
     </details>
-    <p>Vorzeichen von \(\sin 130^\circ\):</p>
+    <p>Vorzeichen von \(\sin(130^\circ)\):</p>
     <div class="check" data-loesung="1">
       <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von sin 130 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>\(130^\circ\) liegt im II. Quadranten, dort ist \(\sin\) positiv, also \(+1\) (und \(\cos\) wäre negativ).</p></div>
+      <div class="weg loesung" style="display:none"><p>\(130^\circ\) liegt im II. Quadranten, dort ist der Sinus positiv, also \(+1\) (und der Kosinus wäre negativ).</p></div>
     </div>
-    <p>Vorzeichen von \(\cos 200^\circ\):</p>
+    <p>Vorzeichen von \(\cos(200^\circ)\):</p>
     <div class="check" data-loesung="-1">
       <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von cos 200 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>\(200^\circ\) liegt im III. Quadranten, dort ist \(\cos\) negativ, also \(-1\) (und \(\sin\) ebenfalls negativ).</p></div>
+      <div class="weg loesung" style="display:none"><p>\(200^\circ\) liegt im III. Quadranten, dort ist der Kosinus negativ, also \(-1\) (und der Sinus ebenfalls negativ).</p></div>
     </div>
-    <p>Vorzeichen von \(\sin 250^\circ\):</p>
+    <p>Vorzeichen von \(\sin(250^\circ)\):</p>
     <div class="check" data-loesung="-1">
       <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von sin 250 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>\(250^\circ\) liegt im III. Quadranten, dort ist \(\sin\) negativ, also \(-1\).</p></div>
+      <div class="weg loesung" style="display:none"><p>\(250^\circ\) liegt im III. Quadranten, dort ist der Sinus negativ, also \(-1\).</p></div>
     </div>
-    <p>Vorzeichen von \(\cos 300^\circ\):</p>
+    <p>Vorzeichen von \(\cos(300^\circ)\):</p>
     <div class="check" data-loesung="1">
       <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von cos 300 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>\(300^\circ\) liegt im IV. Quadranten, dort ist \(\cos\) positiv, also \(+1\) (und \(\sin\) negativ).</p></div>
+      <div class="weg loesung" style="display:none"><p>\(300^\circ\) liegt im IV. Quadranten, dort ist der Kosinus positiv, also \(+1\) (und der Sinus negativ).</p></div>
     </div>
   </div>
-
   <!-- c) Zurückführung auf spitze Winkel -->
   <div class="teil">
     <p>c)&nbsp; Auf welchen spitzen Winkel lässt sich der Wert zurückführen? Gib den spitzen Winkel in Grad ein; den Wert selbst findest du im Lösungsweg.</p>
-    <p>\(\sin 120^\circ\):</p>
+    <p>\(\sin(120^\circ)\):</p>
     <div class="check" data-loesung="60">
       <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für sin 120 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>$$\sin 120^\circ = \sin(180^\circ-120^\circ) = \sin 60^\circ = \tfrac{1}{2}\sqrt{3}$$</p></div>
+      <div class="weg loesung" style="display:none"><p>$$\sin(120^\circ) = \sin(180^\circ-120^\circ) = \sin(60^\circ) = \tfrac{1}{2}\sqrt{3}$$</p></div>
     </div>
-    <p>\(\cos 210^\circ\):</p>
+    <p>\(\cos(210^\circ)\):</p>
     <div class="check" data-loesung="30">
       <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für cos 210 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>$$\cos 210^\circ = -\cos(210^\circ-180^\circ) = -\cos 30^\circ = -\tfrac{1}{2}\sqrt{3}$$</p></div>
+      <div class="weg loesung" style="display:none"><p>$$\cos(210^\circ) = -\cos(210^\circ-180^\circ) = -\cos(30^\circ) = -\tfrac{1}{2}\sqrt{3}$$</p></div>
     </div>
-    <p>\(\sin 225^\circ\):</p>
+    <p>\(\sin(225^\circ)\):</p>
     <div class="check" data-loesung="45">
       <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für sin 225 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>$$\sin 225^\circ = -\sin(225^\circ-180^\circ) = -\sin 45^\circ = -\tfrac{1}{2}\sqrt{2}$$</p></div>
+      <div class="weg loesung" style="display:none"><p>$$\sin(225^\circ) = -\sin(225^\circ-180^\circ) = -\sin(45^\circ) = -\tfrac{1}{2}\sqrt{2}$$</p></div>
     </div>
-    <p>\(\cos 300^\circ\):</p>
+    <p>\(\cos(300^\circ)\):</p>
     <div class="check" data-loesung="60">
       <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für cos 300 Grad">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>$$\cos 300^\circ = \cos(360^\circ-300^\circ) = \cos 60^\circ = \tfrac{1}{2}$$</p></div>
+      <div class="weg loesung" style="display:none"><p>$$\cos(300^\circ) = \cos(360^\circ-300^\circ) = \cos(60^\circ) = \tfrac{1}{2}$$</p></div>
     </div>
   </div>
 </section>
-
 <section class="aufgabe">
   <h2>Aufgabe 2: Der Graph der Sinusfunktion</h2>
-
   <!-- a) Wertetabelle -->
   <div class="teil">
-    <p>a)&nbsp; Fülle die Wertetabelle für \(y = \sin x\) aus (Bogenmaß).</p>
+    <p>a)&nbsp; Fülle die Wertetabelle für \(y = \sin(x)\) aus (Bogenmaß).</p>
     <table class="umr">
-      <tr><th>\(x\)</th><th>\(\sin x\)</th></tr>
+      <tr><th>\(x\)</th><th>\(\sin(x)\)</th></tr>
       <tr><td>\(0\)</td><td>&nbsp;</td></tr>
       <tr><td>\(\tfrac{\pi}{6}\)</td><td>&nbsp;</td></tr>
       <tr><td>\(\tfrac{\pi}{3}\)</td><td>&nbsp;</td></tr>
@@ -198,7 +196,7 @@
     <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
       <div class="loesung">
         <table class="umr">
-          <tr><th>\(x\)</th><th>\(\sin x\)</th></tr>
+          <tr><th>\(x\)</th><th>\(\sin(x)\)</th></tr>
           <tr><td>\(0\)</td><td>\(0\)</td></tr>
           <tr><td>\(\tfrac{\pi}{6}\)</td><td>\(\tfrac{1}{2}\)</td></tr>
           <tr><td>\(\tfrac{\pi}{3}\)</td><td>\(\tfrac{1}{2}\sqrt{3}\)</td></tr>
@@ -216,10 +214,9 @@
       </div>
     </details>
   </div>
-
   <!-- b) Graph zeichnen -->
   <div class="teil">
-    <p>b)&nbsp; Zeichne den Graphen von \(y = \sin x\) für \(-2\pi \le x \le 2\pi\).</p>
+    <p>b)&nbsp; Zeichne den Graphen von \(y = \sin(x)\) für \(-2\pi \le x \le 2\pi\).</p>
     <details><summary>Tipp</summary>
       <div class="tipp"><p>Trage zuerst die Nullstellen und die Hoch- bzw. Tiefpunkte ein und verbinde sie zu einer glatten Wellenlinie.</p></div>
     </details>
@@ -246,7 +243,6 @@
       </div>
     </details>
   </div>
-
   <!-- c) Ablesen -->
   <div class="teil">
     <p>c)&nbsp; Lies am Graphen ab.</p>
@@ -275,7 +271,6 @@
       <div class="weg loesung" style="display:none"><p>Hochpunkte (Wert \(1\)) bei \(x=-\tfrac{3\pi}{2}\) und \(x=\tfrac{\pi}{2}\), also \(2\) Stück.</p></div>
     </div>
   </div>
-
   <!-- d) Beschreiben -->
   <div class="teil">
     <p>d)&nbsp; Beschreibe Periode, Nullstellen und Symmetrie des Graphen.</p>
@@ -288,73 +283,63 @@
     </details>
   </div>
 </section>
-
 <section class="aufgabe">
   <h2>Aufgabe 3: Gleichungen am Einheitskreis</h2>
   <div class="teil">
     <p>Gib alle Lösungen im Intervall \([0^\circ;\,360^\circ)\) an (mehrere mit ; trennen).</p>
-
-    <p>a)&nbsp; \(\sin x = \tfrac{1}{2}\)</p>
+    <p>a)&nbsp; \(\sin(x) = \tfrac{1}{2}\)</p>
     <div class="check" data-loesung="30; 150">
       <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen a">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>\(\sin 30^\circ = \tfrac{1}{2}\). Im II. Quadranten liefert \(180^\circ-30^\circ = 150^\circ\) denselben Sinuswert. Lösungen: \(30^\circ,\ 150^\circ\) (im Bogenmaß \(\tfrac{\pi}{6},\ \tfrac{5\pi}{6}\)).</p></div>
+      <div class="weg loesung" style="display:none"><p>\(\sin(30^\circ) = \tfrac{1}{2}\). Im II. Quadranten liefert \(180^\circ-30^\circ = 150^\circ\) denselben Sinuswert. Lösungen: \(30^\circ,\ 150^\circ\) (im Bogenmaß \(\tfrac{\pi}{6},\ \tfrac{5\pi}{6}\)).</p></div>
     </div>
-
-    <p>b)&nbsp; \(\cos x = \tfrac{1}{2}\sqrt{3}\)</p>
+    <p>b)&nbsp; \(\cos(x) = \tfrac{1}{2}\sqrt{3}\)</p>
     <div class="check" data-loesung="30; 330">
       <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen b">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>\(\cos 30^\circ = \tfrac{1}{2}\sqrt{3}\). Der Kosinus ist auch im IV. Quadranten positiv: \(360^\circ-30^\circ = 330^\circ\). Lösungen: \(30^\circ,\ 330^\circ\) (im Bogenmaß \(\tfrac{\pi}{6},\ \tfrac{11\pi}{6}\)).</p></div>
+      <div class="weg loesung" style="display:none"><p>\(\cos(30^\circ) = \tfrac{1}{2}\sqrt{3}\). Der Kosinus ist auch im IV. Quadranten positiv: \(360^\circ-30^\circ = 330^\circ\). Lösungen: \(30^\circ,\ 330^\circ\) (im Bogenmaß \(\tfrac{\pi}{6},\ \tfrac{11\pi}{6}\)).</p></div>
     </div>
-
-    <p>c)&nbsp; \(\sin x = -\tfrac{1}{2}\sqrt{2}\)</p>
+    <p>c)&nbsp; \(\sin(x) = -\tfrac{1}{2}\sqrt{2}\)</p>
     <div class="check" data-loesung="225; 315">
       <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen c">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>\(\sin 45^\circ = \tfrac{1}{2}\sqrt{2}\); negativ ist der Sinus im III. und IV. Quadranten: \(180^\circ+45^\circ = 225^\circ\) und \(360^\circ-45^\circ = 315^\circ\). Lösungen: \(225^\circ,\ 315^\circ\).</p></div>
+      <div class="weg loesung" style="display:none"><p>\(\sin(45^\circ) = \tfrac{1}{2}\sqrt{2}\); negativ ist der Sinus im III. und IV. Quadranten: \(180^\circ+45^\circ = 225^\circ\) und \(360^\circ-45^\circ = 315^\circ\). Lösungen: \(225^\circ,\ 315^\circ\).</p></div>
     </div>
-
-    <p>d)&nbsp; \(\cos x = -1\)</p>
+    <p>d)&nbsp; \(\cos(x) = -1\)</p>
     <div class="check" data-loesung="180">
-      <input type="text" class="antwort" placeholder="Winkel in °" aria-label="Lösungen d">
+      <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen d">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
       <div class="weg loesung" style="display:none"><p>Der Kosinus wird nur bei \(180^\circ\) gleich \(-1\) (linker Punkt des Kreises). Lösung: \(180^\circ\) (im Bogenmaß \(\pi\)).</p></div>
     </div>
-
-    <p>e)&nbsp; \(\cos x = -2\)</p>
+    <p>e)&nbsp; \(\cos(x) = -2\)</p>
     <div class="check" data-loesung="keine">
       <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen e">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>Keine Lösung: Für jeden Winkel gilt \(-1 \le \cos x \le 1\). Der Wert \(-2\) liegt außerhalb dieses Bereichs.</p></div>
+      <div class="weg loesung" style="display:none"><p>Keine Lösung: Für jeden Winkel gilt \(-1 \le \cos(x) \le 1\). Der Wert \(-2\) liegt außerhalb dieses Bereichs. (Tippe „keine".)</p></div>
     </div>
-    
-    
-
     <p>f)&nbsp; \(\sin(2x) = 0\)</p>
     <div class="check" data-loesung="0; 90; 180; 270">
       <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen f">
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
       <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
-      <div class="weg loesung" style="display:none"><p>Setze \(u = 2x\). Für \(x \in [0^\circ;360^\circ)\) durchläuft \(u\) das Intervall \([0^\circ;720^\circ)\). \(\sin u = 0\) bei \(u = 0^\circ, 180^\circ, 360^\circ, 540^\circ\), also \(x = 0^\circ, 90^\circ, 180^\circ, 270^\circ\).</p></div>
+      <div class="weg loesung" style="display:none"><p>Setze \(u = 2x\). Für \(x \in [0^\circ;360^\circ)\) durchläuft \(u\) das Intervall \([0^\circ;720^\circ)\). \(\sin(u) = 0\) bei \(u = 0^\circ, 180^\circ, 360^\circ, 540^\circ\), also \(x = 0^\circ, 90^\circ, 180^\circ, 270^\circ\).</p></div>
     </div>
   </div>
 </section>
-
 <p><a href="index.html">← zur Übersicht</a></p>
 <script src="schuljahr.js"></script>
 <script>schreibeDatum(2);</script>
-<script src="kontrolle.js?v=4"></script>
+<script src="kontrolle.js?v=5"></script>
 </body>
 </html>
