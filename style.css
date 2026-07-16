@@ -1,14 +1,14 @@
 /* Gemeinsames Styling für alle Seiten. Einmal hier ändern = überall geändert. */
 :root{
-  --akzent:#e0955b;         /* Pastell-Orange */
-  --akzent-dunkel:#c2703a;  /* dezenter, gut lesbar */
-  --tipp-bg:#fdf2e9;
-  --loesung-bg:#faf7f4;
-  --linie:#efe6dd;
-  --text:#33302c;
-  --grau:#9a8f83;
-  --ok:#3f8f5b;
-  --nein:#c0563a;
+  --akzent:#8b6bd6;
+--akzent-dunkel:#6849b4;
+--tipp-bg:#f4f1fc;
+--loesung-bg:#faf8fd;
+--linie:#e6dff5;
+--text:#33302c;
+--grau:#9a8f83;
+--ok:#3f8f5b;
+--nein:#c0563a;
 }
 *{box-sizing:border-box}
 [hidden]{display:none !important}  /* hidden soll IMMER gewinnen */
