@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="schutz.js?v=4"></script>
+<title>Woche 3</title>
+<link rel="stylesheet" href="style.css?v=4">
+<style>
+  .skizze{display:block;margin:.7rem 0 .3rem;max-width:100%;height:auto}
+  .sk-thin{stroke:var(--grau);stroke-width:1.3;fill:none}
+  .sk-curve{stroke:var(--akzent);stroke-width:2.2;fill:none;stroke-linejoin:round;stroke-linecap:round}
+  .sk-guide{stroke:var(--linie);stroke-width:1.1;fill:none;stroke-dasharray:3 3}
+  text.sk-lab{fill:var(--akzent-dunkel);font:600 12px system-ui,sans-serif}
+  text.sk-leg{fill:var(--grau);font:12px system-ui,sans-serif}
+  text.sk-pt{fill:var(--akzent-dunkel);font:12px system-ui,sans-serif}
+  table.umr{border-collapse:collapse;margin:.5rem 0;font-size:.9rem}
+  table.umr th,table.umr td{border:1px solid var(--linie);padding:.3rem .65rem;text-align:center}
+  table.umr th{color:var(--akzent-dunkel);font-weight:600}
+</style>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<header>
+  <h1>Woche 3</h1>
+  <div class="meta">Ausgabe: <span data-datum></span></div>
+</header>
+<section class="aufgabe">
+  <h2>Aufgabe 1: Der Sinusgraph mit Parametern</h2>
+  <p>Betrachtet wird \(f(x) = a\cdot\sin\big(b(x-c)\big) + d\). Die vier Parameter wirken so:</p>
+  <svg class="skizze" viewBox="0 0 491 152" width="491" role="img" aria-label="Basis-Sinus und transformierter Sinus">
+  <line class="sk-guide" x1="44.0" y1="18.0" x2="44.0" y2="129.8"/>
+  <line class="sk-guide" x1="150.8" y1="18.0" x2="150.8" y2="129.8"/>
+  <line class="sk-guide" x1="257.6" y1="18.0" x2="257.6" y2="129.8"/>
+  <line class="sk-guide" x1="364.4" y1="18.0" x2="364.4" y2="129.8"/>
+  <line class="sk-guide" x1="471.3" y1="18.0" x2="471.3" y2="129.8"/>
+  <line class="sk-thin" x1="38.0" y1="93.4" x2="479.3" y2="93.4"/>
+  <line class="sk-thin" x1="257.6" y1="18.0" x2="257.6" y2="129.8"/>
+  <polyline points="44.0,93.4 46.7,91.3 49.4,89.3 52.2,87.2 54.9,85.2 57.6,83.3 60.3,81.4 63.0,79.6 65.8,77.9 68.5,76.3 71.2,74.7 73.9,73.4 76.6,72.1 79.4,71.0 82.1,70.0 84.8,69.2 87.5,68.5 90.2,68.0 93.0,67.6 95.7,67.4 98.4,67.4 101.1,67.6 103.8,67.9 106.6,68.3 109.3,69.0 112.0,69.8 114.7,70.7 117.4,71.8 120.2,73.0 122.9,74.4 125.6,75.8 128.3,77.4 131.0,79.1 133.8,80.9 136.5,82.8 139.2,84.7 141.9,86.7 144.6,88.7 147.4,90.8 150.1,92.8 152.8,94.9 155.5,97.0 158.2,99.0 161.0,101.0 163.7,103.0 166.4,104.9 169.1,106.7 171.8,108.5 174.6,110.1 177.3,111.7 180.0,113.1 182.7,114.4 185.4,115.5 188.2,116.6 190.9,117.4 193.6,118.1 196.3,118.7 199.0,119.1 201.8,119.3 204.5,119.4 207.2,119.3 209.9,119.0 212.6,118.6 215.4,118.0 218.1,117.3 220.8,116.4 223.5,115.3 226.2,114.1 229.0,112.8 231.7,111.4 234.4,109.8 237.1,108.1 239.8,106.4 242.6,104.5 245.3,102.6 248.0,100.7 250.7,98.6 253.4,96.6 256.2,94.5 258.9,92.4 261.6,90.4 264.3,88.3 267.0,86.3 269.8,84.3 272.5,82.4 275.2,80.6 277.9,78.8 280.6,77.1 283.4,75.5 286.1,74.1 288.8,72.8 291.5,71.6 294.2,70.5 297.0,69.6 299.7,68.8 302.4,68.2 305.1,67.8 307.8,67.5 310.6,67.4 313.3,67.5 316.0,67.7 318.7,68.1 321.4,68.6 324.2,69.3 326.9,70.2 329.6,71.2 332.3,72.3 335.0,73.6 337.8,75.0 340.5,76.6 343.2,78.2 345.9,79.9 348.6,81.7 351.4,83.6 354.1,85.6 356.8,87.6 359.5,89.6 362.2,91.7 365.0,93.8 367.7,95.9 370.4,97.9 373.1,100.0 375.8,102.0 378.6,103.9 381.3,105.8 384.0,107.5 386.7,109.2 389.4,110.8 392.2,112.3 394.9,113.7 397.6,114.9 400.3,116.0 403.0,117.0 405.8,117.8 408.5,118.4 411.2,118.9 413.9,119.2 416.6,119.4 419.4,119.4 422.1,119.2 424.8,118.9 427.5,118.4 430.2,117.7 433.0,116.9 435.7,115.9 438.4,114.8 441.1,113.5 443.8,112.2 446.6,110.7 449.3,109.1 452.0,107.4 454.7,105.6 457.4,103.7 460.2,101.7 462.9,99.7 465.6,97.7 468.3,95.6 471.0,93.6" fill="none" stroke="var(--grau)" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <polyline class="sk-curve" points="44.0,106.4 46.7,106.3 49.4,105.9 52.2,105.3 54.9,104.4 57.6,103.3 60.3,102.0 63.0,100.4 65.8,98.7 68.5,96.7 71.2,94.6 73.9,92.2 76.6,89.8 79.4,87.1 82.1,84.4 84.8,81.5 87.5,78.6 90.2,75.6 93.0,72.5 95.7,69.4 98.4,66.3 101.1,63.1 103.8,60.1 106.6,57.0 109.3,54.1 112.0,51.2 114.7,48.4 117.4,45.7 120.2,43.2 122.9,40.8 125.6,38.6 128.3,36.6 131.0,34.8 133.8,33.2 136.5,31.8 139.2,30.7 141.9,29.7 144.6,29.0 147.4,28.6 150.1,28.4 152.8,28.5 155.5,28.8 158.2,29.3 161.0,30.1 163.7,31.2 166.4,32.4 169.1,33.9 171.8,35.6 174.6,37.5 177.3,39.6 180.0,41.9 182.7,44.3 185.4,46.9 188.2,49.7 190.9,52.5 193.6,55.4 196.3,58.4 199.0,61.5 201.8,64.6 204.5,67.7 207.2,70.8 209.9,73.9 212.6,77.0 215.4,79.9 218.1,82.9 220.8,85.7 223.5,88.4 226.2,90.9 229.0,93.3 231.7,95.6 234.4,97.6 237.1,99.5 239.8,101.2 242.6,102.6 245.3,103.9 248.0,104.8 250.7,105.6 253.4,106.1 256.2,106.4 258.9,106.4 261.6,106.1 264.3,105.6 267.0,104.9 269.8,103.9 272.5,102.7 275.2,101.3 277.9,99.7 280.6,97.8 283.4,95.8 286.1,93.5 288.8,91.1 291.5,88.6 294.2,85.9 297.0,83.1 299.7,80.2 302.4,77.2 305.1,74.2 307.8,71.1 310.6,67.9 313.3,64.8 316.0,61.7 318.7,58.7 321.4,55.7 324.2,52.7 326.9,49.9 329.6,47.1 332.3,44.5 335.0,42.1 337.8,39.8 340.5,37.7 343.2,35.8 345.9,34.0 348.6,32.5 351.4,31.3 354.1,30.2 356.8,29.4 359.5,28.8 362.2,28.5 365.0,28.4 367.7,28.6 370.4,29.0 373.1,29.7 375.8,30.6 378.6,31.7 381.3,33.1 384.0,34.7 386.7,36.5 389.4,38.5 392.2,40.7 394.9,43.0 397.6,45.5 400.3,48.2 403.0,50.9 405.8,53.8 408.5,56.8 411.2,59.8 413.9,62.9 416.6,66.0 419.4,69.1 422.1,72.2 424.8,75.3 427.5,78.3 430.2,81.3 433.0,84.2 435.7,86.9 438.4,89.6 441.1,92.1 443.8,94.4 446.6,96.6 449.3,98.5 452.0,100.3 454.7,101.9 457.4,103.2 460.2,104.3 462.9,105.2 465.6,105.9 468.3,106.3 471.0,106.4"/>
+  <text class="sk-pt" x="249.6" y="123.4" text-anchor="end">-1</text>
+  <text class="sk-pt" x="249.6" y="71.4" text-anchor="end">1</text>
+  <text class="sk-pt" x="249.6" y="45.4" text-anchor="end">2</text>
+  <text class="sk-pt" x="44.0" y="145.8" text-anchor="middle">−2π</text>
+  <text class="sk-pt" x="150.8" y="145.8" text-anchor="middle">−π</text>
+  <text class="sk-pt" x="364.4" y="145.8" text-anchor="middle">π</text>
+  <text class="sk-pt" x="471.3" y="145.8" text-anchor="middle">2π</text>
+  <text class="sk-leg" x="48.0" y="31.0">y = sin(x)</text>
+  <text class="sk-lab" x="265.6" y="27.1">y = a·sin(b(x−c))+d</text>
+</svg>
+  <table class="umr">
+    <tr><th>Parameter</th><th>Wirkung</th></tr>
+    <tr><td>\(a\)</td><td>Amplitude (Streckung in \(y\)-Richtung), Höhe \(=|a|\)</td></tr>
+    <tr><td>\(b\)</td><td>Periode \(=\dfrac{2\pi}{b}\) (Streckung/Stauchung in \(x\)-Richtung)</td></tr>
+    <tr><td>\(c\)</td><td>Verschiebung um \(c\) nach rechts</td></tr>
+    <tr><td>\(d\)</td><td>Verschiebung um \(d\) nach oben</td></tr>
+  </table>
+  <p style="color:var(--grau);font-size:.88rem">Gib Periode und Verschiebungen jeweils als Vielfaches von \(\pi\) ein (z. B. <code>0.5</code> für \(\tfrac{\pi}{2}\)).</p>
+  <div class="teil">
+    <p>a)&nbsp; Gegeben ist \(f(x) = 2\cdot\sin\big(0{,}5(x-\tfrac{\pi}{4})\big)\). Bestimme Amplitude, Periode und Verschiebungen; zeichne dann den Graphen.</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Vergleiche mit \(a\cdot\sin(b(x-c))+d\): Amplitude \(=|a|\); Periode \(=\tfrac{2\pi}{b}\); \(c\) verschiebt nach rechts; \(d\) nach oben. Hier ist \(a=2,\ b=0{,}5,\ c=\tfrac{\pi}{4},\ d=0\).</p></div>
+    </details>
+    <p>Amplitude:</p>
+    <div class="check" data-loesung="2">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="Amplitude 1a">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(a = 2\) ⇒ Amplitude \(2\).</p></div>
+    </div>
+    <p>Periode (als Vielfaches von \(\pi\)):</p>
+    <div class="check" data-loesung="4">
+      <input type="text" class="antwort" placeholder="z. B. 2" aria-label="Periode 1a">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(b = 0{,}5\) ⇒ Periode \(=\dfrac{2\pi}{0{,}5} = 4\pi\), also \(4\).</p></div>
+    </div>
+    <p>Verschiebung nach rechts (als Vielfaches von \(\pi\)):</p>
+    <div class="check" data-loesung="0.25">
+      <input type="text" class="antwort" placeholder="z. B. 0.5" aria-label="Rechtsverschiebung 1a">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(c = \tfrac{\pi}{4}\) ⇒ \(0{,}25\cdot\pi\) nach rechts.</p></div>
+    </div>
+    <p>Verschiebung nach oben \(d\):</p>
+    <div class="check" data-loesung="0">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="d 1a">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(d = 0\) ⇒ keine Verschiebung nach oben.</p></div>
+    </div>
+    <details class="loesung-toggle"><summary>Graph anzeigen</summary>
+      <div class="loesung">
+        <svg class="skizze" viewBox="0 0 491 170" width="491" role="img" aria-label="Funktionsgraph">
+  <line class="sk-guide" x1="44.0" y1="18.0" x2="44.0" y2="148.0"/>
+  <line class="sk-guide" x1="150.8" y1="18.0" x2="150.8" y2="148.0"/>
+  <line class="sk-guide" x1="257.6" y1="18.0" x2="257.6" y2="148.0"/>
+  <line class="sk-guide" x1="364.4" y1="18.0" x2="364.4" y2="148.0"/>
+  <line class="sk-guide" x1="471.3" y1="18.0" x2="471.3" y2="148.0"/>
+  <line class="sk-thin" x1="38.0" y1="83.0" x2="479.3" y2="83.0"/>
+  <line class="sk-thin" x1="257.6" y1="18.0" x2="257.6" y2="148.0"/>
+  <polyline class="sk-curve" points="44.0,63.1 46.7,65.0 49.4,67.0 52.2,69.0 54.9,71.0 57.6,73.0 60.3,75.1 63.0,77.2 65.8,79.2 68.5,81.3 71.2,83.4 73.9,85.5 76.6,87.5 79.4,89.6 82.1,91.7 84.8,93.7 87.5,95.7 90.2,97.7 93.0,99.7 95.7,101.7 98.4,103.6 101.1,105.5 103.8,107.3 106.6,109.2 109.3,110.9 112.0,112.7 114.7,114.4 117.4,116.0 120.2,117.6 122.9,119.1 125.6,120.6 128.3,122.0 131.0,123.3 133.8,124.6 136.5,125.8 139.2,127.0 141.9,128.0 144.6,129.0 147.4,130.0 150.1,130.8 152.8,131.6 155.5,132.3 158.2,132.9 161.0,133.5 163.7,133.9 166.4,134.3 169.1,134.6 171.8,134.8 174.6,135.0 177.3,135.0 180.0,135.0 182.7,134.8 185.4,134.6 188.2,134.4 190.9,134.0 193.6,133.6 196.3,133.0 199.0,132.4 201.8,131.7 204.5,131.0 207.2,130.1 209.9,129.2 212.6,128.2 215.4,127.2 218.1,126.0 220.8,124.8 223.5,123.5 226.2,122.2 229.0,120.8 231.7,119.4 234.4,117.8 237.1,116.3 239.8,114.6 242.6,113.0 245.3,111.2 248.0,109.5 250.7,107.7 253.4,105.8 256.2,103.9 258.9,102.0 261.6,100.1 264.3,98.1 267.0,96.1 269.8,94.1 272.5,92.0 275.2,90.0 277.9,87.9 280.6,85.8 283.4,83.7 286.1,81.7 288.8,79.6 291.5,77.5 294.2,75.4 297.0,73.4 299.7,71.4 302.4,69.3 305.1,67.3 307.8,65.4 310.6,63.4 313.3,61.5 316.0,59.6 318.7,57.8 321.4,56.0 324.2,54.3 326.9,52.5 329.6,50.9 332.3,49.3 335.0,47.7 337.8,46.2 340.5,44.8 343.2,43.4 345.9,42.1 348.6,40.8 351.4,39.6 354.1,38.5 356.8,37.5 359.5,36.5 362.2,35.6 365.0,34.8 367.7,34.1 370.4,33.4 373.1,32.8 375.8,32.3 378.6,31.9 381.3,31.5 384.0,31.3 386.7,31.1 389.4,31.0 392.2,31.0 394.9,31.1 397.6,31.2 400.3,31.5 403.0,31.8 405.8,32.2 408.5,32.7 411.2,33.2 413.9,33.9 416.6,34.6 419.4,35.4 422.1,36.3 424.8,37.2 427.5,38.3 430.2,39.4 433.0,40.5 435.7,41.8 438.4,43.1 441.1,44.4 443.8,45.8 446.6,47.3 449.3,48.9 452.0,50.5 454.7,52.1 457.4,53.8 460.2,55.6 462.9,57.3 465.6,59.2 468.3,61.0 471.0,62.9"/>
+  <text class="sk-pt" x="249.6" y="139.0" text-anchor="end">-2</text>
+  <text class="sk-pt" x="249.6" y="113.0" text-anchor="end">-1</text>
+  <text class="sk-pt" x="249.6" y="61.0" text-anchor="end">1</text>
+  <text class="sk-pt" x="249.6" y="35.0" text-anchor="end">2</text>
+  <text class="sk-pt" x="44.0" y="164.0" text-anchor="middle">−2π</text>
+  <text class="sk-pt" x="150.8" y="164.0" text-anchor="middle">−π</text>
+  <text class="sk-pt" x="364.4" y="164.0" text-anchor="middle">π</text>
+  <text class="sk-pt" x="471.3" y="164.0" text-anchor="middle">2π</text>
+</svg>
+        <p>Amplitude \(2\), Periode \(4\pi\), um \(\tfrac{\pi}{4}\) nach rechts, \(d=0\).</p>
+      </div>
+    </details>
+  </div>
+  <div class="teil">
+    <p>b)&nbsp; Gegeben ist \(f(x) = 3\cdot\sin(x-\pi) - 2\). Bestimme Amplitude, Periode und Verschiebungen; zeichne dann den Graphen.</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Amplitude \(=|a|\), Periode \(=\tfrac{2\pi}{b}\), \(c\) = Rechtsverschiebung, \(d\) = Verschiebung nach oben.</p></div>
+    </details>
+    <p>Amplitude:</p>
+    <div class="check" data-loesung="3">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="Amplitude 1b">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(a = 3\) ⇒ Amplitude \(3\).</p></div>
+    </div>
+    <p>Periode (als Vielfaches von \(\pi\)):</p>
+    <div class="check" data-loesung="2">
+      <input type="text" class="antwort" placeholder="z. B. 2" aria-label="Periode 1b">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(b = 1\) ⇒ Periode \(=2\pi\), also \(2\).</p></div>
+    </div>
+    <p>Verschiebung nach rechts (als Vielfaches von \(\pi\)):</p>
+    <div class="check" data-loesung="1">
+      <input type="text" class="antwort" placeholder="z. B. 0.5" aria-label="Rechtsverschiebung 1b">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(c = \pi\) ⇒ \(1\cdot\pi\) nach rechts.</p></div>
+    </div>
+    <p>Verschiebung nach oben \(d\):</p>
+    <div class="check" data-loesung="-2">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="d 1b">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(d = -2\) ⇒ \(2\) nach unten.</p></div>
+    </div>
+    <details class="loesung-toggle"><summary>Graph anzeigen</summary>
+      <div class="loesung">
+        <svg class="skizze" viewBox="0 0 491 222" width="491" role="img" aria-label="Funktionsgraph">
+  <line class="sk-guide" x1="44.0" y1="18.0" x2="44.0" y2="200.0"/>
+  <line class="sk-guide" x1="150.8" y1="18.0" x2="150.8" y2="200.0"/>
+  <line class="sk-guide" x1="257.6" y1="18.0" x2="257.6" y2="200.0"/>
+  <line class="sk-guide" x1="364.4" y1="18.0" x2="364.4" y2="200.0"/>
+  <line class="sk-guide" x1="471.3" y1="18.0" x2="471.3" y2="200.0"/>
+  <line class="sk-guide" x1="44.0" y1="109.0" x2="471.3" y2="109.0"/>
+  <line class="sk-thin" x1="38.0" y1="57.0" x2="479.3" y2="57.0"/>
+  <line class="sk-thin" x1="257.6" y1="18.0" x2="257.6" y2="200.0"/>
+  <polyline class="sk-curve" points="44.0,109.0 46.7,115.2 49.4,121.4 52.2,127.5 54.9,133.5 57.6,139.4 60.3,145.0 63.0,150.4 65.8,155.6 68.5,160.4 71.2,165.0 73.9,169.1 76.6,172.9 79.4,176.3 82.1,179.2 84.8,181.7 87.5,183.7 90.2,185.3 93.0,186.3 95.7,186.9 98.4,187.0 101.1,186.5 103.8,185.6 106.6,184.2 109.3,182.3 112.0,179.9 114.7,177.1 117.4,173.8 120.2,170.2 122.9,166.1 125.6,161.7 128.3,156.9 131.0,151.8 133.8,146.5 136.5,140.9 139.2,135.1 141.9,129.2 144.6,123.1 147.4,116.9 150.1,110.7 152.8,104.4 155.5,98.2 158.2,92.1 161.0,86.1 163.7,80.2 166.4,74.5 169.1,69.0 171.8,63.8 174.6,58.8 177.3,54.2 180.0,50.0 182.7,46.1 185.4,42.6 188.2,39.5 190.9,36.9 193.6,34.8 196.3,33.1 199.0,31.9 201.8,31.2 204.5,31.0 207.2,31.3 209.9,32.1 212.6,33.4 215.4,35.1 218.1,37.4 220.8,40.1 223.5,43.2 226.2,46.8 229.0,50.8 231.7,55.1 234.4,59.8 237.1,64.8 239.8,70.0 242.6,75.6 245.3,81.3 248.0,87.2 250.7,93.3 253.4,99.4 256.2,105.6 258.9,111.9 261.6,118.1 264.3,124.3 267.0,130.3 269.8,136.2 272.5,142.0 275.2,147.5 277.9,152.8 280.6,157.9 283.4,162.6 286.1,166.9 288.8,170.9 291.5,174.5 294.2,177.7 297.0,180.4 299.7,182.7 302.4,184.5 305.1,185.8 307.8,186.7 310.6,187.0 313.3,186.8 316.0,186.2 318.7,185.0 321.4,183.4 324.2,181.3 326.9,178.7 329.6,175.7 332.3,172.2 335.0,168.4 337.8,164.1 340.5,159.5 343.2,154.6 345.9,149.4 348.6,144.0 351.4,138.3 354.1,132.4 356.8,126.4 359.5,120.3 362.2,114.0 365.0,107.8 367.7,101.6 370.4,95.4 373.1,89.3 375.8,83.3 378.6,77.5 381.3,71.9 384.0,66.6 386.7,61.5 389.4,56.7 392.2,52.2 394.9,48.1 397.6,44.4 400.3,41.1 403.0,38.3 405.8,35.9 408.5,33.9 411.2,32.5 413.9,31.5 416.6,31.0 419.4,31.1 422.1,31.6 424.8,32.6 427.5,34.1 430.2,36.1 433.0,38.6 435.7,41.5 438.4,44.8 441.1,48.6 443.8,52.7 446.6,57.2 449.3,62.0 452.0,67.1 454.7,72.5 457.4,78.2 460.2,84.0 462.9,90.0 465.6,96.1 468.3,102.3 471.0,108.5"/>
+  <text class="sk-pt" x="249.6" y="191.0" text-anchor="end">-5</text>
+  <text class="sk-pt" x="249.6" y="165.0" text-anchor="end">-4</text>
+  <text class="sk-pt" x="249.6" y="139.0" text-anchor="end">-3</text>
+  <text class="sk-pt" x="249.6" y="113.0" text-anchor="end">-2</text>
+  <text class="sk-pt" x="249.6" y="87.0" text-anchor="end">-1</text>
+  <text class="sk-pt" x="249.6" y="35.0" text-anchor="end">1</text>
+  <text class="sk-pt" x="44.0" y="216.0" text-anchor="middle">−2π</text>
+  <text class="sk-pt" x="150.8" y="216.0" text-anchor="middle">−π</text>
+  <text class="sk-pt" x="364.4" y="216.0" text-anchor="middle">π</text>
+  <text class="sk-pt" x="471.3" y="216.0" text-anchor="middle">2π</text>
+</svg>
+        <p>Amplitude \(3\), Periode \(2\pi\), um \(\pi\) nach rechts, \(d=-2\).</p>
+      </div>
+    </details>
+  </div>
+  <div class="teil">
+    <p>c)&nbsp; Bestimme die Parameter \(a, b, c, d\) zum abgebildeten Graphen und gib den Funktionsterm an.</p>
+    <svg class="skizze" viewBox="0 0 491 170" width="491" role="img" aria-label="Funktionsgraph">
+  <line class="sk-guide" x1="44.0" y1="18.0" x2="44.0" y2="148.0"/>
+  <line class="sk-guide" x1="150.8" y1="18.0" x2="150.8" y2="148.0"/>
+  <line class="sk-guide" x1="257.6" y1="18.0" x2="257.6" y2="148.0"/>
+  <line class="sk-guide" x1="364.4" y1="18.0" x2="364.4" y2="148.0"/>
+  <line class="sk-guide" x1="471.3" y1="18.0" x2="471.3" y2="148.0"/>
+  <line class="sk-guide" x1="44.0" y1="83.0" x2="471.3" y2="83.0"/>
+  <line class="sk-thin" x1="38.0" y1="57.0" x2="479.3" y2="57.0"/>
+  <line class="sk-thin" x1="257.6" y1="18.0" x2="257.6" y2="148.0"/>
+  <polyline class="sk-curve" points="44.0,83.0 46.7,78.8 49.4,74.7 52.2,70.6 54.9,66.6 57.6,62.8 60.3,59.0 63.0,55.4 65.8,51.9 68.5,48.7 71.2,45.7 73.9,42.9 76.6,40.4 79.4,38.2 82.1,36.2 84.8,34.5 87.5,33.2 90.2,32.2 93.0,31.4 95.7,31.1 98.4,31.0 101.1,31.3 103.8,31.9 106.6,32.9 109.3,34.1 112.0,35.7 114.7,37.6 117.4,39.8 120.2,42.2 122.9,44.9 125.6,47.9 128.3,51.1 131.0,54.4 133.8,58.0 136.5,61.7 139.2,65.6 141.9,69.6 144.6,73.6 147.4,77.7 150.1,81.9 152.8,86.0 155.5,90.2 158.2,94.3 161.0,98.3 163.7,102.2 166.4,106.0 169.1,109.7 171.8,113.1 174.6,116.4 177.3,119.5 180.0,122.4 182.7,124.9 185.4,127.3 188.2,129.3 190.9,131.0 193.6,132.5 196.3,133.6 199.0,134.4 201.8,134.9 204.5,135.0 207.2,134.8 209.9,134.3 212.6,133.4 215.4,132.2 218.1,130.7 220.8,128.9 223.5,126.8 226.2,124.5 229.0,121.8 231.7,118.9 234.4,115.8 237.1,112.5 239.8,109.0 242.6,105.3 245.3,101.5 248.0,97.5 250.7,93.5 253.4,89.4 256.2,85.2 258.9,81.1 261.6,76.9 264.3,72.8 267.0,68.8 269.8,64.8 272.5,61.0 275.2,57.3 277.9,53.8 280.6,50.4 283.4,47.3 286.1,44.4 288.8,41.7 291.5,39.3 294.2,37.2 297.0,35.4 299.7,33.9 302.4,32.7 305.1,31.8 307.8,31.2 310.6,31.0 313.3,31.1 316.0,31.6 318.7,32.3 321.4,33.4 324.2,34.8 326.9,36.5 329.6,38.6 332.3,40.9 335.0,43.4 337.8,46.3 340.5,49.3 343.2,52.6 345.9,56.1 348.6,59.7 351.4,63.5 354.1,67.4 356.8,71.4 359.5,75.5 362.2,79.6 365.0,83.8 367.7,87.9 370.4,92.1 373.1,96.1 375.8,100.1 378.6,104.0 381.3,107.7 384.0,111.3 386.7,114.7 389.4,117.9 392.2,120.8 394.9,123.6 397.6,126.0 400.3,128.2 403.0,130.1 405.8,131.7 408.5,133.0 411.2,134.0 413.9,134.7 416.6,135.0 419.4,134.9 422.1,134.6 424.8,133.9 427.5,132.9 430.2,131.6 433.0,129.9 435.7,128.0 438.4,125.8 441.1,123.3 443.8,120.5 446.6,117.5 449.3,114.3 452.0,110.9 454.7,107.3 457.4,103.6 460.2,99.7 462.9,95.7 465.6,91.6 468.3,87.5 471.0,83.3"/>
+  <text class="sk-pt" x="249.6" y="139.0" text-anchor="end">-3</text>
+  <text class="sk-pt" x="249.6" y="113.0" text-anchor="end">-2</text>
+  <text class="sk-pt" x="249.6" y="87.0" text-anchor="end">-1</text>
+  <text class="sk-pt" x="249.6" y="35.0" text-anchor="end">1</text>
+  <text class="sk-pt" x="44.0" y="164.0" text-anchor="middle">−2π</text>
+  <text class="sk-pt" x="150.8" y="164.0" text-anchor="middle">−π</text>
+  <text class="sk-pt" x="364.4" y="164.0" text-anchor="middle">π</text>
+  <text class="sk-pt" x="471.3" y="164.0" text-anchor="middle">2π</text>
+</svg>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Mittellinie ablesen \(\to d\). Halber Abstand Max\(-\)Min \(\to a\). Länge einer Welle \(\to\) Periode, daraus \(b=\tfrac{2\pi}{\text{Periode}}\). Nullstelle im Anstieg (bezogen auf die Mittellinie) \(\to c\).</p></div>
+    </details>
+    <p>\(a\):</p>
+    <div class="check" data-loesung="2">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="a 1c">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Max \(=1\), Min \(=-3\) ⇒ \(a=\dfrac{1-(-3)}{2}=2\).</p></div>
+    </div>
+    <p>\(b\):</p>
+    <div class="check" data-loesung="1">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="b 1c">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Periode \(=2\pi\) ⇒ \(b=\dfrac{2\pi}{2\pi}=1\).</p></div>
+    </div>
+    <p>Verschiebung nach rechts (als Vielfaches von \(\pi\)):</p>
+    <div class="check" data-loesung="0">
+      <input type="text" class="antwort" placeholder="z. B. 0.5" aria-label="c 1c">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Anstiegs-Nullstelle bei \(x=0\) ⇒ keine Rechtsverschiebung, \(0\).</p></div>
+    </div>
+    <p>\(d\):</p>
+    <div class="check" data-loesung="-1">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="d 1c">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Mittellinie bei \(-1\) ⇒ \(d=-1\).</p></div>
+    </div>
+    <details class="loesung-toggle"><summary>Term anzeigen</summary>
+      <div class="loesung"><p>$$f(x) = 2\cdot\sin(x) - 1$$</p></div>
+    </details>
+  </div>
+  <div class="teil">
+    <p>d)&nbsp; Bestimme die Parameter \(a, b, c, d\) zum abgebildeten Graphen und gib den Funktionsterm an.</p>
+    <svg class="skizze" viewBox="0 0 491 118" width="491" role="img" aria-label="Funktionsgraph">
+  <line class="sk-guide" x1="44.0" y1="18.0" x2="44.0" y2="96.0"/>
+  <line class="sk-guide" x1="150.8" y1="18.0" x2="150.8" y2="96.0"/>
+  <line class="sk-guide" x1="257.6" y1="18.0" x2="257.6" y2="96.0"/>
+  <line class="sk-guide" x1="364.4" y1="18.0" x2="364.4" y2="96.0"/>
+  <line class="sk-guide" x1="471.3" y1="18.0" x2="471.3" y2="96.0"/>
+  <line class="sk-guide" x1="44.0" y1="57.0" x2="471.3" y2="57.0"/>
+  <line class="sk-thin" x1="38.0" y1="83.0" x2="479.3" y2="83.0"/>
+  <line class="sk-thin" x1="257.6" y1="18.0" x2="257.6" y2="96.0"/>
+  <polyline class="sk-curve" points="44.0,57.0 46.7,61.1 49.4,65.2 52.2,69.0 54.9,72.5 57.6,75.7 60.3,78.3 63.0,80.4 65.8,81.9 68.5,82.8 71.2,83.0 73.9,82.5 76.6,81.4 79.4,79.7 82.1,77.4 84.8,74.6 87.5,71.3 90.2,67.6 93.0,63.7 95.7,59.6 98.4,55.5 101.1,51.4 103.8,47.4 106.6,43.7 109.3,40.3 112.0,37.3 114.7,34.9 117.4,33.0 120.2,31.7 122.9,31.1 125.6,31.1 128.3,31.8 131.0,33.1 133.8,35.1 136.5,37.6 139.2,40.6 141.9,44.0 144.6,47.8 147.4,51.8 150.1,55.9 152.8,60.0 155.5,64.1 158.2,68.0 161.0,71.6 163.7,74.9 166.4,77.6 169.1,79.9 171.8,81.6 174.6,82.6 177.3,83.0 180.0,82.7 182.7,81.8 185.4,80.2 188.2,78.1 190.9,75.4 193.6,72.2 196.3,68.7 199.0,64.8 201.8,60.8 204.5,56.6 207.2,52.5 209.9,48.4 212.6,44.6 215.4,41.2 218.1,38.1 220.8,35.5 223.5,33.4 226.2,32.0 229.0,31.2 231.7,31.0 234.4,31.5 237.1,32.7 239.8,34.5 242.6,36.9 245.3,39.7 248.0,43.0 250.7,46.7 253.4,50.7 256.2,54.8 258.9,58.9 261.6,63.0 264.3,67.0 267.0,70.7 269.8,74.0 272.5,76.9 275.2,79.3 277.9,81.2 280.6,82.4 283.4,83.0 286.1,82.9 288.8,82.1 291.5,80.7 294.2,78.7 297.0,76.2 299.7,73.1 302.4,69.6 305.1,65.9 307.8,61.9 310.6,57.7 313.3,53.6 316.0,49.5 318.7,45.6 321.4,42.1 324.2,38.9 326.9,36.1 329.6,33.9 332.3,32.3 335.0,31.3 337.8,31.0 340.5,31.3 343.2,32.3 345.9,34.0 348.6,36.2 351.4,38.9 354.1,42.1 356.8,45.7 359.5,49.6 362.2,53.6 365.0,57.8 367.7,61.9 370.4,65.9 373.1,69.7 375.8,73.2 378.6,76.2 381.3,78.7 384.0,80.7 386.7,82.1 389.4,82.9 392.2,83.0 394.9,82.4 397.6,81.1 400.3,79.3 403.0,76.9 405.8,74.0 408.5,70.6 411.2,66.9 413.9,63.0 416.6,58.8 419.4,54.7 422.1,50.6 424.8,46.7 427.5,43.0 430.2,39.7 433.0,36.8 435.7,34.5 438.4,32.7 441.1,31.5 443.8,31.0 446.6,31.2 449.3,32.0 452.0,33.5 454.7,35.5 457.4,38.1 460.2,41.2 462.9,44.7 465.6,48.5 468.3,52.5 471.0,56.7"/>
+  <text class="sk-pt" x="249.6" y="61.0" text-anchor="end">1</text>
+  <text class="sk-pt" x="249.6" y="35.0" text-anchor="end">2</text>
+  <text class="sk-pt" x="44.0" y="112.0" text-anchor="middle">−2π</text>
+  <text class="sk-pt" x="150.8" y="112.0" text-anchor="middle">−π</text>
+  <text class="sk-pt" x="364.4" y="112.0" text-anchor="middle">π</text>
+  <text class="sk-pt" x="471.3" y="112.0" text-anchor="middle">2π</text>
+</svg>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Achte besonders auf die Periode (kürzer als \(2\pi\)!) und auf den Startpunkt der steigenden Welle.</p></div>
+    </details>
+    <p>\(a\):</p>
+    <div class="check" data-loesung="1">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="a 1d">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Max \(=2\), Min \(=0\) ⇒ \(a=\dfrac{2-0}{2}=1\).</p></div>
+    </div>
+    <p>\(b\):</p>
+    <div class="check" data-loesung="2">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="b 1d">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Periode \(=\pi\) ⇒ \(b=\dfrac{2\pi}{\pi}=2\).</p></div>
+    </div>
+    <p>Verschiebung nach rechts (als Vielfaches von \(\pi\)):</p>
+    <div class="check" data-loesung="0.5">
+      <input type="text" class="antwort" placeholder="z. B. 0.5" aria-label="c 1d">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Anstiegs-Nullstelle (bezogen auf die Mittellinie \(y=1\)) bei \(x=\tfrac{\pi}{2}\) ⇒ \(0{,}5\cdot\pi\).</p></div>
+    </div>
+    <p>\(d\):</p>
+    <div class="check" data-loesung="1">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="d 1d">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Mittellinie bei \(1\) ⇒ \(d=1\).</p></div>
+    </div>
+    <details class="loesung-toggle"><summary>Term anzeigen</summary>
+      <div class="loesung"><p>$$f(x) = \sin\big(2(x-\tfrac{\pi}{2})\big) + 1$$</p></div>
+    </details>
+  </div>
+</section>
+<section class="aufgabe">
+  <h2>Aufgabe 2: Die Kosinusfunktion</h2>
+  <div class="teil">
+    <p>a)&nbsp; Fülle die Wertetabelle für \(y = \cos(x)\) aus (Bogenmaß).</p>
+    <table class="umr">
+      <tr><th>\(x\)</th><th>\(\cos(x)\)</th></tr>
+      <tr><td>\(0\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{\pi}{6}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{\pi}{3}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{\pi}{2}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{2\pi}{3}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{5\pi}{6}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\pi\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{7\pi}{6}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{4\pi}{3}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{3\pi}{2}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{5\pi}{3}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(\tfrac{11\pi}{6}\)</td><td>&nbsp;</td></tr>
+      <tr><td>\(2\pi\)</td><td>&nbsp;</td></tr>
+    </table>
+    <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
+      <div class="loesung">
+        <table class="umr">
+      <tr><th>\(x\)</th><th>\(\cos(x)\)</th></tr>
+      <tr><td>\(0\)</td><td>\(1\)</td></tr>
+      <tr><td>\(\tfrac{\pi}{6}\)</td><td>\(\tfrac{1}{2}\sqrt{3}\)</td></tr>
+      <tr><td>\(\tfrac{\pi}{3}\)</td><td>\(\tfrac{1}{2}\)</td></tr>
+      <tr><td>\(\tfrac{\pi}{2}\)</td><td>\(0\)</td></tr>
+      <tr><td>\(\tfrac{2\pi}{3}\)</td><td>\(-\tfrac{1}{2}\)</td></tr>
+      <tr><td>\(\tfrac{5\pi}{6}\)</td><td>\(-\tfrac{1}{2}\sqrt{3}\)</td></tr>
+      <tr><td>\(\pi\)</td><td>\(-1\)</td></tr>
+      <tr><td>\(\tfrac{7\pi}{6}\)</td><td>\(-\tfrac{1}{2}\sqrt{3}\)</td></tr>
+      <tr><td>\(\tfrac{4\pi}{3}\)</td><td>\(-\tfrac{1}{2}\)</td></tr>
+      <tr><td>\(\tfrac{3\pi}{2}\)</td><td>\(0\)</td></tr>
+      <tr><td>\(\tfrac{5\pi}{3}\)</td><td>\(\tfrac{1}{2}\)</td></tr>
+      <tr><td>\(\tfrac{11\pi}{6}\)</td><td>\(\tfrac{1}{2}\sqrt{3}\)</td></tr>
+      <tr><td>\(2\pi\)</td><td>\(1\)</td></tr>
+    </table>
+      </div>
+    </details>
+  </div>
+  <div class="teil">
+    <p>b)&nbsp; Zeichne den Graphen von \(y = \cos(x)\) für \(-2\pi \le x \le 2\pi\).</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Der Kosinus startet bei \(x=0\) im Hochpunkt (Wert \(1\)).</p></div>
+    </details>
+    <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
+      <div class="loesung">
+        <svg class="skizze" viewBox="0 0 491 118" width="491" role="img" aria-label="Funktionsgraph">
+  <line class="sk-guide" x1="44.0" y1="18.0" x2="44.0" y2="96.0"/>
+  <line class="sk-guide" x1="150.8" y1="18.0" x2="150.8" y2="96.0"/>
+  <line class="sk-guide" x1="257.6" y1="18.0" x2="257.6" y2="96.0"/>
+  <line class="sk-guide" x1="364.4" y1="18.0" x2="364.4" y2="96.0"/>
+  <line class="sk-guide" x1="471.3" y1="18.0" x2="471.3" y2="96.0"/>
+  <line class="sk-thin" x1="38.0" y1="57.0" x2="479.3" y2="57.0"/>
+  <line class="sk-thin" x1="257.6" y1="18.0" x2="257.6" y2="96.0"/>
+  <polyline class="sk-curve" points="44.0,31.0 46.7,31.1 49.4,31.3 52.2,31.7 54.9,32.3 57.6,33.1 60.3,33.9 63.0,35.0 65.8,36.1 68.5,37.5 71.2,38.9 73.9,40.4 76.6,42.1 79.4,43.8 82.1,45.7 84.8,47.6 87.5,49.5 90.2,51.6 93.0,53.6 95.7,55.7 98.4,57.8 101.1,59.8 103.8,61.9 106.6,63.9 109.3,65.9 112.0,67.8 114.7,69.7 117.4,71.4 120.2,73.1 122.9,74.7 125.6,76.2 128.3,77.5 131.0,78.7 133.8,79.8 136.5,80.7 139.2,81.5 141.9,82.1 144.6,82.6 147.4,82.9 150.1,83.0 152.8,83.0 155.5,82.8 158.2,82.4 161.0,81.9 163.7,81.2 166.4,80.3 169.1,79.3 171.8,78.2 174.6,76.9 177.3,75.5 180.0,74.0 182.7,72.4 185.4,70.6 188.2,68.8 190.9,66.9 193.6,65.0 196.3,63.0 199.0,60.9 201.8,58.9 204.5,56.8 207.2,54.7 209.9,52.7 212.6,50.6 215.4,48.6 218.1,46.7 220.8,44.8 223.5,43.0 226.2,41.3 229.0,39.7 231.7,38.2 234.4,36.8 237.1,35.6 239.8,34.5 242.6,33.5 245.3,32.7 248.0,32.0 250.7,31.5 253.4,31.2 256.2,31.0 258.9,31.0 261.6,31.2 264.3,31.5 267.0,32.0 269.8,32.6 272.5,33.4 275.2,34.4 277.9,35.5 280.6,36.7 283.4,38.1 286.1,39.6 288.8,41.2 291.5,42.9 294.2,44.7 297.0,46.5 299.7,48.5 302.4,50.5 305.1,52.5 307.8,54.6 310.6,56.6 313.3,58.7 316.0,60.8 318.7,62.8 321.4,64.8 324.2,66.8 326.9,68.7 329.6,70.5 332.3,72.2 335.0,73.9 337.8,75.4 340.5,76.8 343.2,78.1 345.9,79.2 348.6,80.2 351.4,81.1 354.1,81.8 356.8,82.3 359.5,82.7 362.2,82.9 365.0,83.0 367.7,82.9 370.4,82.6 373.1,82.2 375.8,81.6 378.6,80.8 381.3,79.9 384.0,78.8 386.7,77.6 389.4,76.3 392.2,74.8 394.9,73.3 397.6,71.6 400.3,69.8 403.0,68.0 405.8,66.1 408.5,64.1 411.2,62.1 413.9,60.0 416.6,57.9 419.4,55.8 422.1,53.8 424.8,51.7 427.5,49.7 430.2,47.7 433.0,45.8 435.7,44.0 438.4,42.2 441.1,40.6 443.8,39.0 446.6,37.6 449.3,36.2 452.0,35.1 454.7,34.0 457.4,33.1 460.2,32.4 462.9,31.8 465.6,31.4 468.3,31.1 471.0,31.0"/>
+  <text class="sk-pt" x="249.6" y="87.0" text-anchor="end">-1</text>
+  <text class="sk-pt" x="249.6" y="35.0" text-anchor="end">1</text>
+  <text class="sk-pt" x="44.0" y="112.0" text-anchor="middle">−2π</text>
+  <text class="sk-pt" x="150.8" y="112.0" text-anchor="middle">−π</text>
+  <text class="sk-pt" x="364.4" y="112.0" text-anchor="middle">π</text>
+  <text class="sk-pt" x="471.3" y="112.0" text-anchor="middle">2π</text>
+</svg>
+      </div>
+    </details>
+  </div>
+  <div class="teil">
+    <p>c)&nbsp; Lies am Graphen ab.</p>
+    <p>Amplitude:</p>
+    <div class="check" data-loesung="1">
+      <input type="text" class="antwort" placeholder="Wert" aria-label="Amplitude cos">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Größter Wert \(1\), kleinster \(-1\) ⇒ Amplitude \(1\).</p></div>
+    </div>
+    <p>Anzahl der Nullstellen im Intervall \([-2\pi;\,2\pi]\):</p>
+    <div class="check" data-loesung="4">
+      <input type="text" class="antwort" placeholder="Anzahl" aria-label="Nullstellen cos">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Nullstellen bei \(-\tfrac{3\pi}{2},\ -\tfrac{\pi}{2},\ \tfrac{\pi}{2},\ \tfrac{3\pi}{2}\), also \(4\) Stück.</p></div>
+    </div>
+    <p>Anzahl der Hochpunkte im Intervall \([-2\pi;\,2\pi]\):</p>
+    <div class="check" data-loesung="3">
+      <input type="text" class="antwort" placeholder="Anzahl" aria-label="Hochpunkte cos">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Hochpunkte (Wert \(1\)) bei \(-2\pi,\ 0,\ 2\pi\), also \(3\) Stück.</p></div>
+    </div>
+  </div>
+  <div class="teil">
+    <p>d)&nbsp; Beschreibe die Eigenschaften und vergleiche mit dem Sinus.</p>
+    <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
+      <div class="loesung">
+        <p><strong>Periode:</strong> \(2\pi\). <strong>Amplitude:</strong> \(1\).</p>
+        <p><strong>Nullstellen:</strong> bei \(x = \tfrac{\pi}{2} + k\cdot\pi\) mit \(k \in \mathbb{Z}\).</p>
+        <p><strong>Symmetrie:</strong> achsensymmetrisch zur \(y\)-Achse, denn \(\cos(-x) = \cos(x)\) (gerade Funktion).</p>
+        <p><strong>Vergleich mit \(\sin\):</strong> gleiche Periode und Amplitude. Der Kosinus ist der um \(\tfrac{\pi}{2}\) nach links verschobene Sinus: \(\cos(x) = \sin(x + \tfrac{\pi}{2})\). Nullstellen und Extrema liegen jeweils um \(\tfrac{\pi}{2}\) versetzt.</p>
+      </div>
+    </details>
+  </div>
+</section>
+<p><a href="index.html">← zur Übersicht</a></p>
+<script src="schuljahr.js"></script>
+<script>schreibeDatum(3);</script>
+<script src="kontrolle.js?v=5"></script>
+</body>
+</html>
