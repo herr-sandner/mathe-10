@@ -17,6 +17,9 @@
   table.umr{border-collapse:collapse;margin:.5rem 0;font-size:.9rem}
   table.umr th,table.umr td{border:1px solid var(--linie);padding:.3rem .65rem;text-align:center}
   table.umr th{color:var(--akzent-dunkel);font-weight:600}
+  .fnterm{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;margin:.6rem 0;font-size:1.05rem}
+  .fnterm input.antwort{width:2.6rem;text-align:center;padding:.3rem .15rem;max-width:none}
+  .fnhint{color:var(--grau);font-size:.82rem;margin:.1rem 0 .5rem}
 </style>
 <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
@@ -183,7 +186,7 @@
     </details>
   </div>
   <div class="teil">
-   <p>c)&nbsp; Bestimme Parameter \(a, b, c, d\) zum abgebildeten Graphen (Verschiebung als Vielfaches von \(\pi\)).</p>
+    <p>c)&nbsp; Bestimme Parameter \(a, b, c, d\) zum abgebildeten Graphen (Verschiebung als Vielfaches von \(\pi\)).</p>
     <svg class="skizze" viewBox="0 0 491 170" width="491" role="img" aria-label="Funktionsgraph">
   <line class="sk-guide" x1="44.0" y1="18.0" x2="44.0" y2="148.0"/>
   <line class="sk-guide" x1="150.8" y1="18.0" x2="150.8" y2="148.0"/>
@@ -206,13 +209,17 @@
     <details><summary>Tipp</summary>
       <div class="tipp"><p>Mittellinie ablesen \(\to d\). Halber Abstand Max\(-\)Min \(\to a\). Länge einer Welle \(\to\) Periode, daraus \(b=\tfrac{2\pi}{\text{Periode}}\). Nullstelle im Anstieg \(\to c\).</p></div>
     </details>
-    <p style="color:var(--grau);font-size:.88rem">Es gibt mehrere richtige Parametersätze — alle, die denselben Graphen ergeben, werden akzeptiert.</p>
+    <p class="fnhint">Mehrere richtige Parametersätze sind möglich – alle, die denselben Graphen ergeben, werden akzeptiert.</p>
     <div class="check-fn" data-a="2" data-b="1" data-c="0" data-d="-1">
-      <div class="fnrow">
-        <label>\(a\)&nbsp;<input class="antwort fa" aria-label="a"></label>
-        <label>\(b\)&nbsp;<input class="antwort fb" aria-label="b"></label>
-        <label>Rechts (·π)&nbsp;<input class="antwort fc" aria-label="Rechtsverschiebung"></label>
-        <label>\(d\)&nbsp;<input class="antwort fd" aria-label="d"></label>
+      <div class="fnterm">
+        <span>f(x)&nbsp;=</span>
+        <input class="antwort fa" aria-label="a">
+        <span>&middot;&nbsp;sin(</span>
+        <input class="antwort fb" aria-label="b">
+        <span>&middot;&nbsp;(x&nbsp;&minus;</span>
+        <input class="antwort fc" aria-label="Rechtsverschiebung als Vielfaches von pi">
+        <span>&pi;&nbsp;)&nbsp;)&nbsp;+</span>
+        <input class="antwort fd" aria-label="d">
       </div>
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
@@ -242,13 +249,17 @@
     <details><summary>Tipp</summary>
       <div class="tipp"><p>Achte besonders auf die Periode (kürzer als \(2\pi\)!) und auf den Startpunkt der steigenden Welle.</p></div>
     </details>
-    <p style="color:var(--grau);font-size:.88rem">Es gibt mehrere richtige Parametersätze — alle, die denselben Graphen ergeben, werden akzeptiert.</p>
+    <p class="fnhint">Mehrere richtige Parametersätze sind möglich – alle, die denselben Graphen ergeben, werden akzeptiert.</p>
     <div class="check-fn" data-a="1" data-b="2" data-c="0.5" data-d="1">
-      <div class="fnrow">
-        <label>\(a\)&nbsp;<input class="antwort fa" aria-label="a"></label>
-        <label>\(b\)&nbsp;<input class="antwort fb" aria-label="b"></label>
-        <label>Rechts (·π)&nbsp;<input class="antwort fc" aria-label="Rechtsverschiebung"></label>
-        <label>\(d\)&nbsp;<input class="antwort fd" aria-label="d"></label>
+      <div class="fnterm">
+        <span>f(x)&nbsp;=</span>
+        <input class="antwort fa" aria-label="a">
+        <span>&middot;&nbsp;sin(</span>
+        <input class="antwort fb" aria-label="b">
+        <span>&middot;&nbsp;(x&nbsp;&minus;</span>
+        <input class="antwort fc" aria-label="Rechtsverschiebung als Vielfaches von pi">
+        <span>&pi;&nbsp;)&nbsp;)&nbsp;+</span>
+        <input class="antwort fd" aria-label="d">
       </div>
       <button type="button" class="pruefen">Prüfen</button>
       <span class="feedback"></span>
@@ -258,8 +269,6 @@
   </div>
 </section>
 <section class="aufgabe">
-
-    
   <h2>Aufgabe 2: Die Kosinusfunktion</h2>
   <div class="teil">
     <p>a)&nbsp; Fülle die Wertetabelle für \(y = \cos(x)\) aus (Bogenmaß).</p>
@@ -366,6 +375,37 @@
   </div>
 </section>
 <p><a href="index.html">← zur Übersicht</a></p>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  function num(el){ return parseFloat((el.value||'').replace(',', '.').replace(/\u2212/g,'-').trim()); }
+  function f(a,b,c,d,x){ return a*Math.sin(b*(x-c))+d; }
+  document.querySelectorAll('.check-fn').forEach(function (box) {
+    var A=+box.dataset.a, B=+box.dataset.b, C=(+box.dataset.c)*Math.PI, D=+box.dataset.d;
+    var btn=box.querySelector('.pruefen'), fb=box.querySelector('.feedback');
+    var link=box.querySelector('.weg-link'), weg=box.querySelector('.weg');
+    function pruefe(){
+      var a=num(box.querySelector('.fa')), b=num(box.querySelector('.fb')),
+          c=num(box.querySelector('.fc')), d=num(box.querySelector('.fd'));
+      if([a,b,c,d].some(isNaN)){ fb.textContent='Bitte alle vier Felder ausfüllen.'; fb.className='feedback'; return; }
+      c=c*Math.PI;
+      var ok=true;
+      for(var i=0;i<=240;i++){ var x=-2*Math.PI + i*(4*Math.PI/240);
+        if(Math.abs(f(a,b,c,d,x)-f(A,B,C,D,x))>1e-4){ ok=false; break; } }
+      fb.textContent = ok ? '\u2713 Richtig' : '\u2717 Noch nicht richtig';
+      fb.className = ok ? 'feedback ok' : 'feedback nein';
+      if(link) link.style.display='inline-block';
+    }
+    if(btn) btn.addEventListener('click', pruefe);
+    box.querySelectorAll('.antwort').forEach(function(inp){
+      inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); pruefe(); } });
+    });
+    if(link && weg) link.addEventListener('click', function(){
+      var h=(weg.style.display==='none'||weg.style.display===''); weg.style.display=h?'block':'none';
+      link.textContent = h ? 'Term verbergen' : 'Term anzeigen';
+    });
+  });
+});
+</script>
 <script src="schuljahr.js"></script>
 <script>schreibeDatum(3);</script>
 <script src="kontrolle.js?v=5"></script>
