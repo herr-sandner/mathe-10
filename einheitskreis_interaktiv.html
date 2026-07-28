@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Einheitskreis – Sinus und Kosinus</title>
+<style>
+  :root{
+    --akzent:#2E5AAC; --akzent-dunkel:#1c3a72;
+    --sin:#D2323C; --cos:#2856BE; --linie:#333;
+    --grau:#666; --bg:#ffffff; --panel:#f2f5fb; --rand:#cdd8ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:#1b1b1b;background:var(--bg);}
+  .wrap{max-width:900px;margin:0 auto;padding:16px;}
+  h1{font-size:1.25rem;color:var(--akzent-dunkel);margin:.2rem 0 1rem;}
+  .layout{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;}
+  .figur{flex:1 1 380px;min-width:320px;}
+  .seite{flex:1 1 260px;min-width:250px;}
+  svg{width:100%;height:auto;touch-action:none;user-select:none;}
+  .panel{background:var(--panel);border:1px solid var(--rand);border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+  .readout .zeile{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px dashed var(--rand);}
+  .readout .zeile:last-child{border-bottom:none;}
+  .readout .lab{color:var(--grau);font-size:.95rem;}
+  .readout .val{font-variant-numeric:tabular-nums;font-weight:600;font-size:1.05rem;}
+  .val.sin{color:var(--sin);} .val.cos{color:var(--cos);}
+  .controls label{display:block;font-size:.9rem;color:var(--grau);margin:.2rem 0 .3rem;}
+  input[type=range]{width:100%;accent-color:var(--akzent);}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  button{font:inherit;border:1px solid var(--akzent);background:#fff;color:var(--akzent);
+    border-radius:8px;padding:7px 12px;cursor:pointer;}
+  button:hover{background:var(--akzent);color:#fff;}
+  button.aktiv{background:var(--akzent);color:#fff;}
+  .snap{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.9rem;color:var(--grau);}
+  .quad{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;}
+  .quad div{background:#fff;border:1px solid var(--rand);border-radius:7px;padding:6px 8px;font-size:.85rem;text-align:center;}
+  .quad .on{background:var(--akzent);color:#fff;border-color:var(--akzent);}
+  .hinweis{font-size:.82rem;color:var(--grau);margin-top:8px;line-height:1.4;}
+  text{font-family:inherit;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Einheitskreis – Sinus und Kosinus</h1>
+  <div class="layout">
+    <div class="figur">
+      <svg id="ek" viewBox="0 0 440 440" aria-label="Einheitskreis">
+        <!-- Achsen -->
+        <line x1="30" y1="220" x2="410" y2="220" stroke="#9aa4b8" stroke-width="1.2"/>
+        <line x1="220" y1="410" x2="220" y2="30" stroke="#9aa4b8" stroke-width="1.2"/>
+        <polygon points="410,220 400,215 400,225" fill="#9aa4b8"/>
+        <polygon points="220,30 215,40 225,40" fill="#9aa4b8"/>
+        <text x="414" y="224" font-size="14" fill="#555">x</text>
+        <text x="210" y="28" font-size="14" fill="#555">y</text>
+        <!-- Ticks bei 1 und -1 -->
+        <text x="384" y="238" font-size="11" fill="#888">1</text>
+        <text x="196" y="60"  font-size="11" fill="#888">1</text>
+        <!-- Kreis -->
+        <circle cx="220" cy="220" r="165" fill="none" stroke="#111" stroke-width="2.4"/>
+        <!-- Winkelbogen -->
+        <path id="arc" fill="none" stroke="var(--akzent)" stroke-width="2"/>
+        <!-- Projektionen -->
+        <line id="cosLine" stroke="var(--cos)" stroke-width="5" stroke-linecap="round"/>
+        <line id="sinLine" stroke="var(--sin)" stroke-width="5" stroke-linecap="round"/>
+        <line id="drop" stroke="#9aa4b8" stroke-width="1.4" stroke-dasharray="4 4"/>
+        <!-- Radius -->
+        <line id="radius" x1="220" y1="220" stroke="#111" stroke-width="1.8"/>
+        <!-- Punkt P -->
+        <circle id="P" r="6" fill="var(--akzent-dunkel)"/>
+        <!-- Labels -->
+        <text id="alab" font-size="15" fill="var(--akzent-dunkel)">α</text>
+        <text id="plab" font-size="13" fill="#111"></text>
+      </svg>
+    </div>
+
+    <div class="seite">
+      <div class="panel readout">
+        <div class="zeile"><span class="lab">Winkel α</span><span class="val" id="rDeg">0°</span></div>
+        <div class="zeile"><span class="lab">im Bogenmaß</span><span class="val" id="rRad">0</span></div>
+        <div class="zeile"><span class="lab">cos α</span><span class="val cos" id="rCos">1,000</span></div>
+        <div class="zeile"><span class="lab">sin α</span><span class="val sin" id="rSin">0,000</span></div>
+        <div class="zeile"><span class="lab">Quadrant</span><span class="val" id="rQuad">–</span></div>
+      </div>
+
+      <div class="panel controls">
+        <label for="slider">Winkel ziehen oder schieben: <b id="sLab">0°</b></label>
+        <input id="slider" type="range" min="0" max="360" step="1" value="0">
+        <div class="btns">
+          <button id="play">▶ Umlauf</button>
+          <button id="reset">0° zurück</button>
+        </div>
+        <div class="snap">
+          <input type="checkbox" id="snap"><label for="snap" style="margin:0">auf besondere Winkel einrasten (15°)</label>
+        </div>
+        <div class="quad" id="signs">
+          <div data-q="2">Q II</div><div data-q="1">Q I</div>
+          <div data-q="3">Q III</div><div data-q="4">Q IV</div>
+        </div>
+        <div class="hinweis">sin α = y-Koordinate (rot), cos α = x-Koordinate (blau) des Punktes P auf dem Einheitskreis.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const CX=220, CY=220, R=165;
+  const svg=document.getElementById('ek');
+  const P=document.getElementById('P'), radius=document.getElementById('radius');
+  const cosLine=document.getElementById('cosLine'), sinLine=document.getElementById('sinLine');
+  const drop=document.getElementById('drop'), arc=document.getElementById('arc');
+  const alab=document.getElementById('alab'), plab=document.getElementById('plab');
+  const rDeg=document.getElementById('rDeg'), rRad=document.getElementById('rRad');
+  const rCos=document.getElementById('rCos'), rSin=document.getElementById('rSin'), rQuad=document.getElementById('rQuad');
+  const slider=document.getElementById('slider'), sLab=document.getElementById('sLab');
+  const snap=document.getElementById('snap');
+  const signsBox=document.getElementById('signs');
+
+  let deg=0, playing=false, raf=null;
+
+  const fmt = x => (Math.abs(x)<1e-9?0:x).toFixed(3).replace('.',',');
+
+  function gcd(a,b){return b?gcd(b,a%b):a;}
+  function radText(d){
+    // exakter Bruch von d/180 * pi
+    if(d===0) return '0';
+    let p=d, q=180, g=gcd(p,q); p/=g; q/=g;
+    let num = (p===1?'π':p+'π');
+    let s = (q===1? num : num+'/'+q);
+    let dec = (d*Math.PI/180).toFixed(3).replace('.',',');
+    return s+'  ≈ '+dec;
+  }
+
+  function polar(d){ const r=d*Math.PI/180; return {x:CX+R*Math.cos(r), y:CY-R*Math.sin(r)}; }
+
+  function update(){
+    const r=deg*Math.PI/180;
+    const c=Math.cos(r), s=Math.sin(r);
+    const pt=polar(deg);
+    // Punkt + Radius
+    P.setAttribute('cx',pt.x); P.setAttribute('cy',pt.y);
+    radius.setAttribute('x2',pt.x); radius.setAttribute('y2',pt.y);
+    // cos (auf x-Achse), sin (senkrecht), drop
+    cosLine.setAttribute('x1',CX); cosLine.setAttribute('y1',CY);
+    cosLine.setAttribute('x2',pt.x); cosLine.setAttribute('y2',CY);
+    sinLine.setAttribute('x1',pt.x); sinLine.setAttribute('y1',CY);
+    sinLine.setAttribute('x2',pt.x); sinLine.setAttribute('y2',pt.y);
+    drop.setAttribute('x1',pt.x); drop.setAttribute('y1',pt.y);
+    drop.setAttribute('x2',pt.x); drop.setAttribute('y2',CY);
+    // Winkelbogen
+    const ar=32;
+    const ax=CX+ar, ay=CY;
+    const ex=CX+ar*Math.cos(r), ey=CY-ar*Math.sin(r);
+    const large = (deg>180)?1:0;
+    arc.setAttribute('d',`M ${ax} ${ay} A ${ar} ${ar} 0 ${large} 0 ${ex} ${ey}`);
+    // alpha-Label an Winkelhalbierender
+    const half=(deg/2)*Math.PI/180;
+    alab.setAttribute('x',CX+(ar+16)*Math.cos(half)-5);
+    alab.setAttribute('y',CY-(ar+16)*Math.sin(half)+5);
+    // P-Label, je nach Quadrant leicht versetzt
+    let ox = (c>=0? 10:-96), oy=(s>=0?-10:20);
+    plab.setAttribute('x',pt.x+ox); plab.setAttribute('y',pt.y+oy);
+    plab.textContent=`P(${fmt(c)} | ${fmt(s)})`;
+    // Readout
+    rDeg.textContent=deg+'°';
+    rRad.textContent=radText(deg);
+    rCos.textContent=fmt(c);
+    rSin.textContent=fmt(s);
+    let q = (deg%360===0||deg===180)?'–':(deg<90?'I':deg<180?'II':deg<270?'III':'IV');
+    // Achsenlagen sauber benennen
+    if(deg%90===0){ q = ['0° (x-Achse)','90° (y-Achse)','180° (x-Achse)','270° (y-Achse)'][(deg/90)%4]; }
+    rQuad.textContent=q;
+    // Quadranten-Markierung
+    let qi = (deg>0&&deg<90)?1:(deg>90&&deg<180)?2:(deg>180&&deg<270)?3:(deg>270&&deg<360)?4:0;
+    [...signsBox.children].forEach(el=>el.classList.toggle('on', +el.dataset.q===qi));
+    // slider + label
+    slider.value=deg; sLab.textContent=deg+'°';
+  }
+
+  function setDeg(d){
+    d=((d%360)+360)%360;
+    if(snap.checked) d=Math.round(d/15)*15%360;
+    deg=Math.round(d);
+    update();
+  }
+
+  // Ziehen
+  let dragging=false;
+  function angleFromEvent(e){
+    const rect=svg.getBoundingClientRect();
+    const sx=440/rect.width, sy=440/rect.height;
+    const x=(e.clientX-rect.left)*sx, y=(e.clientY-rect.top)*sy;
+    let a=Math.atan2(CY-y, x-CX)*180/Math.PI;
+    return a;
+  }
+  svg.addEventListener('pointerdown',e=>{dragging=true; svg.setPointerCapture(e.pointerId); setDeg(angleFromEvent(e));});
+  svg.addEventListener('pointermove',e=>{if(dragging) setDeg(angleFromEvent(e));});
+  svg.addEventListener('pointerup',e=>{dragging=false;});
+  svg.addEventListener('pointercancel',e=>{dragging=false;});
+
+  slider.addEventListener('input',()=>setDeg(+slider.value));
+  document.getElementById('reset').addEventListener('click',()=>{stop(); setDeg(0);});
+  snap.addEventListener('change',()=>setDeg(deg));
+
+  const playBtn=document.getElementById('play');
+  function stop(){playing=false; playBtn.classList.remove('aktiv'); playBtn.textContent='▶ Umlauf'; if(raf)cancelAnimationFrame(raf);}
+  function loop(){ if(!playing)return; setDeg(deg+1); raf=requestAnimationFrame(()=>setTimeout(loop,28)); }
+  playBtn.addEventListener('click',()=>{
+    if(playing){stop();}
+    else{playing=true; playBtn.classList.add('aktiv'); playBtn.textContent='⏸ Stopp'; loop();}
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>

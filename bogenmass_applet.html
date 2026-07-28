@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bogenmaß – den Radius abrollen</title>
+<style>
+  :root{
+    --akzent:#2E5AAC; --akzent-dunkel:#1c3a72;
+    --bogen:#C77F1A; --radius:#2856BE; --linie:#333;
+    --grau:#666; --bg:#ffffff; --panel:#f2f5fb; --rand:#cdd8ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:#1b1b1b;background:var(--bg);}
+  .wrap{max-width:940px;margin:0 auto;padding:16px;}
+  h1{font-size:1.25rem;color:var(--akzent-dunkel);margin:.2rem 0 1rem;}
+  .layout{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;}
+  .figur{flex:1 1 420px;min-width:320px;}
+  .seite{flex:1 1 260px;min-width:250px;}
+  svg{width:100%;height:auto;touch-action:none;user-select:none;}
+  .panel{background:var(--panel);border:1px solid var(--rand);border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+  .readout .zeile{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--rand);}
+  .readout .zeile:last-child{border-bottom:none;}
+  .readout .lab{color:var(--grau);font-size:.92rem;}
+  .readout .val{font-variant-numeric:tabular-nums;font-weight:600;font-size:1.05rem;}
+  .big{font-size:1.35rem;color:var(--akzent-dunkel);}
+  .controls label{display:block;font-size:.9rem;color:var(--grau);margin:.5rem 0 .3rem;}
+  input[type=range]{width:100%;accent-color:var(--akzent);}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  button{font:inherit;border:1px solid var(--akzent);background:#fff;color:var(--akzent);
+    border-radius:8px;padding:7px 11px;cursor:pointer;}
+  button:hover{background:var(--akzent);color:#fff;}
+  button.aktiv{background:var(--akzent);color:#fff;}
+  .hinweis{font-size:.82rem;color:var(--grau);margin-top:10px;line-height:1.45;}
+  .merk{background:#fff7ec;border:1px solid #e7cfa0;border-radius:8px;padding:8px 10px;margin-top:10px;font-size:.9rem;color:#7a5312;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Bogenmaß – wie oft passt der Radius auf den Bogen?</h1>
+  <div class="layout">
+    <div class="figur">
+      <svg id="fig" viewBox="0 0 620 470" aria-label="Bogenmaß">
+        <!-- Achsen leicht -->
+        <line id="ax" stroke="#c3ccdd" stroke-width="1"/>
+        <line id="ay" stroke="#c3ccdd" stroke-width="1"/>
+        <!-- Kreis -->
+        <circle id="kreis" fill="none" stroke="#111" stroke-width="2.2"/>
+        <!-- Bogen -->
+        <path id="bogen" fill="none" stroke="var(--bogen)" stroke-width="6" stroke-linecap="round"/>
+        <!-- Radius (Messstab) -->
+        <line id="rad" stroke="var(--radius)" stroke-width="4" stroke-linecap="round"/>
+        <text id="rlab" font-size="13" fill="var(--radius)">r</text>
+        <!-- Winkelbogen klein -->
+        <path id="wbogen" fill="none" stroke="var(--akzent)" stroke-width="1.6"/>
+        <text id="wlab" font-size="14" fill="var(--akzent-dunkel)">α</text>
+        <!-- Punkt -->
+        <circle id="P" r="5" fill="var(--akzent-dunkel)"/>
+        <!-- Abroll-Lineal -->
+        <text x="24" y="352" font-size="13" fill="#555">Bogen abgerollt (in Radien):</text>
+        <line id="ruler" stroke="#999" stroke-width="1.4"/>
+        <rect id="barr" fill="var(--bogen)" opacity="0.28"/>
+        <line id="bar" stroke="var(--bogen)" stroke-width="7" stroke-linecap="round"/>
+        <g id="ticks"></g>
+      </svg>
+    </div>
+
+    <div class="seite">
+      <div class="panel readout">
+        <div class="zeile"><span class="lab">Winkel α</span><span class="val" id="rDeg">0°</span></div>
+        <div class="zeile"><span class="lab">Bogenmaß  b / r</span><span class="val big" id="rRad">0</span></div>
+        <div class="zeile"><span class="lab">Der Radius passt …</span><span class="val" id="rCount">0,00 ×</span></div>
+        <div class="zeile"><span class="lab">Bogenlänge b</span><span class="val" id="rArc">0,00 · r</span></div>
+      </div>
+
+      <div class="panel controls">
+        <label for="wS">Winkel α: <b id="wLab">0°</b></label>
+        <input id="wS" type="range" min="0" max="360" step="1" value="0">
+        <label for="rS">Kreisgröße (Radius): <b id="rLab2">mittel</b></label>
+        <input id="rS" type="range" min="45" max="82" step="1" value="70">
+        <div class="btns">
+          <button id="b1">1 Radius (1 rad)</button>
+          <button id="bpi">Halbkreis (π)</button>
+          <button id="b2pi">Vollkreis (2π)</button>
+        </div>
+        <div class="btns"><button id="play">▶ Abrollen</button></div>
+        <div class="merk">Beobachte: Ändere die <b>Kreisgröße</b> – die Zahl <b>b/r</b> bleibt gleich! Sie hängt nur vom Winkel ab. Das ist das Bogenmaß.</div>
+        <div class="hinweis">1 Radius Bogen ≙ 1 rad ≈ 57,3°. Ganzer Kreis: der Radius passt 2π ≈ 6,28-mal → 360° ≙ 2π.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const fig=document.getElementById('fig');
+  const CX=180, CY=165;
+  let deg=0, R=70, playing=false, raf=null;
+
+  const $=id=>document.getElementById(id);
+  const fmt=(x,n=2)=>x.toFixed(n).replace('.',',');
+  function gcd(a,b){return b?gcd(b,a%b):a;}
+  function radText(d){
+    if(d===0) return '0';
+    let p=d,q=180,g=gcd(p,q); p/=g; q/=g;
+    let num=(p===1?'π':p+'π');
+    return (q===1?num:num+'/'+q);
+  }
+
+  function draw(){
+    const rad=deg*Math.PI/180;
+    // Achsen
+    $('ax').setAttribute('x1',CX-R-25); $('ax').setAttribute('y1',CY); $('ax').setAttribute('x2',CX+R+25); $('ax').setAttribute('y2',CY);
+    $('ay').setAttribute('x1',CX); $('ay').setAttribute('y1',CY+R+25); $('ay').setAttribute('x2',CX); $('ay').setAttribute('y2',CY-R-25);
+    // Kreis
+    $('kreis').setAttribute('cx',CX); $('kreis').setAttribute('cy',CY); $('kreis').setAttribute('r',R);
+    // Radius-Messstab (waagerecht nach rechts)
+    $('rad').setAttribute('x1',CX); $('rad').setAttribute('y1',CY); $('rad').setAttribute('x2',CX+R); $('rad').setAttribute('y2',CY);
+    $('rlab').setAttribute('x',CX+R/2-3); $('rlab').setAttribute('y',CY+16);
+    // Punkt + Bogen
+    const px=CX+R*Math.cos(rad), py=CY-R*Math.sin(rad);
+    $('P').setAttribute('cx',px); $('P').setAttribute('cy',py);
+    const large=(deg>180)?1:0;
+    $('bogen').setAttribute('d',`M ${CX+R} ${CY} A ${R} ${R} 0 ${large} 0 ${px} ${py}`);
+    // kleiner Winkelbogen
+    const wr=20, ex=CX+wr*Math.cos(rad), ey=CY-wr*Math.sin(rad);
+    $('wbogen').setAttribute('d',`M ${CX+wr} ${CY} A ${wr} ${wr} 0 ${large} 0 ${ex} ${ey}`);
+    const half=rad/2;
+    $('wlab').setAttribute('x',CX+(wr+12)*Math.cos(half)-4);
+    $('wlab').setAttribute('y',CY-(wr+12)*Math.sin(half)+5);
+    // Abroll-Lineal
+    const x0=30, y0=372;
+    const arcPx=R*rad;                 // Bogenlänge in px = R * rad
+    $('ruler').setAttribute('x1',x0); $('ruler').setAttribute('y1',y0); $('ruler').setAttribute('x2',x0+2*Math.PI*R+8); $('ruler').setAttribute('y2',y0);
+    $('bar').setAttribute('x1',x0); $('bar').setAttribute('y1',y0); $('bar').setAttribute('x2',x0+arcPx); $('bar').setAttribute('y2',y0);
+    $('barr').setAttribute('x',x0); $('barr').setAttribute('y',y0-9); $('barr').setAttribute('width',arcPx); $('barr').setAttribute('height',18);
+    // Ticks alle 1 Radius
+    const g=$('ticks'); g.innerHTML='';
+    for(let k=0;k<=6;k++){
+      const x=x0+k*R;
+      const ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+      ln.setAttribute('x1',x); ln.setAttribute('y1',y0-11); ln.setAttribute('x2',x); ln.setAttribute('y2',y0+11);
+      ln.setAttribute('stroke','#555'); ln.setAttribute('stroke-width','1.2'); g.appendChild(ln);
+      const tx=document.createElementNS('http://www.w3.org/2000/svg','text');
+      tx.setAttribute('x',x); tx.setAttribute('y',y0+26); tx.setAttribute('font-size','12'); tx.setAttribute('fill','#555'); tx.setAttribute('text-anchor','middle');
+      tx.textContent=(k===0?'0':k+'r'); g.appendChild(tx);
+    }
+    // Marke 2π
+    const x2pi=x0+2*Math.PI*R;
+    const m=document.createElementNS('http://www.w3.org/2000/svg','line');
+    m.setAttribute('x1',x2pi); m.setAttribute('y1',y0-16); m.setAttribute('x2',x2pi); m.setAttribute('y2',y0+16);
+    m.setAttribute('stroke','#C77F1A'); m.setAttribute('stroke-width','1.6'); m.setAttribute('stroke-dasharray','3 3'); g.appendChild(m);
+    const mt=document.createElementNS('http://www.w3.org/2000/svg','text');
+    mt.setAttribute('x',x2pi); mt.setAttribute('y',y0-20); mt.setAttribute('font-size','12'); mt.setAttribute('fill','#8a5a12'); mt.setAttribute('text-anchor','middle');
+    mt.textContent='2π (Vollkreis)'; g.appendChild(mt);
+    // Readouts
+    const dd=Math.round(deg);
+    $('rDeg').textContent=dd+'°';
+    const nice=(dd%15===0 && Math.abs(deg-dd)<1e-6);
+    $('rRad').textContent=(nice? radText(dd)+'  ≈ '+fmt(rad,2) : fmt(rad,2));
+    $('rCount').textContent=fmt(rad,2)+' ×';
+    $('rArc').textContent=fmt(rad,2)+' · r';
+    $('wS').value=dd; $('wLab').textContent=dd+'°';
+    $('rLab2').textContent=(R<57?'klein':R>73?'groß':'mittel');
+  }
+
+  function setDeg(d){ deg=((d%360)+360)%360; draw(); }
+
+  // Ziehen im Kreis
+  let drag=false;
+  function angFrom(e){
+    const rect=fig.getBoundingClientRect(), sx=620/rect.width, sy=470/rect.height;
+    const x=(e.clientX-rect.left)*sx, y=(e.clientY-rect.top)*sy;
+    return Math.atan2(CY-y, x-CX)*180/Math.PI;
+  }
+  fig.addEventListener('pointerdown',e=>{ if(((e.clientX))){ const a=angFrom(e); if(true){drag=true; fig.setPointerCapture(e.pointerId); setDeg(a);} }});
+  fig.addEventListener('pointermove',e=>{ if(drag) setDeg(angFrom(e)); });
+  fig.addEventListener('pointerup',()=>drag=false);
+  fig.addEventListener('pointercancel',()=>drag=false);
+
+  $('wS').addEventListener('input',()=>setDeg(+$('wS').value));
+  $('rS').addEventListener('input',()=>{ R=+$('rS').value; draw(); });
+  $('b1').addEventListener('click',()=>{stop(); setDeg(180/Math.PI);});   // exakt 1 rad
+  $('bpi').addEventListener('click',()=>{stop(); setDeg(180);});
+  $('b2pi').addEventListener('click',()=>{stop(); setDeg(359.9);});
+
+  const playBtn=$('play');
+  function stop(){playing=false; playBtn.classList.remove('aktiv'); playBtn.textContent='▶ Abrollen'; if(raf)cancelAnimationFrame(raf);}
+  function loop(){ if(!playing)return; if(deg>=359){stop();return;} setDeg(deg+2); raf=requestAnimationFrame(()=>setTimeout(loop,26)); }
+  playBtn.addEventListener('click',()=>{ if(playing)stop(); else{ if(deg>=359)setDeg(0); playing=true; playBtn.classList.add('aktiv'); playBtn.textContent='⏸ Stopp'; loop(); } });
+
+  draw();
+})();
+</script>
+</body>
+</html>
