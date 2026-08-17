@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parameter a — y = a·sin(x)</title>
+<style>
+  :root{--akzent:#2E5AAC;--akzent-dunkel:#1c3a72;--grau:#666;--bg:#fff;--panel:#f2f5fb;--rand:#cdd8ee;--sin:#D2323C;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:#1b1b1b;background:var(--bg);}
+  .wrap{max-width:840px;margin:0 auto;padding:14px;}
+  h1{font-size:1.05rem;color:var(--akzent-dunkel);margin:.2rem 0 .7rem;}
+  svg{width:100%;height:auto;touch-action:none;}
+  .panel{background:var(--panel);border:1px solid var(--rand);border-radius:10px;padding:12px 14px;margin-top:10px;}
+  .term{font-variant-numeric:tabular-nums;font-weight:600;font-size:1.15rem;color:var(--sin);margin-bottom:6px;}
+  .legend{font-size:.8rem;color:var(--grau);margin-top:6px;}
+  .ctl{display:flex;align-items:center;gap:10px;margin:8px 0;}
+  .ctl label{flex:0 0 96px;font-size:.95rem;color:#222;}
+  .ctl input[type=range]{flex:1;accent-color:var(--sin);}
+  .val{font-variant-numeric:tabular-nums;color:#333;font-size:.95rem;margin-top:4px;}
+  button{font:inherit;border:1px solid var(--akzent);background:#fff;color:var(--akzent);border-radius:8px;padding:6px 12px;cursor:pointer;margin-top:8px;}
+  button:hover{background:var(--akzent);color:#fff;}
+  button:focus-visible{outline:3px solid #9db6e6;outline-offset:2px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Parameter a — y = a · sin(x)</h1>
+  <svg id="fig" viewBox="0 0 760 360" aria-label="Graph von a mal Sinus x mit gestrichelter Referenzkurve sin x">
+    <defs><clipPath id="clip"><rect x="44" y="16" width="698" height="310"/></clipPath></defs>
+    <g id="axis"></g>
+    <g clip-path="url(#clip)">
+      <path id="ref" fill="none" stroke="#9aa4b8" stroke-width="2" stroke-dasharray="6 5"/>
+      <path id="mid" fill="none" stroke="var(--sin)" stroke-width="1.2" stroke-dasharray="2 4" opacity="0.55" style="display:none"/>
+      <path id="curve" fill="none" stroke="var(--sin)" stroke-width="2.8"/>
+    </g>
+  </svg>
+  <div class="panel">
+    <div class="term" id="rTerm"></div>
+    <div class="ctl"><label for="sA">a = <b id="vA">1</b></label><input id="sA" type="range" min="-12" max="12" value="4" aria-label="Parameter a"></div>
+    <div class="val" id="rAmp"></div>
+    <button id="reset">zurücksetzen</button>
+    <div class="legend">– – –  grau gestrichelt: f(x) = sin(x)</div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const NS='http://www.w3.org/2000/svg', PI=Math.PI;
+  const L=44,R=18,T=16,B=34, VW=760, VH=360, plotW=VW-L-R, plotH=VH-T-B;
+  const xmin=-2*PI, xmax=2*PI, ymin=-3.5, ymax=3.5;
+  const Xp=x=>L+(x-xmin)/(xmax-xmin)*plotW;
+  const Yp=y=>T+(ymax-y)/(ymax-ymin)*plotH;
+  function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(x,y,s,anc){const t=el('text',{x:x,y:y,'font-size':11,fill:'#666','text-anchor':anc||'start'});t.textContent=s;return t;}
+  function gcd(a,b){return b?gcd(b,a%b):a;}
+  function radExact(dg){ dg=Math.round(dg); if(dg===0)return '0'; const neg=dg<0; dg=Math.abs(dg);
+    let p=dg,q=180,g=gcd(p,q); p/=g;q/=g; let num=(p===1?'π':p+'π'); return (neg?'−':'')+(q===1?num:num+'/'+q); }
+  function nf(x){ let s=(Math.abs(x)<1e-9?0:x).toFixed(2); s=s.replace(/\.?0+$/,''); return s.replace('.',','); }
+
+  (function axes(){
+    const g=$('axis');
+    for(let k=-4;k<=4;k++){ const X=Xp(k*PI/2);
+      g.appendChild(el('line',{x1:X,y1:T,x2:X,y2:T+plotH,stroke:(k===0?'#c9d3e8':'#eef1f8'),'stroke-width':(k===0?1.2:1)}));
+      if(k!==0) g.appendChild(txt(X,Yp(0)+15,radExact(k*90),'middle'));
+    }
+    for(let v=-3;v<=3;v++){ const Y=Yp(v);
+      g.appendChild(el('line',{x1:L,y1:Y,x2:L+plotW,y2:Y,stroke:(v===0?'#c9d3e8':'#eef1f8'),'stroke-width':(v===0?1.2:1)}));
+      if(v!==0) g.appendChild(txt(L-6,Y+3,(v>0?''+v:'−'+(-v)),'end'));
+    }
+    g.appendChild(el('polygon',{points:`${L+plotW+2},${Yp(0)} ${L+plotW-6},${Yp(0)-4} ${L+plotW-6},${Yp(0)+4}`,fill:'#9aa4b8'}));
+    g.appendChild(el('polygon',{points:`${Xp(0)},${T-2} ${Xp(0)-4},${T+6} ${Xp(0)+4},${T+6}`,fill:'#9aa4b8'}));
+    g.appendChild(txt(L+plotW-2,Yp(0)-6,'x','end'));
+    g.appendChild(txt(Xp(0)+8,T+4,'y','start'));
+  })();
+
+  function vals(){
+    return {
+      a:$('sA')?(+$('sA').value)/4:1,
+      b:$('sB')?(+$('sB').value)/4:1,
+      c:$('sC')?(+$('sC').value)*PI/4:0,
+      d:$('sD')?(+$('sD').value)/4:0
+    };
+  }
+  function term(a,b,c,d){
+    const coef = a===1?'':(a===-1?'−':nf(a)+'·');
+    const bp = b===1?'':nf(b)+'·';
+    let inside;
+    if(c===0) inside = bp? bp+'x' : 'x';
+    else { const sh = c>0? 'x − '+radExact(c/PI*180) : 'x + '+radExact(-c/PI*180); inside = bp? bp+'('+sh+')' : sh; }
+    let t='f(x) = '+coef+'sin('+inside+')';
+    if(d>1e-9) t+=' + '+nf(d); else if(d<-1e-9) t+=' − '+nf(-d);
+    return t;
+  }
+  function pathOf(fn){ let s='';const N=300; for(let i=0;i<=N;i++){const x=xmin+(xmax-xmin)*i/N; s+=(i?'L':'M')+Xp(x).toFixed(1)+' '+Yp(fn(x)).toFixed(1);} return s; }
+  $('ref').setAttribute('d',pathOf(Math.sin));
+
+  function update(){
+    const {a,b,c,d}=vals();
+    $('curve').setAttribute('d',pathOf(x=>a*Math.sin(b*(x-c))+d));
+    if($('mid')){ $('mid').setAttribute('d',`M${L} ${Yp(d)} L${L+plotW} ${Yp(d)}`); $('mid').style.display=(Math.abs(d)>1e-9?'':'none'); }
+    if($('vA'))$('vA').textContent=nf(a);
+    if($('vB'))$('vB').textContent=nf(b);
+    if($('vC'))$('vC').textContent=radExact(c/PI*180);
+    if($('vD'))$('vD').textContent=nf(d);
+    if($('rTerm'))$('rTerm').textContent=term(a,b,c,d);
+    if($('rAmp'))$('rAmp').textContent='Amplitude = '+nf(Math.abs(a));
+    if($('rPer'))$('rPer').textContent='Periode = '+radExact(360/b);
+    if($('rVer'))$('rVer').textContent='Verschiebung: c = '+radExact(c/PI*180)+(c>1e-9?'  (nach rechts)':c<-1e-9?'  (nach links)':'');
+    if($('rMid'))$('rMid').textContent='Mittellinie: y = '+nf(d);
+  }
+  ['sA','sB','sC','sD'].forEach(id=>{const e=$(id); if(e)e.addEventListener('input',update);});
+  if($('reset'))$('reset').addEventListener('click',()=>{ if($('sA'))$('sA').value=4; if($('sB'))$('sB').value=4; if($('sC'))$('sC').value=0; if($('sD'))$('sD').value=0; update(); });
+  update();
+})();
+</script>
+</body>
+</html>
