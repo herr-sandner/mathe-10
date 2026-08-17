@@ -81,6 +81,7 @@
         <path id="warc" fill="none" stroke="var(--akzent)" stroke-width="2"/>
         <text id="alab" font-size="15" fill="var(--akzent-dunkel)">α</text>
         <circle id="P" r="6" fill="var(--akzent-dunkel)"/>
+        <text id="pLabel" font-size="16" font-weight="bold" fill="var(--akzent-dunkel)">P</text>
       </svg>
     </div>
 
@@ -178,6 +179,12 @@
     setLine('axY',CX,CY+R+16,CX,CY-R-16);
     setLine('radius',CX,CY,px,py);
     setDot('P',px,py);
+    // NEU: Label für P direkt neben dem Punkt positionieren
+    const pLabel = $('pLabel');
+    if (pLabel) {
+      pLabel.setAttribute('x', px + 10);
+      pLabel.setAttribute('y', py + 5);
+    }
     setLine('cosSeg',CX,CY,px,CY,true);       // waagerechte Auslenkung = cos
     setLine('sinSeg',px,CY,px,py,showSin);    // senkrechte Höhe = sin (Vergleich)
     const ar=30, large=(m>180)?1:0;
