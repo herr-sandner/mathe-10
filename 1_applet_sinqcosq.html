@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sinus & Kosinus an Raute und Quadrat</title>
+<style>
+  :root{--akzent:#2E5AAC;--akzent-dunkel:#1c3a72;--grau:#666;--bg:#fff;--panel:#f2f5fb;--rand:#cdd8ee;
+        --kreis:#9aa4b8;--raute:#D2323C;--quadrat:#C77F1A;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;color:#1b1b1b;background:var(--bg);}
+  .wrap{max-width:1000px;margin:0 auto;padding:14px;}
+  h1{font-size:1.15rem;color:var(--akzent-dunkel);margin:.2rem 0 .2rem;}
+  .sub{font-size:.9rem;color:var(--grau);margin:0 0 .8rem;}
+  svg{width:100%;height:auto;touch-action:none;user-select:none;}
+  .row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;}
+  .fig{flex:3 1 560px;min-width:320px;}
+  .side{flex:1 1 220px;min-width:210px;}
+  .panel{background:var(--panel);border:1px solid var(--rand);border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+  .seg{display:inline-flex;border:1px solid var(--akzent);border-radius:8px;overflow:hidden;margin-bottom:6px;}
+  .seg button{border:0;background:#fff;color:var(--akzent);font:inherit;padding:7px 16px;cursor:pointer;}
+  .seg button.aktiv{background:var(--akzent);color:#fff;}
+  .readout .zeile{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px dashed var(--rand);}
+  .readout .zeile:last-child{border-bottom:none;}
+  .readout .lab{font-size:.92rem;color:#333;}
+  .readout .val{font-variant-numeric:tabular-nums;font-weight:600;}
+  .vk{color:var(--kreis);} .vr{color:var(--raute);} .vq{color:var(--quadrat);}
+  label.ctl{display:block;font-size:.9rem;color:var(--grau);margin:.3rem 0 .2rem;}
+  input[type=range]{width:100%;accent-color:var(--akzent);}
+  .btns{display:flex;gap:8px;margin-top:8px;}
+  button.b{font:inherit;border:1px solid var(--akzent);background:#fff;color:var(--akzent);border-radius:8px;padding:6px 12px;cursor:pointer;}
+  button.b:hover{background:var(--akzent);color:#fff;}
+  button:focus-visible{outline:3px solid #9db6e6;outline-offset:2px;}
+  .tg{display:flex;align-items:center;gap:8px;font-size:.92rem;margin:6px 0;}
+  .tg input{width:16px;height:16px;}
+  .chip{display:inline-block;width:20px;height:0;border-top:4px solid #999;border-radius:3px;}
+  .chip.k{border-color:var(--kreis);border-top-style:dashed;} .chip.r{border-color:var(--raute);} .chip.q{border-color:var(--quadrat);}
+  @media (prefers-reduced-motion: reduce){ #play{display:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="titel">Sinus an Raute und Quadrat</h1>
+  <p class="sub" id="unter">P ist der Schnittpunkt des Winkelstrahls mit dem Rand der Figur. sin(α) = Höhe (y-Wert) von P.</p>
+  <div class="row">
+    <div class="fig">
+      <svg id="fig" viewBox="0 0 960 470" aria-label="Definition von Sinus und Kosinus an Raute und Quadrat mit mitwachsendem Graphen">
+        <g id="axis"></g>
+        <!-- Figuren -->
+        <circle id="kreis" cx="205" cy="235" r="95" fill="none" stroke="var(--kreis)" stroke-width="1.4" stroke-dasharray="4 4"/>
+        <rect id="quad" x="110" y="140" width="190" height="190" fill="none" stroke="var(--quadrat)" stroke-width="2"/>
+        <polygon id="raut" fill="none" stroke="var(--raute)" stroke-width="2"/>
+        <!-- dynamisch links -->
+        <line id="segK" stroke="var(--kreis)" stroke-width="2.4" stroke-linecap="round"/>
+        <line id="segQ" stroke="var(--quadrat)" stroke-width="3" stroke-linecap="round"/>
+        <line id="segR" stroke="var(--raute)" stroke-width="3" stroke-linecap="round"/>
+        <line id="ray" stroke="#333" stroke-width="1.4"/>
+        <path id="arc" fill="none" stroke="var(--akzent)" stroke-width="1.8"/>
+        <text id="alab" font-size="14" fill="var(--akzent-dunkel)">α</text>
+        <circle id="dotK" r="4.5" fill="var(--kreis)" stroke="#fff" stroke-width="1.4"/>
+        <circle id="dotQ" r="5"   fill="var(--quadrat)" stroke="#fff" stroke-width="1.4"/>
+        <circle id="dotR" r="5"   fill="var(--raute)" stroke="#fff" stroke-width="1.4"/>
+        <!-- dynamisch rechts (Graph) -->
+        <line id="head" stroke="#9aa4b8" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.5"/>
+        <path id="curK" fill="none" stroke="var(--kreis)" stroke-width="2" stroke-dasharray="6 5"/>
+        <path id="curQ" fill="none" stroke="var(--quadrat)" stroke-width="2.6"/>
+        <path id="curR" fill="none" stroke="var(--raute)" stroke-width="2.6"/>
+        <circle id="gdK" r="4" fill="var(--kreis)"/>
+        <circle id="gdQ" r="4.5" fill="var(--quadrat)"/>
+        <circle id="gdR" r="4.5" fill="var(--raute)"/>
+      </svg>
+    </div>
+    <div class="side">
+      <div class="seg" role="group" aria-label="Sinus oder Kosinus">
+        <button id="btnSin" class="aktiv">Sinus</button><button id="btnCos">Kosinus</button>
+      </div>
+      <div class="panel readout">
+        <div class="zeile"><span class="lab">Winkel α</span><span class="val" id="rA">0°</span></div>
+        <div class="zeile"><span class="lab"><span id="lR">sin</span> an der Raute</span><span class="val vr" id="rR">0,00</span></div>
+        <div class="zeile"><span class="lab"><span id="lQ">sin</span> am Quadrat</span><span class="val vq" id="rQ">0,00</span></div>
+        <div class="zeile"><span class="lab"><span id="lK">sin</span> am Kreis (echt)</span><span class="val vk" id="rK">0,00</span></div>
+      </div>
+      <div class="panel">
+        <label class="ctl" for="wS">Winkel ziehen oder schieben</label>
+        <input id="wS" type="range" min="0" max="360" step="1" value="0" aria-label="Winkel in Grad">
+        <div class="btns"><button class="b" id="play">▶ Umlauf</button><button class="b" id="reset">0° zurück</button></div>
+        <div class="tg"><input type="checkbox" id="cR" checked><span class="chip r"></span>Raute (Q1)</div>
+        <div class="tg"><input type="checkbox" id="cQ" checked><span class="chip q"></span>Quadrat (Q2)</div>
+        <div class="tg"><input type="checkbox" id="cK" checked><span class="chip k"></span>Kreis – echte Kurve</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const NS='http://www.w3.org/2000/svg', PI=Math.PI;
+  const CX=205, CY=235, U=95;                 // Figur
+  const X0=430, W=490, DEGMAX=360;            // Graph
+  const Xg=d=>X0+d/DEGMAX*W;
+  const Yv=v=>CY-v*U;
+  const FX=x=>CX+x*U, FY=y=>CY-y*U;
+  let deg=0, mode='sin', playing=false, raf=null;
+
+  function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(x,y,s,anc){const t=el('text',{x:x,y:y,'font-size':11,fill:'#666','text-anchor':anc||'start'});t.textContent=s;return t;}
+  const nf=x=>(Math.abs(x)<1e-9?0:x).toFixed(2).replace('.',',').replace('-','−');
+
+  // Raute-Polygon
+  $('raut').setAttribute('points',`${FX(1)},${FY(0)} ${FX(0)},${FY(1)} ${FX(-1)},${FY(0)} ${FX(0)},${FY(-1)}`);
+
+  // ---- statische Achsen (Figur links + Graph rechts) ----
+  (function(){
+    const g=$('axis');
+    // Figur-Achsen
+    g.appendChild(el('line',{x1:CX-U-24,y1:CY,x2:CX+U+24,y2:CY,stroke:'#9aa4b8','stroke-width':1.1}));
+    g.appendChild(el('line',{x1:CX,y1:CY+U+24,x2:CX,y2:CY-U-24,stroke:'#9aa4b8','stroke-width':1.1}));
+    g.appendChild(el('polygon',{points:`${CX+U+26},${CY} ${CX+U+18},${CY-4} ${CX+U+18},${CY+4}`,fill:'#9aa4b8'}));
+    g.appendChild(el('polygon',{points:`${CX},${CY-U-26} ${CX-4},${CY-U-18} ${CX+4},${CY-U-18}`,fill:'#9aa4b8'}));
+    g.appendChild(txt(FX(1)+4,CY+14,'1','middle'));
+    g.appendChild(txt(CX-10,FY(1)+4,'1','end'));
+    g.appendChild(txt(CX+U+24,CY-6,'x','end'));
+    g.appendChild(txt(CX+8,CY-U-20,'y','start'));
+    // Graph-Achsen
+    g.appendChild(el('line',{x1:X0,y1:Yv(-1.25),x2:X0,y2:Yv(1.3),stroke:'#9aa4b8','stroke-width':1.1}));
+    g.appendChild(el('polygon',{points:`${X0},${Yv(1.34)} ${X0-4},${Yv(1.25)} ${X0+4},${Yv(1.25)}`,fill:'#9aa4b8'}));
+    g.appendChild(el('line',{x1:X0-8,y1:CY,x2:Xg(DEGMAX)+22,y2:CY,stroke:'#9aa4b8','stroke-width':1.1}));
+    g.appendChild(el('polygon',{points:`${Xg(DEGMAX)+26},${CY} ${Xg(DEGMAX)+18},${CY-4} ${Xg(DEGMAX)+18},${CY+4}`,fill:'#9aa4b8'}));
+    [1,-1].forEach(v=>g.appendChild(el('line',{x1:X0,y1:Yv(v),x2:Xg(DEGMAX),y2:Yv(v),stroke:'#e6ebf5','stroke-width':1,'stroke-dasharray':'3 4'})));
+    g.appendChild(txt(X0-7,Yv(1)+4,'1','end'));
+    g.appendChild(txt(X0-7,Yv(-1)+4,'−1','end'));
+    for(let d=90;d<=DEGMAX;d+=90){ const x=Xg(d);
+      g.appendChild(el('line',{x1:x,y1:Yv(1.15),x2:x,y2:Yv(-1.15),stroke:'#eef1f8','stroke-width':1}));
+      g.appendChild(txt(x,CY+16,d+'°','middle'));
+    }
+    g.appendChild(txt(Xg(DEGMAX)+24,CY-6,'α','end'));
+  })();
+
+  function ptOf(shape,a){ const c=Math.cos(a),s=Math.sin(a); let t;
+    if(shape==='k') t=1;
+    else if(shape==='r') t=1/(Math.abs(c)+Math.abs(s));
+    else t=1/Math.max(Math.abs(c),Math.abs(s));
+    return {x:c*t,y:s*t}; }
+  function value(shape,d){ const p=ptOf(shape,d*PI/180); return mode==='sin'?p.y:p.x; }
+
+  function curvePath(shape){ let s=''; for(let g=0; g<=deg; g+=2){ const v=value(shape,g); s+=(g===0?'M':'L')+Xg(g).toFixed(1)+' '+Yv(v).toFixed(1);} const v=value(shape,deg); s+='L'+Xg(deg).toFixed(1)+' '+Yv(v).toFixed(1); return s; }
+
+  function setLine(id,x1,y1,x2,y2,show){const e=$(id);e.style.display=show?'':'none';e.setAttribute('x1',x1);e.setAttribute('y1',y1);e.setAttribute('x2',x2);e.setAttribute('y2',y2);}
+  function setDot(id,cx,cy,show){const e=$(id);e.style.display=show?'':'none';e.setAttribute('cx',cx);e.setAttribute('cy',cy);}
+  function setPath(id,d,show){const e=$(id);e.style.display=show?'':'none';e.setAttribute('d',d);}
+
+  function update(){
+    const a=deg*PI/180, m=((deg%360)+360)%360;
+    const showK=$('cK').checked, showR=$('cR').checked, showQ=$('cQ').checked;
+    const P={k:ptOf('k',a),r:ptOf('r',a),q:ptOf('q',a)};
+    // Strahl bis zum Quadratrand (äußerste Figur)
+    setLine('ray',CX,CY,FX(P.q.x),FY(P.q.y),true);
+    // Bogen
+    const ar=24,large=(m>180)?1:0,c=Math.cos(a),s=Math.sin(a);
+    $('arc').setAttribute('d',`M ${CX+ar} ${CY} A ${ar} ${ar} 0 ${large} 0 ${CX+ar*c} ${CY-ar*s}`);
+    $('alab').setAttribute('x',CX+(ar+12)*Math.cos(a/2)-4);
+    $('alab').setAttribute('y',CY-(ar+12)*Math.sin(a/2)+5);
+    // Segmente (sin: senkrecht auf Höhe; cos: waagerecht auf x-Achse)
+    function seg(id,P,show){ if(mode==='sin') setLine(id,FX(P.x),CY,FX(P.x),FY(P.y),show); else setLine(id,CX,CY,FX(P.x),CY,show); }
+    seg('segK',P.k,showK); seg('segQ',P.q,showQ); seg('segR',P.r,showR);
+    setDot('dotK',FX(P.k.x),FY(P.k.y),showK);
+    setDot('dotQ',FX(P.q.x),FY(P.q.y),showQ);
+    setDot('dotR',FX(P.r.x),FY(P.r.y),showR);
+    // Graph
+    setLine('head',Xg(deg),Yv(1.15),Xg(deg),Yv(-1.15),true);
+    setPath('curK',curvePath('k'),showK);
+    setPath('curQ',curvePath('q'),showQ);
+    setPath('curR',curvePath('r'),showR);
+    setDot('gdK',Xg(deg),Yv(value('k',deg)),showK);
+    setDot('gdQ',Xg(deg),Yv(value('q',deg)),showQ);
+    setDot('gdR',Xg(deg),Yv(value('r',deg)),showR);
+    // Readout
+    $('rA').textContent=Math.round(deg)+'°';
+    $('rK').textContent=nf(value('k',deg));
+    $('rR').textContent=nf(value('r',deg));
+    $('rQ').textContent=nf(value('q',deg));
+    $('wS').value=Math.round(deg);
+  }
+
+  function setDeg(d){ deg=Math.max(0,Math.min(DEGMAX,d)); update(); }
+
+  // Ziehen im Figurbereich
+  let drag=false;
+  function rawDeg(e){ const r=$('fig').getBoundingClientRect(), sx=960/r.width, sy=470/r.height;
+    const x=(e.clientX-r.left)*sx, y=(e.clientY-r.top)*sy;
+    if(x>X0-30) return null;                 // nur linke Figur zum Ziehen
+    let a=Math.atan2(CY-y,x-CX)*180/PI; return ((a%360)+360)%360; }
+  $('fig').addEventListener('pointerdown',e=>{const d=rawDeg(e); if(d===null)return; drag=true; $('fig').setPointerCapture(e.pointerId); setDeg(d);});
+  $('fig').addEventListener('pointermove',e=>{ if(!drag)return; const d=rawDeg(e); if(d!==null) setDeg(d); });
+  $('fig').addEventListener('pointerup',()=>drag=false);
+  $('fig').addEventListener('pointercancel',()=>drag=false);
+
+  $('wS').addEventListener('input',()=>setDeg(+$('wS').value));
+  ['cK','cR','cQ'].forEach(id=>$(id).addEventListener('change',update));
+  $('reset').addEventListener('click',()=>{stop(); setDeg(0);});
+
+  function setMode(m){ mode=m;
+    $('btnSin').classList.toggle('aktiv',m==='sin'); $('btnCos').classList.toggle('aktiv',m==='cos');
+    const w=(m==='sin'?'sin':'cos'); $('lK').textContent=w; $('lR').textContent=w; $('lQ').textContent=w;
+    $('titel').textContent=(m==='sin'?'Sinus':'Kosinus')+' an Raute und Quadrat';
+    $('unter').textContent='P ist der Schnittpunkt des Winkelstrahls mit dem Rand der Figur. '+(m==='sin'?'sin(α) = Höhe (y-Wert) von P.':'cos(α) = waagerechter Abstand (x-Wert) von P.');
+    update();
+  }
+  $('btnSin').addEventListener('click',()=>setMode('sin'));
+  $('btnCos').addEventListener('click',()=>setMode('cos'));
+
+  const playBtn=$('play');
+  function stop(){playing=false;playBtn.classList.remove('aktiv');playBtn.textContent='▶ Umlauf';if(raf)cancelAnimationFrame(raf);}
+  function loop(){ if(!playing)return; if(deg>=DEGMAX){stop();return;} setDeg(deg+2); raf=requestAnimationFrame(()=>setTimeout(loop,24)); }
+  playBtn.addEventListener('click',()=>{ if(playing){stop();} else { if(deg>=DEGMAX)setDeg(0); playing=true; playBtn.classList.add('aktiv'); playBtn.textContent='⏸ Stopp'; loop(); } });
+
+  update();
+})();
+</script>
+</body>
+</html>
