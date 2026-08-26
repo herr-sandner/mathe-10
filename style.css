@@ -87,3 +87,7 @@ summary:hover{color:var(--akzent)}
   summary,.pruefen,.antwort,.weg-link,.feedback{display:none}
   .tipp,.loesung,.weg{display:block !important}
 }
+
+/* Besuchszähler */
+.zaehler{margin-top:1.8rem;padding-top:.9rem;border-top:1px solid #efe6dd;color:#9a8f83;font-size:.85rem}
+.zaehler .zaehler-sep{margin:0 .5rem;opacity:.5}
