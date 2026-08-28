@@ -1,1 +1,294 @@
-
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="schutz.js?v=4"></script>
+<title>Woche 2</title>
+<link rel="stylesheet" href="style.css?v=4">
+<style>
+  /* Skizzen – Farben aus style.css */
+  .skizze{display:block;margin:.7rem 0 .3rem;max-width:100%;height:auto}
+  .sk-shape{fill:none;stroke:var(--akzent);stroke-width:2;stroke-linejoin:round}
+  .sk-thin{stroke:var(--grau);stroke-width:1.3;fill:none}
+  .sk-arc{stroke:var(--akzent-dunkel);stroke-width:1.6;fill:none}
+  .sk-rad{stroke:var(--akzent);stroke-width:2;fill:none}
+  .sk-proj{stroke:var(--akzent-dunkel);stroke-width:1.8;fill:none;stroke-dasharray:4 3}
+  .sk-sin{stroke:#e5322d;stroke-width:2.2;fill:none;stroke-dasharray:4 3}
+  .sk-cos{stroke:#1a56ff;stroke-width:2.2;fill:none;stroke-dasharray:4 3}
+  .sk-curve{stroke:var(--akzent);stroke-width:2.2;fill:none;stroke-linejoin:round;stroke-linecap:round}
+  .sk-guide{stroke:var(--linie);stroke-width:1.2;fill:none;stroke-dasharray:3 3}
+  .sk-dot{fill:var(--akzent)}
+  text.sk-lab{fill:var(--akzent-dunkel);font:600 13px system-ui,sans-serif}
+  text.sk-sin-l{fill:#e5322d;font:600 13px system-ui,sans-serif}
+  text.sk-cos-l{fill:#1a56ff;font:600 13px system-ui,sans-serif}
+  text.sk-ang{fill:var(--akzent-dunkel);font:600 12px system-ui,sans-serif}
+  text.sk-pt{fill:var(--akzent-dunkel);font:12px system-ui,sans-serif}
+  /* Tabellen */
+  table.umr{border-collapse:collapse;margin:.5rem 0;font-size:.9rem}
+  table.umr th,table.umr td{border:1px solid var(--linie);padding:.3rem .65rem;text-align:center}
+  table.umr th{color:var(--akzent-dunkel);font-weight:600}
+</style>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<header>
+  <h1>Woche 2</h1>
+  <div class="meta">Ausgabe: <span data-datum></span></div>
+</header>
+<section class="aufgabe">
+  <h2>Aufgabe 1: Sinus und Kosinus am Einheitskreis</h2>
+  <svg class="skizze" viewBox="0 0 250 250" width="250" role="img" aria-label="Einheitskreis mit Punkt P sowie sin und cos als Strecken">
+    <line class="sk-thin" x1="20" y1="130" x2="235" y2="130"/>
+    <line class="sk-thin" x1="120" y1="20" x2="120" y2="240"/>
+    <circle class="sk-shape" cx="120" cy="130" r="90"/>
+    <line class="sk-cos" x1="120" y1="130" x2="171.6" y2="130"/>
+    <line class="sk-sin" x1="171.6" y1="130" x2="171.6" y2="56.3"/>
+    <line class="sk-rad" x1="120" y1="130" x2="171.6" y2="56.3"/>
+    <path class="sk-arc" d="M 146,130 A 26 26 0 0 0 134.9,108.7"/>
+    <circle class="sk-dot" cx="171.6" cy="56.3" r="3"/>
+    <text class="sk-ang" x="130" y="126">α</text>
+    <text class="sk-cos-l" x="128" y="147">cos(α)</text>
+    <text class="sk-sin-l" x="178" y="98">sin(α)</text>
+    <text class="sk-pt" x="176" y="52">P</text>
+    <text class="sk-pt" x="107" y="145">O</text>
+  </svg>
+  <!-- a) Achsenwinkel-Tabelle -->
+  <div class="teil">
+    <p>a)&nbsp; Fülle die Tabelle ohne Taschenrechner aus.</p>
+    <table class="umr">
+      <tr><th>Winkel</th><th>sin</th><th>cos</th></tr>
+      <tr><td>0°</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>90°</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>180°</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>270°</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>360°</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </table>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Lies die Werte am Einheitskreis ab: Der Kosinus ist die x-Koordinate, der Sinus die y-Koordinate des Punktes auf dem Kreis.</p></div>
+    </details>
+    <details class="loesung-toggle"><summary>Lösung anzeigen</summary>
+      <div class="loesung">
+        <table class="umr">
+          <tr><th>Winkel</th><th>sin</th><th>cos</th></tr>
+          <tr><td>0°</td><td>0</td><td>1</td></tr>
+          <tr><td>90°</td><td>1</td><td>0</td></tr>
+          <tr><td>180°</td><td>0</td><td>−1</td></tr>
+          <tr><td>270°</td><td>−1</td><td>0</td></tr>
+          <tr><td>360°</td><td>0</td><td>1</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+  <!-- b) Vorzeichen -->
+  <div class="teil">
+    <p>b)&nbsp; Gib das Vorzeichen an: <strong>+1</strong> für positiv, <strong>−1</strong> für negativ.</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp">
+        <p>In welchem Quadranten liegt der Winkel? Die Vorzeichen von sin und cos je Quadrant:</p>
+        <svg class="skizze" viewBox="0 0 240 210" width="240" role="img" aria-label="Vorzeichen von sin und cos in den vier Quadranten">
+          <circle class="sk-shape" cx="120" cy="100" r="72" style="stroke:var(--linie)"/>
+          <line class="sk-thin" x1="24" y1="100" x2="216" y2="100"/>
+          <line class="sk-thin" x1="120" y1="12" x2="120" y2="188"/>
+          <text class="sk-ang" x="165" y="60" text-anchor="middle">sin +</text>
+          <text class="sk-ang" x="165" y="76" text-anchor="middle">cos +</text>
+          <text class="sk-ang" x="72" y="60" text-anchor="middle">sin +</text>
+          <text class="sk-ang" x="72" y="76" text-anchor="middle">cos −</text>
+          <text class="sk-ang" x="72" y="132" text-anchor="middle">sin −</text>
+          <text class="sk-ang" x="72" y="148" text-anchor="middle">cos −</text>
+          <text class="sk-ang" x="165" y="132" text-anchor="middle">sin −</text>
+          <text class="sk-ang" x="165" y="148" text-anchor="middle">cos +</text>
+        </svg>
+      </div>
+    </details>
+    <p>Vorzeichen von \(\sin(130^\circ)\):</p>
+    <div class="check" data-loesung="1">
+      <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von sin 130 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(130^\circ\) liegt im II. Quadranten, dort ist der Sinus positiv, also \(+1\) (und der Kosinus wäre negativ).</p></div>
+    </div>
+    <p>Vorzeichen von \(\cos(200^\circ)\):</p>
+    <div class="check" data-loesung="-1">
+      <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von cos 200 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(200^\circ\) liegt im III. Quadranten, dort ist der Kosinus negativ, also \(-1\) (und der Sinus ebenfalls negativ).</p></div>
+    </div>
+    <p>Vorzeichen von \(\sin(250^\circ)\):</p>
+    <div class="check" data-loesung="-1">
+      <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von sin 250 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(250^\circ\) liegt im III. Quadranten, dort ist der Sinus negativ, also \(-1\).</p></div>
+    </div>
+    <p>Vorzeichen von \(\cos(300^\circ)\):</p>
+    <div class="check" data-loesung="1">
+      <input type="text" class="antwort" placeholder="+1 oder −1" aria-label="Vorzeichen von cos 300 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(300^\circ\) liegt im IV. Quadranten, dort ist der Kosinus positiv, also \(+1\) (und der Sinus negativ).</p></div>
+    </div>
+  </div>
+  <!-- c) Zurückführung auf spitze Winkel (nur Sinus) -->
+  <div class="teil">
+    <p>c)&nbsp; Auf welchen spitzen Winkel lässt sich der Sinuswert zurückführen? Gib den spitzen Winkel in Grad ein; den Wert selbst findest du im Lösungsweg.</p>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Nutze deine Entdeckung vom Blatt: \(\sin(180^\circ-\alpha)=\sin(\alpha)\) und \(\sin(360^\circ-\alpha)=-\sin(\alpha)\).</p></div>
+    </details>
+    <p>\(\sin(120^\circ)\):</p>
+    <div class="check" data-loesung="60">
+      <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für sin 120 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>$$\sin(120^\circ) = \sin(180^\circ-120^\circ) = \sin(60^\circ) = \tfrac{1}{2}\sqrt{3}$$</p></div>
+    </div>
+    <p>\(\sin(135^\circ)\):</p>
+    <div class="check" data-loesung="45">
+      <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für sin 135 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>$$\sin(135^\circ) = \sin(180^\circ-135^\circ) = \sin(45^\circ) = \tfrac{1}{2}\sqrt{2}$$</p></div>
+    </div>
+    <p>\(\sin(330^\circ)\):</p>
+    <div class="check" data-loesung="30">
+      <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für sin 330 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>$$\sin(330^\circ) = -\sin(360^\circ-330^\circ) = -\sin(30^\circ) = -\tfrac{1}{2}$$</p></div>
+    </div>
+    <p>\(\sin(300^\circ)\):</p>
+    <div class="check" data-loesung="60">
+      <input type="text" class="antwort" placeholder="spitzer Winkel in °" aria-label="Spitzer Winkel für sin 300 Grad">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>$$\sin(300^\circ) = -\sin(360^\circ-300^\circ) = -\sin(60^\circ) = -\tfrac{1}{2}\sqrt{3}$$</p></div>
+    </div>
+  </div>
+</section>
+<section class="aufgabe">
+  <h2>Aufgabe 2: Winkel zu gegebenen Sinuswerten</h2>
+  <div class="teil">
+    <p>Gib alle Lösungen im Intervall \([0^\circ;\,360^\circ)\) an (mehrere mit ; trennen). Nutze, dass ein zweiter Winkel mit \(180^\circ-\alpha\) denselben Sinuswert hat.</p>
+    <p>a)&nbsp; \(\sin(x) = \tfrac{1}{2}\)</p>
+    <div class="check" data-loesung="30; 150">
+      <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen a">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(\sin(30^\circ)=\tfrac{1}{2}\). Der zweite Winkel im II. Quadranten: \(180^\circ-30^\circ=150^\circ\). Lösungen: \(30^\circ,\ 150^\circ\).</p></div>
+    </div>
+    <p>b)&nbsp; \(\sin(x) = \tfrac{1}{2}\sqrt{2}\)</p>
+    <div class="check" data-loesung="45; 135">
+      <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen b">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(\sin(45^\circ)=\tfrac{1}{2}\sqrt{2}\); zweiter Winkel: \(180^\circ-45^\circ=135^\circ\). Lösungen: \(45^\circ,\ 135^\circ\).</p></div>
+    </div>
+    <p>c)&nbsp; \(\sin(x) = \tfrac{1}{2}\sqrt{3}\)</p>
+    <div class="check" data-loesung="60; 120">
+      <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen c">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>\(\sin(60^\circ)=\tfrac{1}{2}\sqrt{3}\); zweiter Winkel: \(180^\circ-60^\circ=120^\circ\). Lösungen: \(60^\circ,\ 120^\circ\).</p></div>
+    </div>
+    <p>d)&nbsp; \(\sin(x) = 1\)</p>
+    <div class="check" data-loesung="90">
+      <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen d">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Der Sinus (die y-Koordinate) wird nur ganz oben gleich \(1\): bei \(90^\circ\). Hier gibt es nur <em>eine</em> Lösung.</p></div>
+    </div>
+    <p>e)&nbsp; \(\sin(x) = 2\)</p>
+    <div class="check" data-loesung="keine">
+      <input type="text" class="antwort" placeholder="mehrere mit ; trennen" aria-label="Lösungen e">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Keine Lösung: Der Sinus ist die y-Koordinate auf dem Einheitskreis, also stets \(-1\le\sin(x)\le 1\). Der Wert \(2\) ist nicht erreichbar. (Tippe „keine".)</p></div>
+    </div>
+  </div>
+</section>
+<section class="aufgabe">
+  <h2>Aufgabe 3: Kreissektoren</h2>
+  <!-- a) Herzfigur -->
+  <div class="teil">
+    <p>a)&nbsp; Die Figur besteht aus einem Quadrat und zwei aufgesetzten Halbkreisen. Berechne Umfang und Flächeninhalt. Runde auf 2 Dezimalstellen.</p>
+    <svg class="skizze" viewBox="0 0 250 235" width="250" role="img" aria-label="Herzfigur aus Quadrat mit zwei Halbkreisen, Seitenlänge 2 cm">
+      <path class="sk-shape" d="M 125,183.6 L 61.4,120 A 45 45 0 0 1 125,56.4 A 45 45 0 0 1 188.6,120 L 125,183.6 Z"/>
+      <line class="sk-proj" x1="61.4" y1="120" x2="125" y2="56.4"/>
+      <line class="sk-proj" x1="125" y1="56.4" x2="188.6" y2="120"/>
+      <circle class="sk-dot" cx="93.2" cy="88.2" r="3"/>
+      <circle class="sk-dot" cx="156.8" cy="88.2" r="3"/>
+      <text class="sk-lab" x="83" y="162" text-anchor="middle" transform="rotate(45 83 162)">2 cm</text>
+      <text class="sk-lab" x="167" y="162" text-anchor="middle" transform="rotate(-45 167 162)">2 cm</text>
+    </svg>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Die \(2\,\text{cm}\) sind die Quadratseite und zugleich der Durchmesser eines Halbkreises. Der Radius ist also \(1\,\text{cm}\). Zwei Halbkreise ergeben zusammen einen ganzen Kreis. Zum Umfang zählen nur die beiden unteren Quadratseiten und die beiden Bögen.</p></div>
+    </details>
+    <p>Umfang:</p>
+    <div class="check" data-loesung="10.28">
+      <input type="text" class="antwort" placeholder="cm, auf 2 Dezimalstellen" aria-label="Umfang der Herzfigur">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Zwei untere Seiten und zwei Halbkreisbögen (Radius \(1\,\text{cm}\), zusammen ein voller Kreisumfang):</p><p>$$U = 2\cdot 2\,\text{cm} + 2\pi\cdot 1\,\text{cm} = 4\,\text{cm} + 2\pi\,\text{cm} \approx 10{,}28\,\text{cm}$$</p></div>
+    </div>
+    <p>Flächeninhalt:</p>
+    <div class="check" data-loesung="7.14">
+      <input type="text" class="antwort" placeholder="cm², auf 2 Dezimalstellen" aria-label="Flächeninhalt der Herzfigur">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>Quadrat (Seite \(2\,\text{cm}\)) und zwei Halbkreise (Radius \(1\,\text{cm}\), zusammen ein ganzer Kreis):</p><p>$$A = (2\,\text{cm})^2 + \pi\cdot(1\,\text{cm})^2 = 4\,\text{cm}^2 + \pi\,\text{cm}^2 \approx 7{,}14\,\text{cm}^2$$</p></div>
+    </div>
+  </div>
+  <!-- b) Kreissektor -->
+  <div class="teil">
+    <p>b)&nbsp; Berechne die Bogenlänge \(b\) und den Flächeninhalt \(A\) des Kreissektors. Runde auf 2 Dezimalstellen.</p>
+    <svg class="skizze" viewBox="0 0 220 200" width="220" role="img" aria-label="Kreissektor mit Radius 4 cm und Mittelpunktswinkel 135 Grad">
+      <path class="sk-shape" d="M 110,178 L 198.7,141.3 A 96 96 0 0 0 21.3,141.3 Z"/>
+      <path class="sk-arc" d="M 137.7,166.5 A 30 30 0 0 0 82.3,166.5"/>
+      <text class="sk-ang" x="110" y="140" text-anchor="middle">135°</text>
+      <text class="sk-lab" x="150" y="152" text-anchor="middle" transform="rotate(-22.5 150 152)">4 cm</text>
+      <circle class="sk-dot" cx="110" cy="178" r="2.8"/>
+    </svg>
+    <details><summary>Tipp</summary>
+      <div class="tipp"><p>Ein Sektor ist der Anteil \(\tfrac{\alpha}{360^\circ}\) des ganzen Kreises. Bogenlänge: \(b=\tfrac{\alpha}{360^\circ}\cdot 2\pi r\); Fläche: \(A=\tfrac{\alpha}{360^\circ}\cdot \pi r^2\).</p></div>
+    </details>
+    <p>Bogenlänge \(b\):</p>
+    <div class="check" data-loesung="9.42">
+      <input type="text" class="antwort" placeholder="cm, auf 2 Dezimalstellen" aria-label="Bogenlänge des Sektors">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>$$b = \frac{135^\circ}{360^\circ}\cdot 2\pi\cdot 4\,\text{cm} = \frac{3}{8}\cdot 8\pi\,\text{cm} = 3\pi\,\text{cm} \approx 9{,}42\,\text{cm}$$</p></div>
+    </div>
+    <p>Flächeninhalt \(A\):</p>
+    <div class="check" data-loesung="18.85">
+      <input type="text" class="antwort" placeholder="cm², auf 2 Dezimalstellen" aria-label="Flächeninhalt des Sektors">
+      <button type="button" class="pruefen">Prüfen</button>
+      <span class="feedback"></span>
+      <span class="weg-link" style="display:none">Lösungsweg anzeigen</span>
+      <div class="weg loesung" style="display:none"><p>$$A = \frac{135^\circ}{360^\circ}\cdot \pi\cdot (4\,\text{cm})^2 = \frac{3}{8}\cdot 16\pi\,\text{cm}^2 = 6\pi\,\text{cm}^2 \approx 18{,}85\,\text{cm}^2$$</p></div>
+    </div>
+  </div>
+</section>
+<p><a href="index.html">← zur Übersicht</a></p>
+<script src="schuljahr.js"></script>
+<script>schreibeDatum(2);</script>
+<script src="kontrolle.js?v=5"></script>
+</body>
+</html>
