@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kontrollaufgaben – Woche 4</title>
 <!-- Kopfbereich ggf. 1:1 aus woche-03.html übernehmen -->
-<script src="schutz.js"></script>
-<link rel="stylesheet" href="style.css">
+<script src="schutz.js?v=4"></script>
+<link rel="stylesheet" href="style.css?v=4">
 <script src="schuljahr.js"></script>
 <script src="kontrolle.js?v=5" defer></script>
 <script>window.MathJax = { tex: { displayMath: [['$$','$$']] } };</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
-  /* Woche 4: Allgemeine Sinusfunktion */
+  /* Woche 4: Graph → Term */
   .fn-box { overflow-x: auto; margin: .8em 0; }
   .sk-fn { width: 100%; min-width: 520px; max-width: 720px; height: auto; display: block; }
   .fn-grid { stroke: var(--linie, #d0d7de); stroke-width: .7; }
@@ -23,12 +23,10 @@
   .fn-axlab { font-size: 14px; font-style: italic; fill: var(--akzent-dunkel, #0b3d91); }
   .check-fn { margin: .6em 0 1em; }
   .fn-zeile { display: flex; flex-wrap: wrap; align-items: center; gap: .3em; font-size: 1.1em; }
-  .fn-zeile input { width: 4.6em; padding: .25em .3em; font-size: 1em; text-align: center; }
+  .fn-zeile .antwort { width: 4.6em; max-width: none; text-align: center; }
+  .fn-zeile .pruefen { margin-left: .4rem; }
+  .check-fn .feedback { display: block; margin: .4rem 0 0; }
   .fn-t { white-space: nowrap; }
-  .fn-pruefen { margin-top: .5em; }
-  .fn-feedback { margin-top: .4em; }
-  .fn-feedback.ok { color: #1a7f37; font-weight: 600; }
-  .fn-feedback.falsch { color: #b3261e; }
   .fn-hinweis { font-size: .9em; color: var(--grau, #555); margin: .2em 0 .4em; }
 </style>
 </head>
@@ -42,9 +40,19 @@
 <p>Schreibe π als <code>pi</code> oder <code>π</code> (z. B. <code>pi/4</code>, <code>3π/2</code>, <code>-pi</code>). Brüche wie <code>1/2</code> sind erlaubt.</p>
 <p>Es gibt jeweils mehrere richtige Terme – ein passender reicht.</p>
 
-<details class="tipp"><summary>Tipp: So gehst du vor</summary>
-$$a=\frac{y_{\max}-y_{\min}}{2}, \qquad d=\frac{y_{\max}+y_{\min}}{2}, \qquad b=\frac{2\pi}{p}$$
-<p>Für c suchst du eine Stelle, an der der Graph die Mittellinie y = d steigend schneidet (dann ist a &gt; 0). Wählst du eine Stelle, an der er sie fallend schneidet, ist a &lt; 0.</p>
+<details><summary>Tipp: So gehst du vor</summary>
+<div class="tipp">
+<ol>
+<li>Mittellinie denken: mittig zwischen Hoch- und Tiefpunkten.</li>
+<li>Eine Periode markieren: von einer Stelle, an der der Graph die Mittellinie steigend schneidet, bis zur nächsten.</li>
+<li>Amplitude a ablesen: Abstand Mittellinie – Hochpunkt.</li>
+<li>Periode p ablesen und b ausrechnen:
+$$b=\frac{2\pi}{p}$$</li>
+<li>Verschiebung in x-Richtung: c ist der Anfang deiner markierten Periode.</li>
+<li>Verschiebung in y-Richtung: d ist die Höhe der Mittellinie.</li>
+</ol>
+<p>Beginnst du die Periode an einem <em>fallenden</em> Schnittpunkt, wird a negativ – auch das ist richtig.</p>
+</div>
 </details>
 
 <h2>Aufgabe 1: Graph 1</h2>
@@ -101,28 +109,32 @@ $$a=\frac{y_{\max}-y_{\min}}{2}, \qquad d=\frac{y_{\max}+y_{\min}}{2}, \qquad b=
 <div class="check-fn" data-a="3" data-b="1" data-c="0" data-d="-1">
   <p class="fn-hinweis">π schreibst du als <code>pi</code> oder <code>π</code>, z. B. <code>pi/4</code> oder <code>-3π/2</code>.</p>
   <div class="fn-zeile"><span class="fn-t">f(x) =</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <button type="button" class="pruefen">Prüfen</button>
   </div>
-  <button type="button" class="fn-pruefen">Prüfen</button>
-  <div class="fn-feedback" aria-live="polite"></div>
+  <div class="feedback" aria-live="polite"></div>
 </div>
-<details class="loesung"><summary>Lösungsweg</summary>
-<p>Aus</p>
-$$y_{\max}=2 \quad\text{und}\quad y_{\min}=-4$$
-<p>folgt</p>
-$$a=\frac{2-(-4)}{2}=3 \quad\text{und}\quad d=\frac{2+(-4)}{2}=-1.$$
-<p>Aus der Periode</p>
-$$p=2\pi \quad\text{folgt}\quad b=\frac{2\pi}{2\pi}=1.$$
-<p>Der Graph schneidet die Mittellinie steigend bei</p>
-$$x=0,$$
-<p>damit ist</p>
-$$c=0 \quad\text{und}\quad f(x)=3\sin(x)-1.$$
+<details><summary>Lösungsweg</summary><div class="loesung">
+<p><strong>1. Mittellinie</strong> (mittig zwischen Hoch- und Tiefpunkten):</p>
+$$y=\frac{2+(-4)}{2}=-1$$
+<p><strong>2. Eine Periode markieren</strong> von einem steigenden Schnittpunkt mit der Mittellinie zum nächsten:</p>
+$$x=0 \quad\text{bis}\quad x=2\pi$$
+<p><strong>3. Amplitude</strong> (Abstand Mittellinie – Hochpunkt):</p>
+$$a=2-(-1)=3$$
+<p><strong>4. Periode</strong> ablesen und b ausrechnen:</p>
+$$p=2\pi \quad\Rightarrow\quad b=\frac{2\pi}{2\pi}=1$$
+<p><strong>5. Verschiebung in x-Richtung</strong> (Anfang der markierten Periode):</p>
+$$c=0$$
+<p><strong>6. Verschiebung in y-Richtung</strong> (Höhe der Mittellinie):</p>
+$$d=-1$$
+<p>Damit ist</p>
+$$f(x)=3\sin(x)-1.$$
 <p>Ebenfalls richtig (Beispiele):</p>
-$$f(x)=-3\sin(x-\pi)-1, \qquad f(x)=3\sin(x-2\pi)-1.$$
-</details>
+$$f(x)=-3\sin(x-\pi)-1, \qquad f(x)=3\sin(x-2\pi)-1$$
+</div></details>
 
 <h2>Aufgabe 2: Graph 2</h2>
 <div class="fn-box"><svg class="sk-fn" viewBox="0 0 696 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph 2">
@@ -174,28 +186,32 @@ $$f(x)=-3\sin(x-\pi)-1, \qquad f(x)=3\sin(x-2\pi)-1.$$
 <div class="check-fn" data-a="-2" data-b="2" data-c="0" data-d="1">
   <p class="fn-hinweis">π schreibst du als <code>pi</code> oder <code>π</code>, z. B. <code>pi/4</code> oder <code>-3π/2</code>.</p>
   <div class="fn-zeile"><span class="fn-t">f(x) =</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <button type="button" class="pruefen">Prüfen</button>
   </div>
-  <button type="button" class="fn-pruefen">Prüfen</button>
-  <div class="fn-feedback" aria-live="polite"></div>
+  <div class="feedback" aria-live="polite"></div>
 </div>
-<details class="loesung"><summary>Lösungsweg</summary>
-<p>Aus</p>
-$$y_{\max}=3 \quad\text{und}\quad y_{\min}=-1$$
-<p>folgt</p>
-$$a=\frac{3-(-1)}{2}=2 \quad\text{und}\quad d=\frac{3+(-1)}{2}=1.$$
-<p>Aus der Periode</p>
-$$p=\pi \quad\text{folgt}\quad b=\frac{2\pi}{\pi}=2.$$
-<p>Der Graph schneidet die Mittellinie steigend bei</p>
-$$x=\tfrac{\pi}{2},$$
-<p>damit ist</p>
-$$c=\tfrac{\pi}{2} \quad\text{und}\quad f(x)=2\sin\!\left(2\left(x-\tfrac{\pi}{2}\right)\right)+1.$$
-<p>Bei 0 fällt der Graph durch die Mittellinie – er ist also an der Mittellinie gespiegelt. Darum ist auch richtig:</p>
-$$f(x)=-2\sin(2x)+1.$$
-</details>
+<details><summary>Lösungsweg</summary><div class="loesung">
+<p><strong>1. Mittellinie</strong> (mittig zwischen Hoch- und Tiefpunkten):</p>
+$$y=\frac{3+(-1)}{2}=1$$
+<p><strong>2. Eine Periode markieren</strong> von einem steigenden Schnittpunkt mit der Mittellinie zum nächsten:</p>
+$$x=\tfrac{\pi}{2} \quad\text{bis}\quad x=\tfrac{3\pi}{2}$$
+<p><strong>3. Amplitude</strong> (Abstand Mittellinie – Hochpunkt):</p>
+$$a=3-1=2$$
+<p><strong>4. Periode</strong> ablesen und b ausrechnen:</p>
+$$p=\pi \quad\Rightarrow\quad b=\frac{2\pi}{\pi}=2$$
+<p><strong>5. Verschiebung in x-Richtung</strong> (Anfang der markierten Periode):</p>
+$$c=\tfrac{\pi}{2}$$
+<p><strong>6. Verschiebung in y-Richtung</strong> (Höhe der Mittellinie):</p>
+$$d=1$$
+<p>Damit ist</p>
+$$f(x)=2\sin\!\left(2\left(x-\tfrac{\pi}{2}\right)\right)+1.$$
+<p>Ebenfalls richtig (Beispiele):</p>
+$$f(x)=-2\sin(2x)+1, \qquad f(x)=2\sin\!\left(2\left(x+\tfrac{\pi}{2}\right)\right)+1$$
+</div></details>
 
 <h2>Aufgabe 3: Graph 3</h2>
 <div class="fn-box"><svg class="sk-fn" viewBox="0 0 696 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph 3">
@@ -247,28 +263,32 @@ $$f(x)=-2\sin(2x)+1.$$
 <div class="check-fn" data-a="2" data-b="2" data-c="-pi/4" data-d="-1">
   <p class="fn-hinweis">π schreibst du als <code>pi</code> oder <code>π</code>, z. B. <code>pi/4</code> oder <code>-3π/2</code>.</p>
   <div class="fn-zeile"><span class="fn-t">f(x) =</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <button type="button" class="pruefen">Prüfen</button>
   </div>
-  <button type="button" class="fn-pruefen">Prüfen</button>
-  <div class="fn-feedback" aria-live="polite"></div>
+  <div class="feedback" aria-live="polite"></div>
 </div>
-<details class="loesung"><summary>Lösungsweg</summary>
-<p>Aus</p>
-$$y_{\max}=1 \quad\text{und}\quad y_{\min}=-3$$
-<p>folgt</p>
-$$a=\frac{1-(-3)}{2}=2 \quad\text{und}\quad d=\frac{1+(-3)}{2}=-1.$$
-<p>Aus der Periode</p>
-$$p=\pi \quad\text{folgt}\quad b=\frac{2\pi}{\pi}=2.$$
-<p>Der Graph schneidet die Mittellinie steigend bei</p>
-$$x=-\tfrac{\pi}{4},$$
-<p>damit ist</p>
-$$c=-\tfrac{\pi}{4} \quad\text{und}\quad f(x)=2\sin\!\left(2\left(x+\tfrac{\pi}{4}\right)\right)-1.$$
+<details><summary>Lösungsweg</summary><div class="loesung">
+<p><strong>1. Mittellinie</strong> (mittig zwischen Hoch- und Tiefpunkten):</p>
+$$y=\frac{1+(-3)}{2}=-1$$
+<p><strong>2. Eine Periode markieren</strong> von einem steigenden Schnittpunkt mit der Mittellinie zum nächsten:</p>
+$$x=-\tfrac{\pi}{4} \quad\text{bis}\quad x=\tfrac{3\pi}{4}$$
+<p><strong>3. Amplitude</strong> (Abstand Mittellinie – Hochpunkt):</p>
+$$a=1-(-1)=2$$
+<p><strong>4. Periode</strong> ablesen und b ausrechnen:</p>
+$$p=\pi \quad\Rightarrow\quad b=\frac{2\pi}{\pi}=2$$
+<p><strong>5. Verschiebung in x-Richtung</strong> (Anfang der markierten Periode):</p>
+$$c=-\tfrac{\pi}{4}$$
+<p><strong>6. Verschiebung in y-Richtung</strong> (Höhe der Mittellinie):</p>
+$$d=-1$$
+<p>Damit ist</p>
+$$f(x)=2\sin\!\left(2\left(x+\tfrac{\pi}{4}\right)\right)-1.$$
 <p>Ebenfalls richtig (Beispiele):</p>
-$$f(x)=-2\sin\!\left(2\left(x-\tfrac{\pi}{4}\right)\right)-1, \qquad f(x)=2\sin\!\left(2\left(x-\tfrac{3\pi}{4}\right)\right)-1.$$
-</details>
+$$f(x)=-2\sin\!\left(2\left(x-\tfrac{\pi}{4}\right)\right)-1, \qquad f(x)=2\sin\!\left(2\left(x-\tfrac{3\pi}{4}\right)\right)-1$$
+</div></details>
 
 <h2>Aufgabe 4: Graph 4</h2>
 <div class="fn-box"><svg class="sk-fn" viewBox="0 0 696 292" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph 4">
@@ -328,28 +348,32 @@ $$f(x)=-2\sin\!\left(2\left(x-\tfrac{\pi}{4}\right)\right)-1, \qquad f(x)=2\sin\
 <div class="check-fn" data-a="3" data-b="1/2" data-c="pi/2" data-d="1">
   <p class="fn-hinweis">π schreibst du als <code>pi</code> oder <code>π</code>, z. B. <code>pi/4</code> oder <code>-3π/2</code>.</p>
   <div class="fn-zeile"><span class="fn-t">f(x) =</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <button type="button" class="pruefen">Prüfen</button>
   </div>
-  <button type="button" class="fn-pruefen">Prüfen</button>
-  <div class="fn-feedback" aria-live="polite"></div>
+  <div class="feedback" aria-live="polite"></div>
 </div>
-<details class="loesung"><summary>Lösungsweg</summary>
-<p>Aus</p>
-$$y_{\max}=4 \quad\text{und}\quad y_{\min}=-2$$
-<p>folgt</p>
-$$a=\frac{4-(-2)}{2}=3 \quad\text{und}\quad d=\frac{4+(-2)}{2}=1.$$
-<p>Aus der Periode</p>
-$$p=4\pi \quad\text{folgt}\quad b=\frac{2\pi}{4\pi}=\frac{1}{2}.$$
-<p>Der Graph schneidet die Mittellinie steigend bei</p>
-$$x=\tfrac{\pi}{2},$$
-<p>damit ist</p>
-$$c=\tfrac{\pi}{2} \quad\text{und}\quad f(x)=3\sin\!\left(\tfrac{1}{2}\left(x-\tfrac{\pi}{2}\right)\right)+1.$$
+<details><summary>Lösungsweg</summary><div class="loesung">
+<p><strong>1. Mittellinie</strong> (mittig zwischen Hoch- und Tiefpunkten):</p>
+$$y=\frac{4+(-2)}{2}=1$$
+<p><strong>2. Eine Periode markieren</strong> von einem steigenden Schnittpunkt mit der Mittellinie zum nächsten:</p>
+$$x=\tfrac{\pi}{2} \quad\text{bis}\quad x=\tfrac{9\pi}{2}$$
+<p><strong>3. Amplitude</strong> (Abstand Mittellinie – Hochpunkt):</p>
+$$a=4-1=3$$
+<p><strong>4. Periode</strong> ablesen und b ausrechnen:</p>
+$$p=4\pi \quad\Rightarrow\quad b=\frac{2\pi}{4\pi}=\tfrac{1}{2}$$
+<p><strong>5. Verschiebung in x-Richtung</strong> (Anfang der markierten Periode):</p>
+$$c=\tfrac{\pi}{2}$$
+<p><strong>6. Verschiebung in y-Richtung</strong> (Höhe der Mittellinie):</p>
+$$d=1$$
+<p>Damit ist</p>
+$$f(x)=3\sin\!\left(\tfrac{1}{2}\left(x-\tfrac{\pi}{2}\right)\right)+1.$$
 <p>Ebenfalls richtig (Beispiele):</p>
-$$f(x)=-3\sin\!\left(\tfrac{1}{2}\left(x-\tfrac{5\pi}{2}\right)\right)+1, \qquad f(x)=-3\sin\!\left(\tfrac{1}{2}\left(x+\tfrac{3\pi}{2}\right)\right)+1.$$
-</details>
+$$f(x)=-3\sin\!\left(\tfrac{1}{2}\left(x-\tfrac{5\pi}{2}\right)\right)+1, \qquad f(x)=-3\sin\!\left(\tfrac{1}{2}\left(x+\tfrac{3\pi}{2}\right)\right)+1$$
+</div></details>
 
 <h2>Aufgabe 5: Graph 5</h2>
 <div class="fn-box"><svg class="sk-fn" viewBox="0 0 696 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph 5">
@@ -419,28 +443,32 @@ $$f(x)=-3\sin\!\left(\tfrac{1}{2}\left(x-\tfrac{5\pi}{2}\right)\right)+1, \qquad
 <div class="check-fn" data-a="2" data-b="pi/4" data-c="2" data-d="2">
   <p class="fn-hinweis">π schreibst du als <code>pi</code> oder <code>π</code>, z. B. <code>pi/4</code> oder <code>-3π/2</code>.</p>
   <div class="fn-zeile"><span class="fn-t">f(x) =</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
-    <input type="text" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="a" aria-label="a"> <span class="fn-t">· sin(</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="b" aria-label="b"> <span class="fn-t">· (x −</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="c" aria-label="c"> <span class="fn-t">)) +</span>
+    <input type="text" class="antwort" autocapitalize="off" autocomplete="off" spellcheck="false" data-p="d" aria-label="d">
+    <button type="button" class="pruefen">Prüfen</button>
   </div>
-  <button type="button" class="fn-pruefen">Prüfen</button>
-  <div class="fn-feedback" aria-live="polite"></div>
+  <div class="feedback" aria-live="polite"></div>
 </div>
-<details class="loesung"><summary>Lösungsweg</summary>
-<p>Aus</p>
-$$y_{\max}=4 \quad\text{und}\quad y_{\min}=0$$
-<p>folgt</p>
-$$a=\frac{4-0}{2}=2 \quad\text{und}\quad d=\frac{4+0}{2}=2.$$
-<p>Aus der Periode</p>
-$$p=8 \quad\text{folgt}\quad b=\frac{2\pi}{8}=\frac{\pi}{4}.$$
-<p>Der Graph schneidet die Mittellinie steigend bei</p>
-$$x=2,$$
-<p>damit ist</p>
-$$c=2 \quad\text{und}\quad f(x)=2\sin\!\left(\tfrac{\pi}{4}(x-2)\right)+2.$$
+<details><summary>Lösungsweg</summary><div class="loesung">
+<p><strong>1. Mittellinie</strong> (mittig zwischen Hoch- und Tiefpunkten):</p>
+$$y=\frac{4+0}{2}=2$$
+<p><strong>2. Eine Periode markieren</strong> von einem steigenden Schnittpunkt mit der Mittellinie zum nächsten:</p>
+$$x=2 \quad\text{bis}\quad x=10$$
+<p><strong>3. Amplitude</strong> (Abstand Mittellinie – Hochpunkt):</p>
+$$a=4-2=2$$
+<p><strong>4. Periode</strong> ablesen und b ausrechnen:</p>
+$$p=8 \quad\Rightarrow\quad b=\frac{2\pi}{8}=\tfrac{\pi}{4}$$
+<p><strong>5. Verschiebung in x-Richtung</strong> (Anfang der markierten Periode):</p>
+$$c=2$$
+<p><strong>6. Verschiebung in y-Richtung</strong> (Höhe der Mittellinie):</p>
+$$d=2$$
+<p>Damit ist</p>
+$$f(x)=2\sin\!\left(\tfrac{\pi}{4}(x-2)\right)+2.$$
 <p>Ebenfalls richtig (Beispiele):</p>
-$$f(x)=-2\sin\!\left(\tfrac{\pi}{4}(x-6)\right)+2, \qquad f(x)=2\sin\!\left(\tfrac{\pi}{4}(x+6)\right)+2.$$
-</details>
+$$f(x)=-2\sin\!\left(\tfrac{\pi}{4}(x-6)\right)+2, \qquad f(x)=2\sin\!\left(\tfrac{\pi}{4}(x+6)\right)+2$$
+</div></details>
 <!-- ===== ENDE INHALT ===== -->
 
 <script>
@@ -488,17 +516,17 @@ $$f(x)=-2\sin\!\left(\tfrac{\pi}{4}(x-6)\right)+2, \qquad f(x)=2\sin\!\left(\tfr
 
   document.querySelectorAll(".check-fn").forEach(function (box) {
     var ziel = { a: wert(box.dataset.a), b: wert(box.dataset.b), c: wert(box.dataset.c), d: wert(box.dataset.d) };
-    var fb = box.querySelector(".fn-feedback");
-    box.querySelector(".fn-pruefen").addEventListener("click", function () {
+    var fb = box.querySelector(".feedback");
+    box.querySelector(".pruefen").addEventListener("click", function () {
       var p = {}, fehlt = false;
-      box.querySelectorAll("input").forEach(function (inp) {
+      box.querySelectorAll(".antwort").forEach(function (inp) {
         var v = wert(inp.value);
         if (isNaN(v)) fehlt = true;
         p[inp.dataset.p] = v;
       });
-      fb.className = "fn-feedback";
+      fb.className = "feedback";
       if (fehlt) { fb.textContent = "Bitte alle vier Felder ausfüllen (z. B. 2, 1/2, pi/4, -π, auch 0)."; return; }
-      if (p.a === 0 || p.b === 0) { fb.className += " falsch"; fb.textContent = "Mit a = 0 oder b = 0 entsteht keine Sinuskurve."; return; }
+      if (p.a === 0 || p.b === 0) { fb.className += " nein"; fb.textContent = "Mit a = 0 oder b = 0 entsteht keine Sinuskurve."; return; }
 
       var T = 2 * Math.PI / Math.abs(ziel.b);
       function abw(tol) {
@@ -509,7 +537,7 @@ $$f(x)=-2\sin\!\left(\tfrac{\pi}{4}(x-6)\right)+2, \qquad f(x)=2\sin\!\left(\tfr
         return true;
       }
       if (abw(1e-6)) { fb.className += " ok"; fb.textContent = "Richtig! Dein Term beschreibt genau diesen Graphen."; return; }
-      fb.className += " falsch";
+      fb.className += " nein";
       if (abw(0.08)) { fb.textContent = "Fast! Gib die Werte exakt an – π als pi oder π, nicht als Dezimalzahl."; return; }
 
       var tol = 1e-3, hinweise = [];
