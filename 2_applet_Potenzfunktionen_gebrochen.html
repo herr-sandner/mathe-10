@@ -15,7 +15,7 @@
   .wrap{max-width:1000px;margin:0 auto;padding:16px;}
   h1{font-size:1.25rem;color:var(--akzent-dunkel);margin:.2rem 0 1rem;}
   .layout{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;}
-  .figur{flex:2 1 460px;min-width:320px;}
+  .figur{flex:3 1 560px;min-width:320px;}
   .seite{flex:1 1 250px;min-width:240px;}
   svg{width:100%;height:auto;touch-action:none;user-select:none;}
   text{font-family:inherit;}
@@ -41,13 +41,14 @@
   <h1>Potenzfunktionen mit gebrochenen Exponenten</h1>
   <div class="layout">
     <div class="figur">
-      <svg id="fig" viewBox="0 0 440 440" aria-label="Koordinatensystem mit dem Graphen einer Potenzfunktion mit positivem gebrochenem Exponenten (Wurzelfunktion); Faktor a, Zähler und Nenner des Exponenten einstellbar, ein Punkt lässt sich am Graphen verschieben.">
+      <svg id="fig" viewBox="0 0 600 440" aria-label="Koordinatensystem mit dem Graphen einer Wurzelfunktion f(x) = a·x hoch 1/n; Faktor a und Wurzelexponent n einstellbar. Bei ungeradem n ist der Graph auch für negative x gestrichelt eingezeichnet. Ein Punkt lässt sich am Graphen verschieben.">
         <g id="grid"></g>
         <rect id="verboten" fill="#f4f6fa" opacity="0.7"/>
         <line id="axX" stroke="#5a6577" stroke-width="1.4"/>
         <line id="axY" stroke="#5a6577" stroke-width="1.4"/>
         <g id="ticklabels" font-size="12" fill="#5a6577"></g>
         <path id="curve" fill="none" stroke="var(--kurve)" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+        <path id="curveNeg" fill="none" stroke="var(--kurve)" stroke-width="2.8" stroke-dasharray="9 6" stroke-linejoin="round"/>
         <line id="ptv" stroke="#9aa4b8" stroke-width="1.2" stroke-dasharray="4 4"/>
         <circle id="orig" r="3.4" fill="#333"/>
         <circle id="pt" r="7" fill="var(--punkt)" stroke="#fff" stroke-width="1.5"/>
@@ -63,12 +64,10 @@
       <div class="panel controls">
         <label for="sA">Faktor a: <b id="lA">1</b></label>
         <input id="sA" type="range" min="-10" max="10" step="0.25" value="1" aria-label="Faktor a">
-        <label for="sP">Zähler des Exponenten: <b id="lP">1</b></label>
-        <input id="sP" type="range" min="1" max="6" step="1" value="1" aria-label="Zähler des Exponenten">
-        <label for="sQ">Nenner des Exponenten (Wurzel): <b id="lQ">2</b></label>
-        <input id="sQ" type="range" min="2" max="6" step="1" value="2" aria-label="Nenner des Exponenten">
+        <label for="sQ">Wurzelexponent n (Nenner): <b id="lQ">2</b></label>
+        <input id="sQ" type="range" min="2" max="20" step="1" value="2" aria-label="Wurzelexponent n">
 
-        <div class="opt"><input type="checkbox" id="optB"><label for="optB" style="margin:0">Version <b>a·x<sup>p/q</sup> + b</b> zuschalten</label></div>
+        <div class="opt"><input type="checkbox" id="optB"><label for="optB" style="margin:0">Version <b>a·x<sup>1/n</sup> + b</b> zuschalten</label></div>
         <div id="boxB" hidden>
           <label for="sB">Summand b: <b id="lB">0</b></label>
           <input id="sB" type="range" min="-10" max="10" step="0.25" value="0" aria-label="Summand b">
@@ -89,17 +88,19 @@
   const NS='http://www.w3.org/2000/svg';
 
   // ---- Plot-Geometrie ----
-  const VBW=440, PX0=44, PX1=424, PY0=28, PY1=408;
-  const XMIN=-0.8, XMAX=6.4, YMIN=-4, YMAX=4;
+  const VBW=600, PX0=24, PX1=584, PY0=28, PY1=408;
+  const XMIN=-6.5, XMAX=6.5, YMIN=-4.4, YMAX=4.4;
   const sx=x=>PX0+(x-XMIN)/(XMAX-XMIN)*(PX1-PX0);
   const sy=y=>PY1-(y-YMIN)/(YMAX-YMIN)*(PY1-PY0);
 
   // ---- Zustand ----
-  let a=1, p=1, q=2, b=0, useB=false, x0=1;
+  let a=1, q=2, b=0, useB=false, x0=1;
+  const odd=()=>q%2===1;
 
   // ---- Helfer ----
   function numDE(x,d=2){ let s=(Math.round(x*Math.pow(10,d))/Math.pow(10,d)).toString(); s=s.replace('.',','); s=s.replace('-','−'); return s; }
-  function f(x){ return x<0 ? NaN : a*Math.pow(x,p/q) + (useB?b:0); }
+  function root(x){ return x>=0 ? Math.pow(x,1/q) : (odd() ? -Math.pow(-x,1/q) : NaN); }
+  function f(x){ return a*root(x) + (useB?b:0); }
   function el(name,attrs){const e=document.createElementNS(NS,name);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
 
   // ---- Gitter + Achsen (einmalig) ----
@@ -108,22 +109,22 @@
     // verbotener Bereich x<0 (nicht im Definitionsbereich)
     $('verboten').setAttribute('x',sx(XMIN)); $('verboten').setAttribute('y',sy(YMAX));
     $('verboten').setAttribute('width',sx(0)-sx(XMIN)); $('verboten').setAttribute('height',sy(YMIN)-sy(YMAX));
-    for(let x=0;x<=6;x++){ g.appendChild(el('line',{x1:sx(x),y1:sy(YMIN),x2:sx(x),y2:sy(YMAX),stroke:'#e6ebf5','stroke-width':1})); }
-    for(let y=-4;y<=4;y++){ g.appendChild(el('line',{x1:sx(0),y1:sy(y),x2:sx(XMAX),y2:sy(y),stroke:'#e6ebf5','stroke-width':1})); }
+    for(let x=-6;x<=6;x++){ g.appendChild(el('line',{x1:sx(x),y1:sy(YMIN),x2:sx(x),y2:sy(YMAX),stroke:'#e6ebf5','stroke-width':1})); }
+    for(let y=-4;y<=4;y++){ g.appendChild(el('line',{x1:sx(XMIN),y1:sy(y),x2:sx(XMAX),y2:sy(y),stroke:'#e6ebf5','stroke-width':1})); }
     $('axX').setAttribute('x1',sx(XMIN)); $('axX').setAttribute('y1',sy(0)); $('axX').setAttribute('x2',sx(XMAX)); $('axX').setAttribute('y2',sy(0));
     $('axY').setAttribute('x1',sx(0)); $('axY').setAttribute('y1',sy(YMIN)); $('axY').setAttribute('x2',sx(0)); $('axY').setAttribute('y2',sy(YMAX));
     g.appendChild(el('path',{d:`M ${sx(XMAX)} ${sy(0)} l -8 -4 l 0 8 z`,fill:'#5a6577'}));
     g.appendChild(el('path',{d:`M ${sx(0)} ${sy(YMAX)} l -4 8 l 8 0 z`,fill:'#5a6577'}));
     tl.appendChild(el('text',{x:sx(XMAX)-4,y:sy(0)+16,'text-anchor':'end'})).textContent='x';
     tl.appendChild(el('text',{x:sx(0)+8,y:sy(YMAX)+10})).textContent='y';
-    for(const x of [1,2,3,4,5,6]){ const t=el('text',{x:sx(x),y:sy(0)+16,'text-anchor':'middle'}); t.textContent=x; tl.appendChild(t); }
+    for(const x of [-6,-5,-4,-3,-2,-1,1,2,3,4,5,6]){ const t=el('text',{x:sx(x),y:sy(0)+16,'text-anchor':'middle'}); t.textContent=numDE(x,0); tl.appendChild(t); }
     for(const y of [-4,-2,2,4]){ const t=el('text',{x:sx(0)-8,y:sy(y)+4,'text-anchor':'end'}); t.textContent=numDE(y,0); tl.appendChild(t); }
   }
 
   // ---- Kurve (nur x >= 0) mit Randbeschneidung ----
-  function curveD(){
-    const dx=0.01; let subs=[], cur=[], pIn=false, pX=null, pY=null;
-    for(let x=0;x<=XMAX+1e-9;x+=dx){
+  function curveD(xa,xb){
+    const dx=0.005; let subs=[], cur=[], pIn=false, pX=null, pY=null;
+    for(let x=xa;x<=xb+1e-9;x+=dx){
       const y=f(x), fin=isFinite(y), inside=fin && y>=YMIN && y<=YMAX;
       if(inside){
         if(!pIn && pX!==null && isFinite(pY)){ const yb=pY>YMAX?YMAX:YMIN, t=(yb-pY)/(y-pY), xb=pX+(x-pX)*t; if(isFinite(xb)) cur.push([xb,yb]); }
@@ -135,19 +136,19 @@
       pIn=inside; pX=x; pY=y;
     }
     if(cur.length) subs.push(cur);
-    return subs.map(s=>'M '+s.map(pt=>sx(pt[0]).toFixed(1)+' '+sy(pt[1]).toFixed(1)).join(' L ')).join(' ');
+    return subs.filter(s=>s.length>1).map(s=>'M '+s.map(pt=>sx(pt[0]).toFixed(1)+' '+sy(pt[1]).toFixed(1)).join(' L ')).join(' ');
   }
 
   // ---- Termanzeige ----
   function coefHTML(){ return a===1?'':(a===-1?'−':numDE(a)+'·'); }
   function termHTML(){
-    let t = 'f(x) = '+coefHTML()+'x<sup>'+p+'/'+q+'</sup>';
+    let t = 'f(x) = '+coefHTML()+'x<sup>1/'+q+'</sup>';
     if(useB){ t += (b<0? ' − '+numDE(-b) : ' + '+numDE(b)); }
     return t;
   }
   function rootHTML(){
     const idx = (q===2) ? '' : '<sup>'+q+'</sup>';
-    const radWrapped = (p===1) ? 'x' : '(x<sup>'+p+'</sup>)';
+    const radWrapped = 'x';
     let t = '= '+coefHTML()+idx+'&radic;'+radWrapped;
     if(useB){ t += (b<0? ' − '+numDE(-b) : ' + '+numDE(b)); }
     return t;
@@ -155,30 +156,33 @@
 
   // ---- Aktualisieren ----
   function update(){
-    $('curve').setAttribute('d',curveD());
+    $('curve').setAttribute('d',curveD(0,XMAX));
+    $('curveNeg').setAttribute('d', odd()? curveD(XMIN,0) : '');
+    $('verboten').style.display = odd()? 'none' : '';
+    if(!odd() && x0<0) x0=0;
     // Startpunkt: bei x=0 ist f(0)=b (bzw. 0)
     const startY=useB?b:0;
     const showStart = startY>=YMIN && startY<=YMAX;
     $('orig').style.display = showStart?'':'none';
     if(showStart){ $('orig').setAttribute('cx',sx(0)); $('orig').setAttribute('cy',sy(startY)); }
     const fy=f(x0);
-    const defined = x0>=0 && isFinite(fy);
+    const defined = isFinite(fy);
     if(defined){
       const pyC=Math.max(YMIN,Math.min(YMAX,fy));
-      $('pt').style.display=''; $('ptv').style.display= x0>0.02?'':'none';
+      $('pt').style.display=''; $('ptv').style.display= Math.abs(x0)>0.02?'':'none';
       $('pt').setAttribute('cx',sx(x0)); $('pt').setAttribute('cy',sy(pyC));
       $('ptv').setAttribute('x1',sx(x0)); $('ptv').setAttribute('y1',sy(0)); $('ptv').setAttribute('x2',sx(x0)); $('ptv').setAttribute('y2',sy(pyC));
     } else { $('pt').style.display='none'; $('ptv').style.display='none'; }
     // Termanzeige
     $('rTerm').innerHTML=termHTML();
     $('rTerm2').innerHTML=rootHTML();
-    $('lA').textContent=numDE(a); $('lP').textContent=p; $('lQ').textContent=q; $('lB').textContent=numDE(b);
+    $('lA').textContent=numDE(a); $('lQ').textContent=q; $('lB').textContent=numDE(b);
   }
 
   // ---- Punkt ziehen (x aus Zeigerposition, nur x>=0) ----
   let drag=false;
   function worldX(e){ const r=fig.getBoundingClientRect(); const svgx=(e.clientX-r.left)*(VBW/r.width); return XMIN+(svgx-PX0)/(PX1-PX0)*(XMAX-XMIN); }
-  function setX(x){ x0=Math.max(0,Math.min(XMAX,x)); update(); }
+  function setX(x){ x0=Math.max(odd()?XMIN:0,Math.min(XMAX,x)); update(); }
   fig.addEventListener('pointerdown',e=>{drag=true; fig.setPointerCapture(e.pointerId); setX(worldX(e));});
   fig.addEventListener('pointermove',e=>{ if(drag) setX(worldX(e)); });
   fig.addEventListener('pointerup',()=>drag=false);
@@ -186,14 +190,13 @@
 
   // ---- Regler / Buttons ----
   $('sA').addEventListener('input',()=>{a=+$('sA').value; update();});
-  $('sP').addEventListener('input',()=>{p=+$('sP').value; update();});
   $('sQ').addEventListener('input',()=>{q=+$('sQ').value; update();});
   $('sB').addEventListener('input',()=>{b=+$('sB').value; update();});
-  $('optB').addEventListener('change',()=>{ useB=$('optB').checked; $('boxB').hidden=!useB; $('curve').setAttribute('stroke', useB?'var(--kurveB)':'var(--kurve)'); update(); });
+  $('optB').addEventListener('change',()=>{ useB=$('optB').checked; $('boxB').hidden=!useB; for(const id of ['curve','curveNeg']) $(id).setAttribute('stroke', useB?'var(--kurveB)':'var(--kurve)'); update(); });
   $('reset').addEventListener('click',()=>{
-    a=1;p=1;q=2;b=0;useB=false;x0=1;
-    $('sA').value=1; $('sP').value=1; $('sQ').value=2; $('sB').value=0; $('optB').checked=false; $('boxB').hidden=true;
-    $('curve').setAttribute('stroke','var(--kurve)'); update();
+    a=1;q=2;b=0;useB=false;x0=1;
+    $('sA').value=1; $('sQ').value=2; $('sB').value=0; $('optB').checked=false; $('boxB').hidden=true;
+    for(const id of ['curve','curveNeg']) $(id).setAttribute('stroke','var(--kurve)'); update();
   });
 
   buildGrid(); update();
